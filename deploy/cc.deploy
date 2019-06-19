@@ -1,0 +1,6 @@
+export NAME=hs-test
+export IMG=hatespeech
+export NS=c3s-test
+export PORT=80
+export TAG=${TAG}
+export HOST=hatespeech-test.citizenscience.ch

@@ -1,0 +1,12 @@
+[submodule "src/views/shared"]
+	path = src/views/shared
+	url = git@github.com:CitizenScienceCenter/shared-views.git
+[submodule "src/styles/shared"]
+	path = src/styles/shared
+	url = git@github.com:CitizenScienceCenter/shared-styles.git
+[submodule "src/components/shared"]
+	path = src/components/shared
+	url = git@github.com:CitizenScienceCenter/shared-components.git
+[submodule "src/assets/shared"]
+	path = src/assets/shared
+	url = git@github.com:CitizenScienceCenter/shared-assets.git
