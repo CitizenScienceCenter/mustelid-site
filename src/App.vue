@@ -2,14 +2,14 @@
   {
   "de": {
 
-  "project-title": "Mustelid<br/>Wanted",
-  "site-title": "Wiesel Gesucht | Citizen Science Center Zurich",
-  "site-description": "The Snake Identification Challenge"
+  "project-title": "Wiesel<br/>gesucht",
+  "site-title": "Wiesel Gesucht | Citizen Science Center Zürich",
+  "site-description": "Helfen Sie mit die Wiesel zu finden."
 
   },
   "en": {
 
-  "project-title": "Wiesel<br/>gesucht",
+  "project-title": "Mustelid<br/>Wanted",
   "site-title": "Mustelid Wanted | Citizen Science Center Zurich",
   "site-description": "Help us find the Mustelids."
 
@@ -19,7 +19,7 @@
 
 <template>
   <div id="app">
-    <app-header :roject-name="$t('project-title')" :languages="['de','en']"></app-header>
+    <app-header :project-name="$t('project-title')" :languages="['de','en']"></app-header>
     <div class="content-area">
       <router-view></router-view>
     </div>

@@ -1,21 +1,21 @@
 <i18n>
 {
 
-  "en": {
-
-  "page-title": "Hate Speech | Citizen Science Center Zurich",
-
-  "cover-heading": "Geschlechter&shy;spezifische Hassausdrücke",
-  "cover-subheading": "Identifizieren und klassifizieren anhand von Whatsapp Texten"
-
-  },
 
   "de": {
 
-  "page-title": "Hate Speech | Citizen Science Center Zürich",
+  "page-title": "Wiesel Gesucht | Citizen Science Center Zürich",
 
-  "cover-heading": "Geschlechter&shy;spezifische Hassausdrücke",
-  "cover-subheading": "Identifizieren und klassifizieren anhand von Whatsapp Texten"
+  "cover-heading": "Dem Wiesel auf der Spur",
+  "cover-subheading": "Helfen Sie mit sie zu finden."
+
+  },
+  "en": {
+
+  "page-title": "Mustelid Wanted | Citizen Science Center Zurich",
+
+  "cover-heading": "Tracking down Mustelids",
+  "cover-subheading": "Help us find them."
 
   }
 
@@ -59,7 +59,7 @@
 
           <div class="col col-large-5 col-large-after-1 col-wrapping scroll-effect scroll-effect-delayed-1">
             <div>
-              <h2 class="heading centered left-aligned-large">Worum gehts?</h2>
+              <h2 class="heading centered left-aligned-large">Mit Kamerafallen auf der Suche nach Wieseln</h2>
               <p class="">
                 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
               </p>
@@ -81,14 +81,14 @@
           <div class="col col-10 col-tablet-portrait-8 col-large-6 col-wrapping scroll-effect">
             <div>
               <div class="extra-padding-large-h">
-                <img src="/img/graphic-bubbles.png"/>
+                <img src="/img/graphic-videos.png"/>
               </div>
             </div>
           </div>
 
           <div class="col col-large-5 col-large-before-1 col-wrapping scroll-effect scroll-effect-delayed-1">
             <div>
-              <h2 class="heading centered left-aligned-large" id="start-project">Ihre Hilfe ist gefragt</h2>
+              <h2 class="heading centered left-aligned-large" id="start-project">Helfen Sie mit die gefilmten Tiere zu identifizieren.</h2>
               <p class="">
                 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
               </p>
@@ -108,13 +108,13 @@
 
           <div class="col col-10 col-tablet-portrait-8 col-large-6 col-wrapping scroll-effect">
             <div class="extra-padding-h">
-              <img src="/img/people-with-phones.jpg" style="border-radius:50%"/>
+              <img src="/img/graphic-hermelin.jpg" style="border-radius:50%"/>
             </div>
           </div>
 
           <div class="col col-large-5 col-large-after-1 col-wrapping scroll-effect scroll-effect-delayed-1">
             <div>
-              <h2 class="heading centered left-aligned-large">Woher stammen die Texte?</h2>
+              <h2 class="heading centered left-aligned-large">Wiesel-Population in der Schweiz</h2>
               <p class="">
                 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
               </p>
