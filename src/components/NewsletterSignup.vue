@@ -89,7 +89,7 @@ export default {
   .newsletter-signup {
 
     .form-field {
-      margin: $spacing-1;
+      margin-right: $spacing-2;
       display: inline-block;
       width: 20%;
     }
