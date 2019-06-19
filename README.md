@@ -1,4 +1,4 @@
-# hatespeech-site
+# mustelid-site
 
 ## Project setup
 ```

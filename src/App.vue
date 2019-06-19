@@ -1,19 +1,25 @@
 <i18n>
   {
-  "en": {
-  "site-title": "Hate Speech | Citizen Science Center Zurich",
-  "site-description": "The Snake Identification Challenge"
-  },
   "de": {
-  "site-title": "Hate Speech | Citizen Science Center Zurich",
+
+  "project-title": "Mustelid<br/>Wanted",
+  "site-title": "Wiesel Gesucht | Citizen Science Center Zurich",
   "site-description": "The Snake Identification Challenge"
+
+  },
+  "en": {
+
+  "project-title": "Wiesel<br/>gesucht",
+  "site-title": "Mustelid Wanted | Citizen Science Center Zurich",
+  "site-description": "Help us find the Mustelids."
+
   }
   }
 </i18n>
 
 <template>
   <div id="app">
-    <app-header project-name="Hate<br/>Speech" :languages="['de','en','fr','it']"></app-header>
+    <app-header :roject-name="$t('project-title')" :languages="['de','en']"></app-header>
     <div class="content-area">
       <router-view></router-view>
     </div>
@@ -50,7 +56,7 @@ export default {
               },
               {
                   property: 'og:url',
-                  content: 'https://hatespeech.citizenscience.ch'+this.$route.path
+                  content: 'https://wiesel.citizenscience.ch'+this.$route.path
               },
               {
                   property: 'og:image',
@@ -58,7 +64,7 @@ export default {
               }
           ],
           link: [
-              {rel: 'canonical', href: 'https://hatespeech.citizenscience.ch'+this.$route.path}
+              {rel: 'canonical', href: 'https://wiesel.citizenscience.ch'+this.$route.path}
           ]
       }
   },

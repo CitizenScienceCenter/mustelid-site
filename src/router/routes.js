@@ -18,11 +18,6 @@ const About = resolve => {
         resolve(require("@/views/About.vue"));
     });
 };
-const Sources = resolve => {
-    require.ensure(["@/views/Sources.vue"], () => {
-        resolve(require("@/views/Sources.vue"));
-    });
-};
 const Terms = resolve => {
     require.ensure(["@/views/shared/static/Terms.vue"], () => {
         resolve(require("@/views/shared/static/Terms.vue"));
@@ -57,11 +52,6 @@ export const routes = [
                 path: "about",
                 component: About,
                 meta: {i18n: 'navigation-about', nav: true}
-            },
-            {
-                path: "sources",
-                component: Sources,
-                meta: {i18n: 'navigation-sources', nav: true}
             },
             {
                 path: "terms",
