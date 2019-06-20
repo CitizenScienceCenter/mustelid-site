@@ -43,15 +43,15 @@ export const routes = [
                 meta: {requiresAuth: true, i18n: 'navigation-identification', nav: true}
             },
             {
+                path: "about",
+                component: About,
+                meta: {i18n: 'navigation-about', nav: true}
+            },
+            {
                 path: "forum",
                 component: Forum,
                 name: "Forum",
                 meta: {requiresAuth: true, i18n: 'navigation-forum', nav: true},
-            },
-            {
-                path: "about",
-                component: About,
-                meta: {i18n: 'navigation-about', nav: true}
             },
             {
                 path: "terms",

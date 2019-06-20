@@ -26,7 +26,7 @@
         <div class="row">
           <div class="col col-large-6">
 
-            <h2 class="heading">Welches Tier ist zu sehen?</h2>
+            <h2 class="heading small">Welches Tier ist zu sehen?</h2>
 
           </div>
         </div>
@@ -34,9 +34,13 @@
       </div>
 
       <div class="video-wrapper">
-        <video autoplay loop playsinline>
-          <source type="video/mp4" src="/videos/09170086.mp4">
-        </video>
+        <div class="row">
+          <div class="col">
+            <video autoplay loop playsinline>
+              <source type="video/mp4" src="/videos/09170086.mp4">
+            </video>
+          </div>
+        </div>
       </div>
 
       <div class="content-wrapper">
@@ -58,13 +62,26 @@
     </app-content-section>
 
 
-    <app-content-section class="content-section-condensed right-section">
+    <app-content-section class="content-section-flat right-section">
       <div class="content-wrapper">
         <div class="row">
 
           <div class="col col-large-6 col-large-before-6">
 
-            answer
+            <div class="bubu">bubu</div>
+            <div class="bubu">bubu</div>
+            <div class="bubu">bubu</div>
+            <div class="bubu">bubu</div>
+            <div class="bubu">bubu</div>
+            <div class="bubu">bubu</div>
+            <div class="bubu">bubu</div>
+            <div class="bubu">bubu</div>
+            <div class="bubu">bubu</div>
+            <div class="bubu">bubu</div>
+            <div class="bubu">bubu</div>
+            <div class="bubu">bubu</div>
+            <div class="bubu">bubu</div>
+
 
           </div>
 
@@ -208,13 +225,27 @@ export default {
 
 
   .mustelid-identification {
+
     .left-section {
       .video-wrapper {
         video {
           width: 100%;
+          border-radius: $border-radius;
         }
       }
     }
+
+    .right-section {
+      .bubu {
+        width: 100%;
+        height: 48px;
+        background-color: $color-primary;
+        color: $color-primary;
+        margin-bottom: $spacing-2;
+        border-radius: $border-radius;
+      }
+    }
+
   }
 
   @media only screen and (min-width: $viewport-tablet-portrait) {
@@ -228,14 +259,16 @@ export default {
 
     .mustelid-identification {
       position: relative;
-      height: calc( 100vh - 160px );
 
       .left-section {
-        height: 100%;
+        height: calc( 100vh - 160px );
         overflow-y: scroll;
 
         .video-wrapper {
           width: 50%;
+          video {
+
+          }
         }
       }
       .right-section {
@@ -243,7 +276,8 @@ export default {
         top: 0;
         left: 0;
         width: 100%;
-        height: 100%;
+        height: calc( 100vh - 160px );
+        overflow-y: scroll;
         background: none;
       }
       .action-bar {
