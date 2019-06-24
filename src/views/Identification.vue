@@ -17,79 +17,62 @@
 </i18n>
 
 <template>
-  <div class="mustelid-identification">
+  <div>
 
-    <app-content-section class="content-section-condensed left-section" color="light-greyish">
+    <app-content-section class="content-section-flat mustelid-identification" color="light-greyish">
 
-      <div class="content-wrapper">
+      <div class="left-section">
 
-        <div class="row">
-          <div class="col col-large-6">
+        <app-content-section class="content-section-condensed" color="transparent">
+          <div class="content-wrapper">
+            <div class="row">
+              <div class="col">
 
-            <h2 class="heading small">Welches Tier ist zu sehen?</h2>
+                <h2 class="heading small">Welches Tier ist zu sehen?</h2>
 
-          </div>
-        </div>
+                <video autoplay loop playsinline>
+                  <source type="video/mp4" src="/videos/09170086.mp4">
+                </video>
 
-      </div>
-
-      <div class="video-wrapper">
-        <div class="row">
-          <div class="col">
-            <video autoplay loop playsinline>
-              <source type="video/mp4" src="/videos/09170086.mp4">
-            </video>
-          </div>
-        </div>
-      </div>
-
-      <div class="content-wrapper">
-
-        <div class="row">
-          <div class="col col-large-6">
-
-            <div class="button-group">
-              <button class="button button-secondary">O</button>
-              <button class="button button-secondary">O</button>
-              <button class="button button-secondary">O</button>
+              </div>
             </div>
-
           </div>
-        </div>
+        </app-content-section>
+
+      </div>
+
+      <div class="right-section">
+
+        <app-content-section class="content-section-condensed" color="transparent">
+          <div class="content-wrapper">
+            <div class="row">
+              <div class="col">
+
+                <div class="bubu">bubu</div>
+                <div class="bubu">bubu</div>
+                <div class="bubu">bubu</div>
+                <div class="bubu">bubu</div>
+                <div class="bubu">bubu</div>
+                <div class="bubu">bubu</div>
+                <div class="bubu">bubu</div>
+                <div class="bubu">bubu</div>
+                <div class="bubu">bubu</div>
+                <div class="bubu">bubu</div>
+                <div class="bubu">bubu</div>
+                <div class="bubu">bubu</div>
+                <div class="bubu">bubu</div>
+
+              </div>
+            </div>
+          </div>
+        </app-content-section>
 
       </div>
 
     </app-content-section>
 
 
-    <app-content-section class="content-section-flat right-section">
-      <div class="content-wrapper">
-        <div class="row">
-
-          <div class="col col-large-6 col-large-before-6">
-
-            <div class="bubu">bubu</div>
-            <div class="bubu">bubu</div>
-            <div class="bubu">bubu</div>
-            <div class="bubu">bubu</div>
-            <div class="bubu">bubu</div>
-            <div class="bubu">bubu</div>
-            <div class="bubu">bubu</div>
-            <div class="bubu">bubu</div>
-            <div class="bubu">bubu</div>
-            <div class="bubu">bubu</div>
-            <div class="bubu">bubu</div>
-            <div class="bubu">bubu</div>
-            <div class="bubu">bubu</div>
-
-
-          </div>
-
-        </div>
-      </div>
-    </app-content-section>
-
-    <div class="action-bar">
+    <app-content-section class="content-section-flat action-bar">
       <div class="content-wrapper">
         <div class="row">
 
@@ -99,7 +82,8 @@
 
         </div>
       </div>
-    </div>
+    </app-content-section>
+
 
     <app-content-section color="light-greyish">
       <div class="content-wrapper">
@@ -157,7 +141,6 @@
     <section-newsletter-signup></section-newsletter-signup>
 
     <app-footer></app-footer>
-
 
   </div>
 </template>
@@ -227,11 +210,10 @@ export default {
   .mustelid-identification {
 
     .left-section {
-      .video-wrapper {
-        video {
-          width: 100%;
-          border-radius: $border-radius;
-        }
+      video {
+        display: block;
+        width: 100%;
+        border-radius: $border-radius;
       }
     }
 
@@ -258,33 +240,35 @@ export default {
   @media only screen and (min-width: $viewport-large) {
 
     .mustelid-identification {
-      position: relative;
+
+      height: calc( 100vh - 160px );
+      overflow: hidden;
 
       .left-section {
-        height: calc( 100vh - 160px );
-        overflow-y: scroll;
-
-        .video-wrapper {
-          width: 50%;
-          video {
-
-          }
+        .content-wrapper {
+          padding-right: 0;
         }
+        width: 50%;
+        height: 100%;
+        overflow: hidden;
+        overflow-y: auto;
       }
       .right-section {
+        .content-wrapper {
+          padding-left: 0;
+        }
         position: absolute;
         top: 0;
-        left: 0;
-        width: 100%;
-        height: calc( 100vh - 160px );
-        overflow-y: scroll;
-        background: none;
+        right: 0;
+        width: 50%;
+        height: 100%;
+        overflow-y: auto;
       }
-      .action-bar {
-        position: relative;
-        height: 80px;
-        background: white;
-      }
+
+    }
+    .action-bar {
+      background: white;
+      height: 80px;
     }
 
   }

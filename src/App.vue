@@ -2,16 +2,12 @@
   {
   "de": {
 
-  "project-title": "Wiesel<br/>gesucht",
-  "site-title": "Wiesel Gesucht | Citizen Science Center Zürich",
-  "site-description": "Helfen Sie mit die Wiesel zu finden."
+  "project-title": "Wiesel<br/>gesucht"
 
   },
   "en": {
 
-  "project-title": "Mustelid<br/>Wanted",
-  "site-title": "Mustelid Wanted | Citizen Science Center Zurich",
-  "site-description": "Help us find the Mustelids."
+  "project-title": "Mustelid<br/>Wanted"
 
   }
   }
@@ -65,11 +61,14 @@ export default {
           ],
           link: [
               {rel: 'canonical', href: 'https://wiesel.citizenscience.ch'+this.$route.path}
-          ]
+          ],
+          htmlAttrs: {
+              lang: this.language
+          }
       }
   },
   computed: mapState({
-      gdpr: state => state.gdpr.accepted
+      language: state => state.settings.language
   }),
   mounted: function() {
       var app = this.$el;

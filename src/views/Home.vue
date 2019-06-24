@@ -4,15 +4,11 @@
 
   "de": {
 
-  "page-title": "Wiesel Gesucht | Citizen Science Center Zürich",
-
   "cover-heading": "Dem Wiesel auf der Spur",
   "cover-subheading": "Helfen Sie mit sie zu finden."
 
   },
   "en": {
-
-  "page-title": "Mustelid Wanted | Citizen Science Center Zurich",
 
   "cover-heading": "Tracking down Mustelids",
   "cover-subheading": "Help us find them."
@@ -155,12 +151,12 @@ export default {
   },
   metaInfo: function() {
       return {
-          title: this.$t('page-title'),
+          title: this.$t('site-title'),
           titleTemplate: null,
           meta: [
               {
                   property: 'og:title',
-                  content: this.$t('page-title')
+                  content: this.$t('site-title')
               }
           ]
       }

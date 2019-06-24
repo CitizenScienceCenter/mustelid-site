@@ -4,9 +4,9 @@ import store from './store/store.js'
 
 Vue.use(VueI18n);
 
-var language;
 if( !store.state.settings.language ) {
     // no language in store
+    var language;
 
     // check browser
     language = window.navigator.userLanguage || window.navigator.language;
@@ -32,6 +32,10 @@ export const i18n = new VueI18n({
   silentTranslationWarn: true,
   messages: {
       'en': {
+
+          "site-title": "Mustelid Wanted | Citizen Science Center Zurich",
+          "site-description": "Help us find the Mustelids.",
+
           'navigation-homepage': {
               'link': 'Home'
           },
@@ -67,6 +71,10 @@ export const i18n = new VueI18n({
           }
       },
       'de': {
+
+          "site-title": "Wiesel Gesucht | Citizen Science Center Zürich",
+          "site-description": "Helfen Sie mit die Wiesel zu finden.",
+
           'navigation-homepage': {
               'link': 'Home'
           },
