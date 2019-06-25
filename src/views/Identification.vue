@@ -25,6 +25,7 @@
 
         <app-content-section class="content-section-condensed" color="transparent">
           <div class="content-wrapper">
+
             <div class="row">
               <div class="col">
 
@@ -36,6 +37,7 @@
 
               </div>
             </div>
+
           </div>
         </app-content-section>
 
@@ -45,25 +47,31 @@
 
         <app-content-section class="content-section-condensed" color="transparent">
           <div class="content-wrapper">
+
             <div class="row">
               <div class="col">
 
-                <div class="bubu">bubu</div>
-                <div class="bubu">bubu</div>
-                <div class="bubu">bubu</div>
-                <div class="bubu">bubu</div>
-                <div class="bubu">bubu</div>
-                <div class="bubu">bubu</div>
-                <div class="bubu">bubu</div>
-                <div class="bubu">bubu</div>
-                <div class="bubu">bubu</div>
-                <div class="bubu">bubu</div>
-                <div class="bubu">bubu</div>
-                <div class="bubu">bubu</div>
-                <div class="bubu">bubu</div>
+                <ul class="animal-categories">
+                  <li v-for="(category,index) in animals" :key="index" :class="{open: openCategory === index }">
+                    <div class="category" @click="clickCategory(index)">
+                      {{ category.name[language] }}
+                      <div class="images">
+                        <div class="image" v-for="(image,index) in category.images" :style="{ backgroundImage: 'url(/img/animals/'+image+')' }" :key="index"></div>
+                      </div>
+                    </div>
+                    <ul class="animals">
+                      <li v-for="(animal,index) in category.animals" :key="index">
+                        <div class="animal">
+                          {{ animal.name[language] }}
+                        </div>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
 
               </div>
             </div>
+
           </div>
         </app-content-section>
 
@@ -85,6 +93,7 @@
     </app-content-section>
 
 
+    <!--
     <app-content-section color="light-greyish">
       <div class="content-wrapper">
         <div class="row row-centered row-middle row-wrapping">
@@ -142,6 +151,8 @@
 
     <app-footer></app-footer>
 
+    -->
+
   </div>
 </template>
 
@@ -153,6 +164,7 @@ import Footer from '@/components/shared/Footer.vue';
 import SectionNewsletterSignup from "@/components/shared/SectionNewsletterSignup";
 import ContentSection from "@/components/shared/ContentSection";
 
+import animals from "@/assets/animals.json";
 
 export default {
   name: 'Home',
@@ -176,20 +188,30 @@ export default {
   },
   data() {
       return {
+          animals: animals,
 
+          openCategory: null
       }
   },
   computed: {
-      /*
       ...mapState({
-          user: state => state.c3s.user
+          language: state => state.settings.language
       })
-      */
     },
   mounted() {
 
   },
   methods: {
+    clickCategory( index ) {
+        if( this.openCategory !== index ) {
+            this.openCategory = index;
+        }
+        else {
+            this.openCategory = null;
+        }
+    }
+  },
+  watch: {
 
   }
 }
@@ -206,7 +228,6 @@ export default {
     display: none;
   }
 
-
   .mustelid-identification {
 
     .left-section {
@@ -218,13 +239,57 @@ export default {
     }
 
     .right-section {
-      .bubu {
-        width: 100%;
-        height: 48px;
-        background-color: $color-primary;
-        color: $color-primary;
-        margin-bottom: $spacing-2;
-        border-radius: $border-radius;
+      .animal-categories {
+        li {
+          &:before {
+            display: none;
+          }
+          padding: 0;
+          margin: 0;
+
+          .category, .animal {
+            background: $color-primary;
+            margin-bottom: $spacing-2;
+            color: white;
+            border-radius: $border-radius;
+            cursor: pointer;
+            &:active, &:focus {
+              background-color: $color-primary-shade-20;
+            }
+            @media (hover: hover) {
+              &:hover {
+                background-color: $color-primary-shade-20
+              }
+            }
+          }
+
+          .category {
+            .images {
+              display: flex;
+              .image {
+                flex: 1;
+                height: 128px;
+                background-size: cover;
+                background-position: 50% 50%;
+              }
+            }
+          }
+
+          .animals {
+            display: none;
+            padding: 0 $spacing-1;
+          }
+
+          &.open {
+            .category {
+              background-color: $color-primary-shade-20;
+            }
+            .animals {
+              display: block;
+            }
+          }
+
+        }
       }
     }
 
@@ -242,28 +307,60 @@ export default {
     .mustelid-identification {
 
       height: calc( 100vh - 160px );
+      max-height: 900px;
       overflow: hidden;
 
+
       .left-section {
+        position: absolute;
+        top: 0;
+        right: 50%;
+        width: 50%;
+        height: 100%;
+        max-width: $grid-max-width/2;
+        overflow: hidden;
+        overflow-y: auto;
         .content-wrapper {
           padding-right: 0;
         }
-        width: 50%;
-        height: 100%;
-        overflow: hidden;
-        overflow-y: auto;
       }
       .right-section {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        width: 50%;
+        height: 100%;
+        max-width: $grid-max-width/2;
+        overflow-y: scroll;
         .content-wrapper {
           padding-left: 0;
         }
-        position: absolute;
-        top: 0;
-        right: 0;
-        width: 50%;
-        height: 100%;
-        overflow-y: auto;
+
+        /*
+
+        &::-webkit-scrollbar {
+          width: 4px;
+        }
+
+        &::-webkit-scrollbar-track {
+          background-color: transparent;
+        }
+
+        &::-webkit-scrollbar-thumb {
+          border-radius: 2px;
+        }
+        &:hover {
+          &::-webkit-scrollbar-thumb {
+            background-color: $color-black-tint-90;
+          }
+        }
+
+        &::-webkit-scrollbar-thumb:hover {
+          background-color: $color-black-tint-90;
+        }
+        */
       }
+
 
     }
     .action-bar {

@@ -1,0 +1,232 @@
+[
+  {
+    "name": {
+      "de": "Wiesel / Marder",
+      "en": "Weasel / Marten"
+    },
+    "images": [
+      "stoat.jpg",
+      "leastweasel.jpg",
+      "polecat.jpg"
+    ],
+    "animals": [
+      {
+        "name": {
+          "de": "Hermelin",
+          "en": "Stoat"
+        },
+        "image": "stoat.jpg",
+        "text": {
+          "de": "<ul><li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li></ul>",
+          "en": "<ul><li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li></ul>"
+        }
+      },
+      {
+        "name": {
+          "de": "Mauswiesel",
+          "en": "Least Weasel"
+        },
+        "image": "leastweasel.jpg",
+        "text": {
+          "de": "<ul><li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li></ul>",
+          "en": "<ul><li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li></ul>"
+        }
+      },
+      {
+        "name": {
+          "de": "Iltis",
+          "en": "Polecat"
+        },
+        "image": "polecat.jpg",
+        "text": {
+          "de": "<ul><li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li></ul>",
+          "en": "<ul><li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li></ul>"
+        }
+      }
+    ]
+  },
+  {
+    "name": {
+      "de": "Maus (Spitzmaus, Nagetier)",
+      "en": "Mouse (Shrew, Rodent)"
+    },
+    "images": [
+      "shrew.jpg",
+      "vole.jpg",
+      "longtailmouse.jpg"
+    ],
+    "animals": [
+      {
+        "name": {
+          "de": "Spitzmaus",
+          "en": "Shrew"
+        },
+        "image": "shrew.jpg",
+        "text": {
+          "de": "<ul><li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li></ul>",
+          "en": "<ul><li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li></ul>"
+        }
+      },
+      {
+        "name": {
+          "de": "Wühlmaus",
+          "en": "Vole"
+        },
+        "image": "vole.jpg",
+        "text": {
+          "de": "<ul><li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li></ul>",
+          "en": "<ul><li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li></ul>"
+        }
+      },
+      {
+        "name": {
+          "de": "Langschwanzmaus",
+          "en": "Long tail Mouse"
+        },
+        "image": "longtailmouse.jpg",
+        "text": {
+          "de": "<ul><li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li></ul>",
+          "en": "<ul><li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li></ul>"
+        }
+      }
+    ]
+  },
+  {
+    "name": {
+      "de": "Wiesel / Marder",
+      "en": "Weasel / Marten"
+    },
+    "images": [
+      "stoat.jpg",
+      "leastweasel.jpg",
+      "polecat.jpg"
+    ],
+    "animals": [
+      {
+        "name": {
+          "de": "Hermelin",
+          "en": "Stoat"
+        },
+        "image": "stoat.jpg",
+        "text": {
+          "de": "<ul><li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li></ul>",
+          "en": "<ul><li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li></ul>"
+        }
+      },
+      {
+        "name": {
+          "de": "Mauswiesel",
+          "en": "Least Weasel"
+        },
+        "image": "leastweasel.jpg",
+        "text": {
+          "de": "<ul><li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li></ul>",
+          "en": "<ul><li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li></ul>"
+        }
+      },
+      {
+        "name": {
+          "de": "Iltis",
+          "en": "Polecat"
+        },
+        "image": "polecat.jpg",
+        "text": {
+          "de": "<ul><li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li></ul>",
+          "en": "<ul><li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li></ul>"
+        }
+      }
+    ]
+  },
+  {
+    "name": {
+      "de": "Maus (Spitzmaus, Nagetier)",
+      "en": "Mouse (Shrew, Rodent)"
+    },
+    "images": [
+      "shrew.jpg",
+      "vole.jpg",
+      "longtailmouse.jpg"
+    ],
+    "animals": [
+      {
+        "name": {
+          "de": "Spitzmaus",
+          "en": "Shrew"
+        },
+        "image": "shrew.jpg",
+        "text": {
+          "de": "<ul><li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li></ul>",
+          "en": "<ul><li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li></ul>"
+        }
+      },
+      {
+        "name": {
+          "de": "Wühlmaus",
+          "en": "Vole"
+        },
+        "image": "vole.jpg",
+        "text": {
+          "de": "<ul><li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li></ul>",
+          "en": "<ul><li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li></ul>"
+        }
+      },
+      {
+        "name": {
+          "de": "Langschwanzmaus",
+          "en": "Long tail Mouse"
+        },
+        "image": "longtailmouse.jpg",
+        "text": {
+          "de": "<ul><li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li></ul>",
+          "en": "<ul><li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li></ul>"
+        }
+      }
+    ]
+  },
+  {
+    "name": {
+      "de": "Maus (Spitzmaus, Nagetier)",
+      "en": "Mouse (Shrew, Rodent)"
+    },
+    "images": [
+      "shrew.jpg",
+      "vole.jpg",
+      "longtailmouse.jpg"
+    ],
+    "animals": [
+      {
+        "name": {
+          "de": "Spitzmaus",
+          "en": "Shrew"
+        },
+        "image": "shrew.jpg",
+        "text": {
+          "de": "<ul><li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li></ul>",
+          "en": "<ul><li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li></ul>"
+        }
+      },
+      {
+        "name": {
+          "de": "Wühlmaus",
+          "en": "Vole"
+        },
+        "image": "vole.jpg",
+        "text": {
+          "de": "<ul><li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li></ul>",
+          "en": "<ul><li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li></ul>"
+        }
+      },
+      {
+        "name": {
+          "de": "Langschwanzmaus",
+          "en": "Long tail Mouse"
+        },
+        "image": "longtailmouse.jpg",
+        "text": {
+          "de": "<ul><li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li></ul>",
+          "en": "<ul><li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li></ul>"
+        }
+      }
+    ]
+  }
+]
