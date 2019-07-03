@@ -17,7 +17,7 @@
         },
         "image": "stoat.jpg",
         "text": {
-          "de": "<ul><li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li></ul>",
+          "de": "<ul><li>Schwarze Schwanzspitze</li><li>Übergang heller Bauch zu dunklem Rückenfell bildet eine gerade Linie.</li><ul>",
           "en": "<ul><li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li></ul>"
         }
       },
@@ -28,7 +28,7 @@
         },
         "image": "leastweasel.jpg",
         "text": {
-          "de": "<ul><li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li></ul>",
+          "de": "<ul><li>Kurzer Schwanz, ohne dunkle Spitze</li><li>Übergang heller Bauch zu dunklem Rückenfell ist gewellt</li><ul>",
           "en": "<ul><li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li></ul>"
         }
       },
@@ -39,7 +39,29 @@
         },
         "image": "polecat.jpg",
         "text": {
-          "de": "<ul><li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li></ul>",
+          "de": "<ul><li>Gesichttsmaske (helles Gesucht mit dunklen Flecken um die Augen)</li><li>helle Ohren</li><li>Körper heller als Vorderbeine und Schwanz</li></ul>",
+          "en": "<ul><li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li></ul>"
+        }
+      },
+      {
+        "name": {
+          "de": "Baummarder",
+          "en": "Pine Marten"
+        },
+        "image": "pinemarten.jpg",
+        "text": {
+          "de": "<ul><li>Dunkle Nasespitze</li><li>helle Ohren</li><li>Buschiger Schwanz</li><li>Kehlfleck meistens nicht geteilt</li></ul>",
+          "en": "<ul><li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li></ul>"
+        }
+      },
+      {
+        "name": {
+          "de": "Steinmarder",
+          "en": "Beech Marten"
+        },
+        "image": "beechmarten.jpg",
+        "text": {
+          "de": "<ul><li>Helle Nasenspitze</li><li>Heller Kehlfleck meist gegabelt und bis zu den Beinen reichend</li></ul>",
           "en": "<ul><li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li></ul>"
         }
       }
@@ -63,7 +85,7 @@
         },
         "image": "shrew.jpg",
         "text": {
-          "de": "<ul><li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li></ul>",
+          "de": "<ul><li>Längliche, spitze Schnauze</li><li>Dünner bis körperlanger Schwanz</li><li>Ohren sichtbar</li></ul>",
           "en": "<ul><li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li></ul>"
         }
       },
@@ -74,7 +96,7 @@
         },
         "image": "vole.jpg",
         "text": {
-          "de": "<ul><li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li></ul>",
+          "de": "<ul><li>Schwanz ist kürzer als der Körper</li><li>Ohren schlecht bis gar nicht sichtbar</li><li>Runde Kopfform</li></ul>",
           "en": "<ul><li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li></ul>"
         }
       },
@@ -85,7 +107,18 @@
         },
         "image": "longtailmouse.jpg",
         "text": {
-          "de": "<ul><li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li></ul>",
+          "de": "<ul><li>Schwanz ist ungefähr gleich lang wie der Körper oder länger</li><li>Ohren sind gut sichtbar</li><li>Dreieckige Kopfform</li></ul>",
+          "en": "<ul><li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li></ul>"
+        }
+      },
+      {
+        "name": {
+          "de": "Schläfer (Bilche)",
+          "en": "Dormouse"
+        },
+        "image": "dormouse.jpg",
+        "text": {
+          "de": "<ul><li>Schwanz lang und stark behaart</li></ul>",
           "en": "<ul><li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li></ul>"
         }
       }
@@ -93,140 +126,138 @@
   },
   {
     "name": {
-      "de": "Wiesel / Marder",
-      "en": "Weasel / Marten"
+      "de": "Anderes Säugetier",
+      "en": "Other Mammal"
     },
     "images": [
-      "stoat.jpg",
-      "leastweasel.jpg",
-      "polecat.jpg"
+      "hedgehog.jpg",
+      "squirrel.jpg",
+      "mole.jpg"
     ],
     "animals": [
       {
         "name": {
-          "de": "Hermelin",
-          "en": "Stoat"
+          "de": "Igel",
+          "en": "Hedgehog"
         },
-        "image": "stoat.jpg",
+        "image": "hedgehog.jpg",
         "text": {
-          "de": "<ul><li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li></ul>",
-          "en": "<ul><li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li></ul>"
+          "de": "",
+          "en": ""
         }
       },
       {
         "name": {
-          "de": "Mauswiesel",
-          "en": "Least Weasel"
+          "de": "Eichörnchen",
+          "en": "Squirrel"
         },
-        "image": "leastweasel.jpg",
+        "image": "squirrel.jpg",
         "text": {
-          "de": "<ul><li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li></ul>",
-          "en": "<ul><li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li></ul>"
+          "de": "",
+          "en": ""
         }
       },
       {
         "name": {
-          "de": "Iltis",
-          "en": "Polecat"
+          "de": "Maulwurf",
+          "en": "Mole"
         },
-        "image": "polecat.jpg",
+        "image": "mole.jpg",
         "text": {
-          "de": "<ul><li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li></ul>",
-          "en": "<ul><li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li></ul>"
+          "de": "",
+          "en": ""
         }
       }
     ]
   },
   {
     "name": {
-      "de": "Maus (Spitzmaus, Nagetier)",
-      "en": "Mouse (Shrew, Rodent)"
+      "de": "Amphibie / Reptil",
+      "en": "Amphibian / Reptile"
     },
     "images": [
-      "shrew.jpg",
-      "vole.jpg",
-      "longtailmouse.jpg"
+      "frog.jpg",
+      "newt.jpg",
+      "blindworm.jpg"
     ],
     "animals": [
       {
         "name": {
-          "de": "Spitzmaus",
-          "en": "Shrew"
+          "de": "Frosch / Kröte",
+          "en": "Frog / Toad"
         },
-        "image": "shrew.jpg",
+        "image": "frog.jpg",
         "text": {
-          "de": "<ul><li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li></ul>",
-          "en": "<ul><li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li></ul>"
+          "de": "",
+          "en": ""
         }
       },
       {
         "name": {
-          "de": "Wühlmaus",
-          "en": "Vole"
+          "de": "Molch",
+          "en": "Newt"
         },
-        "image": "vole.jpg",
+        "image": "newt.jpg",
         "text": {
-          "de": "<ul><li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li></ul>",
-          "en": "<ul><li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li></ul>"
+          "de": "<ul><li>Langgezogener Körper</li><li>Abgeplatteter Schwanz</li></ul>",
+          "en": "<ul><li>Langgezogener Körper</li><li>Abgeplatteter Schwanz</li></ul>"
         }
       },
       {
         "name": {
-          "de": "Langschwanzmaus",
-          "en": "Long tail Mouse"
+          "de": "Salamander",
+          "en": "Salamander"
         },
-        "image": "longtailmouse.jpg",
+        "image": "salamander.jpg",
         "text": {
-          "de": "<ul><li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li></ul>",
-          "en": "<ul><li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li></ul>"
+          "de": "<ul><li>Runder Schwanz</li></ul>",
+          "en": "<ul><li>Runder Schwanz</li></ul>"
+        }
+      },
+      {
+        "name": {
+          "de": "Eidechse",
+          "en": "Lizard"
+        },
+        "image": "lizard.jpg",
+        "text": {
+          "de": "",
+          "en": ""
+        }
+      },
+      {
+        "name": {
+          "de": "Blindschleiche",
+          "en": "Blindworm"
+        },
+        "image": "blindworm.jpg",
+        "text": {
+          "de": "",
+          "en": ""
+        }
+      },
+      {
+        "name": {
+          "de": "Schlange",
+          "en": "Snake"
+        },
+        "image": "snake.jpg",
+        "text": {
+          "de": "",
+          "en": ""
         }
       }
     ]
   },
   {
     "name": {
-      "de": "Maus (Spitzmaus, Nagetier)",
-      "en": "Mouse (Shrew, Rodent)"
+      "de": "Vogel",
+      "en": "Bird"
     },
     "images": [
-      "shrew.jpg",
-      "vole.jpg",
-      "longtailmouse.jpg"
-    ],
-    "animals": [
-      {
-        "name": {
-          "de": "Spitzmaus",
-          "en": "Shrew"
-        },
-        "image": "shrew.jpg",
-        "text": {
-          "de": "<ul><li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li></ul>",
-          "en": "<ul><li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li></ul>"
-        }
-      },
-      {
-        "name": {
-          "de": "Wühlmaus",
-          "en": "Vole"
-        },
-        "image": "vole.jpg",
-        "text": {
-          "de": "<ul><li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li></ul>",
-          "en": "<ul><li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li></ul>"
-        }
-      },
-      {
-        "name": {
-          "de": "Langschwanzmaus",
-          "en": "Long tail Mouse"
-        },
-        "image": "longtailmouse.jpg",
-        "text": {
-          "de": "<ul><li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li></ul>",
-          "en": "<ul><li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li></ul>"
-        }
-      }
+      "bird1.jpg",
+      "bird2.jpg",
+      "bird3.jpg"
     ]
   }
 ]

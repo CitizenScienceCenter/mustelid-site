@@ -13,15 +13,15 @@ export const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
 
-    console.log( 'navigate to: '+to.path );
-    console.log('split:');
+    //console.log( 'navigate to: '+to.path );
+    //console.log('split:');
 
     let filteredPath = to.path.split('/').filter(element => element.length > 0);
-    console.log( filteredPath );
+    //console.log( filteredPath );
 
     //if( to.params.lang && to.params.lang.split('/')[0].length === 2 ) {
     if( filteredPath.length > 0 && filteredPath[0].length === 2 ) {
-        console.log( 'url has language: '+ to.params.lang);
+        //console.log( 'url has language: '+ to.params.lang);
         let language = to.params.lang;
         store.dispatch("settings/setLanguage", language);
         i18n.locale = language;
@@ -31,7 +31,7 @@ router.beforeEach((to, from, next) => {
 
         if( to.matched.some(record => record.meta.requiresAuth) ) {
             if( store.state.c3s.user.currentUser ) {
-                console.log('validate user '+store.state.c3s.user.currentUser.username);
+                //console.log('validate user '+store.state.c3s.user.currentUser.username);
 
                 store.dispatch('c3s/user/validate').then(v => {
                     //console.log('validation success');
@@ -45,7 +45,7 @@ router.beforeEach((to, from, next) => {
             }
             else {
                 store.dispatch('c3s/user/generateAnon').then(u => {
-                    console.log('generate anon');
+                    //console.log('generate anon');
                     next();
                 });
             }
@@ -68,8 +68,8 @@ router.beforeEach((to, from, next) => {
 
     }
     else {
-        console.log('redirect to');
-        console.log( '/'+ i18n.locale + to.path );
+        //console.log('redirect to');
+        //console.log( '/'+ i18n.locale + to.path );
         next( '/'+ i18n.locale + to.path );
     }
 

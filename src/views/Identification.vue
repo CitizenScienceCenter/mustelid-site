@@ -51,21 +51,35 @@
             <div class="row">
               <div class="col">
 
-                <ul class="animal-categories">
-                  <li v-for="(category,index) in animals" :key="index" :class="{open: openCategory === index }">
+                <ul class="animal-categories margin-bottom">
+                  <li class="category-item" v-for="(category,index) in animals" :key="index" :class="{ open: openCategory === index, animal: !category.animals }">
+
                     <div class="category" @click="clickCategory(index)">
-                      {{ category.name[language] }}
+                      <div class="title">
+                        {{ category.name[language] }}
+                      </div>
                       <div class="images">
                         <div class="image" v-for="(image,index) in category.images" :style="{ backgroundImage: 'url(/img/animals/'+image+')' }" :key="index"></div>
                       </div>
                     </div>
-                    <ul class="animals">
-                      <li v-for="(animal,index) in category.animals" :key="index">
-                        <div class="animal">
-                          {{ animal.name[language] }}
-                        </div>
-                      </li>
-                    </ul>
+
+                    <div class="animal-list-wrapper" :ref="'animalListWrapper'+index">
+                      <ul class="animals" :ref="'animalList'+index">
+                        <li class="animal-item" v-for="(animal,index) in category.animals" :key="index">
+                          <div class="animal">
+                            <div class="image" :style="{ 'background-image' : 'url(/img/animals/'+animal.image+')' }"></div>
+                            <div class="info">
+                              <div class="title">
+                                {{ animal.name[language] }}
+                              </div>
+                              <div class="text" v-html="animal.text[language]"></div>
+                            </div>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+
+
                   </li>
                 </ul>
 
@@ -199,7 +213,12 @@ export default {
       })
     },
   mounted() {
+      var self = this;
+      window.addEventListener('resize', function() {
+          self.resize();
+      } );
 
+      this.resize();
   },
   methods: {
     clickCategory( index ) {
@@ -209,10 +228,21 @@ export default {
         else {
             this.openCategory = null;
         }
+        this.resize();
+    },
+    resize() {
+        console.log( 'resize');
+        for( var i=0; i< this.animals.length; i++ ) {
+            if( this.openCategory === i ) {
+                console.log( this.$refs['animalList'+this.openCategory][0].offsetHeight );
+                this.$refs['animalListWrapper'+i][0].style.height = this.$refs['animalList'+this.openCategory][0].offsetHeight +'px';
+                console.log( this.$refs['animalListWrapper'+i][0].style.height );
+            }
+            else {
+                this.$refs['animalListWrapper'+i][0].style.height = 0+'px';
+            }
+        }
     }
-  },
-  watch: {
-
   }
 }
 
@@ -240,63 +270,245 @@ export default {
 
     .right-section {
       .animal-categories {
-        li {
+
+        .category-item {
+
           &:before {
             display: none;
           }
           padding: 0;
           margin: 0;
 
-          .category, .animal {
-            background: $color-primary;
-            margin-bottom: $spacing-2;
-            color: white;
-            border-radius: $border-radius;
+
+          margin-bottom: $spacing-2;
+          transition: margin $transition-duration-short $transition-timing-function;
+
+          .category {
             cursor: pointer;
+            overflow: hidden;
+            border-radius: $border-radius;
+
+            box-shadow: 0px 4px 8px -4px rgba($color-black,0.2);
+            transition: margin-bottom $transition-duration-short $transition-timing-function;
+
+            .title {
+              background: $color-primary;
+              color: white;
+              padding: calc( (40px - 1.5rem) / 2) $spacing-2;
+              font-weight: 700;
+
+              transition: background-color $transition-duration-short $transition-timing-function;
+            }
+
+
             &:active, &:focus {
-              background-color: $color-primary-shade-20;
+              .title {
+                background-color: $color-primary-shade-20;
+              }
             }
             @media (hover: hover) {
               &:hover {
-                background-color: $color-primary-shade-20
+                .title {
+                  background-color: $color-primary-shade-20;
+                }
               }
             }
-          }
 
-          .category {
+
             .images {
               display: flex;
+              overflow: hidden;
+
+              height: 128px;
+
+              transition: height $transition-duration-long $transition-timing-function;
+              transition-delay: $transition-delay-1;
+
               .image {
-                flex: 1;
                 height: 128px;
+                flex: 1;
                 background-size: cover;
                 background-position: 50% 50%;
               }
             }
           }
 
-          .animals {
-            display: none;
-            padding: 0 $spacing-1;
+          .animal-list-wrapper {
+            overflow: hidden;
+
+            transition: height $transition-duration-long $transition-timing-function;
+
+            .animals {
+
+              .animal-item {
+
+                &:before {
+                  display: none;
+                }
+                padding: 0;
+                margin: 0;
+
+                .animal {
+                  display: flex;
+
+                  margin-bottom: $spacing-2;
+                  border-radius: $border-radius;
+                  background: white;
+                  cursor: pointer;
+                  overflow: hidden;
+
+                  box-shadow: 0px 4px 8px -4px rgba($color-black,0.2);
+
+                  .image {
+                    flex: 0 0 33.333%;
+                    background-size: cover;
+                    background-position: 50% 50%;
+
+                    &:after {
+                      content: '';
+                      display: block;
+                      padding-bottom: 75%;
+                    }
+                  }
+                  .info {
+                    flex: 1;
+                    .title {
+                      color: white;
+                      padding: calc((40px - 1.5rem) / 2) $spacing-2;
+                      background: $color-primary;
+                      font-weight: 700;
+
+                      transition: background-color $transition-duration-short $transition-timing-function;
+                    }
+                    .text {
+                      width: 100%;
+                      padding: $spacing-2;
+                      padding-left: $spacing-1;
+
+                      li {
+                        padding-left: $spacing-3;
+                        margin-bottom: $spacing-1;
+                        font-size: $font-size-small;
+                        &:before {
+                          width: 0.3rem;
+                          height: 0.3rem;
+                          top: 0.5rem;
+                          left: 0.5rem;
+                          transform: translateY(-2px);
+                        }
+                      }
+                    }
+                  }
+
+                  &:active, &:focus {
+                    .info {
+                      .title {
+                        background-color: $color-primary-shade-20;
+                      }
+                    }
+                  }
+                  @media (hover: hover) {
+                    &:hover {
+                      .info {
+                        .title {
+                          background-color: $color-primary-shade-20;
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
 
           &.open {
-            .category {
-              background-color: $color-primary-shade-20;
-            }
-            .animals {
-              display: block;
+
+            margin-bottom: $spacing-4;
+
+            &:not(.animal) {
+
+              &:not(:first-child) {
+                margin-top: $spacing-4;
+              }
+
+              .category {
+                margin-bottom: $spacing-2;
+                .title {
+                  background-color: $color-primary-shade-20;
+                }
+                .images {
+                  transition-delay: 0s;
+                  height: 0;
+                }
+              }
+              .animal-list-wrapper {
+                transition-delay: $transition-delay-1;
+                .animals {
+                }
+              }
             }
           }
 
         }
+
       }
     }
 
   }
 
+
+  .action-bar {
+    background: white;
+    height: 80px;
+    width: 100%;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+
+    box-shadow: 0px -4px 8px +4px rgba($color-black, 0.2);
+  }
+
+
   @media only screen and (min-width: $viewport-tablet-portrait) {
 
+
+    .mustelid-identification {
+
+      .left-section {
+        video {
+          display: block;
+          width: 100%;
+          border-radius: $border-radius;
+        }
+      }
+
+      .right-section {
+        .animal-categories {
+          .category-item {
+            .category {
+              .title {
+                padding: calc((48px - 1.5rem) / 2) $spacing-2;
+              }
+            }
+
+            .animal-list-wrapper {
+              .animals {
+                .animal-item {
+                  .animal {
+                    .info {
+                      .title {
+                        padding: calc((48px - 1.5rem) / 2) $spacing-2;
+                      }
+                    }
+                  }
+                }
+              }
+            }
+
+          }
+        }
+      }
+    }
 
 
   }
@@ -307,7 +519,7 @@ export default {
     .mustelid-identification {
 
       height: calc( 100vh - 160px );
-      max-height: 900px;
+      //max-height: 900px;
       overflow: hidden;
 
 
@@ -364,8 +576,6 @@ export default {
 
     }
     .action-bar {
-      background: white;
-      height: 80px;
     }
 
   }
