@@ -71,12 +71,15 @@ export default {
       language: state => state.settings.language
   }),
   mounted: function() {
+      // body fade
       var app = this.$el;
       var cover = new Image();
-      cover.onload = function() {
-          app.classList.add("show");
-      };
       cover.src = '/img/cover.jpg';
+      cover.onload = function() {
+          if( navigator.userAgent !== 'ReactSnap' ) {
+              app.classList.add("show");
+          }
+      };
   }
 }
 </script>

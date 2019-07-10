@@ -19,6 +19,12 @@ Vue.use(VueRouter);
 Vue.use(Vuex);
 Vue.use(Meta);
 
+let VueScrollTo = require('vue-scrollto');
+Vue.use(VueScrollTo, {
+    easing: "easeInOut",
+    offset: 0
+})
+
 
 store.watch(
     (state) => state.c3s && state.c3s.client,

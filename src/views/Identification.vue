@@ -21,7 +21,7 @@
 
     <app-content-section class="content-section-flat mustelid-identification" color="light-greyish">
 
-      <div class="left-section">
+      <div class="video-section">
 
         <app-content-section class="content-section-condensed" color="transparent">
           <div class="content-wrapper">
@@ -31,9 +31,20 @@
 
                 <h2 class="heading small">Welches Tier ist zu sehen?</h2>
 
+                <!--
                 <video autoplay loop playsinline>
                   <source type="video/mp4" src="/videos/09170086.mp4">
                 </video>
+                -->
+                <video autoplay playsinline muted v-for="(video,index) in task.videos" :key="'video'+index" v-show="index === activeVideo" @ended="onVideoEnd">
+                  <source type="video/mp4" :src="'/videos/'+video">
+                </video>
+
+                <ul class="thumbnails">
+                  <li v-for="(video,index) in task.videos" :key="'thumbnail'+index" :class="{active: index === activeVideo}">
+                    {{ video }}
+                  </li>
+                </ul>
 
               </div>
             </div>
@@ -43,7 +54,7 @@
 
       </div>
 
-      <div class="right-section">
+      <div class="answer-section" id="answer-section" ref="answerSection">
 
         <app-content-section class="content-section-condensed" color="transparent">
           <div class="content-wrapper">
@@ -52,14 +63,25 @@
               <div class="col">
 
                 <ul class="animal-categories margin-bottom">
-                  <li class="category-item" v-for="(category,index) in animals" :key="index" :class="{ open: openCategory === index, animal: !category.animals }">
+                  <li class="category-item" v-for="(category,index) in animals" :key="index" :class="{ open: openCategory === index, animal: !category.animals }" :id="'category-item-'+index">
 
-                    <div class="category" @click="clickCategory(index)">
-                      <div class="title">
-                        {{ category.name[language] }}
-                      </div>
+                    <div v-if="index < animals.length-1" class="category" @click="clickCategory(index)">
                       <div class="images">
                         <div class="image" v-for="(image,index) in category.images" :style="{ backgroundImage: 'url(/img/animals/'+image+')' }" :key="index"></div>
+                      </div>
+                      <div class="title">
+                        <svg v-if="category.animals" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M352.26,273l-136,136a23.9,23.9,0,0,1-33.9,0l-22.6-22.6a23.9,23.9,0,0,1,0-33.9l96.4-96.4-96.4-96.4a23.9,23.9,0,0,1,0-33.9l22.5-22.8a23.9,23.9,0,0,1,33.9,0l136,136A23.93,23.93,0,0,1,352.26,273Z"/></svg>
+                        {{ category.name[language] }}
+                      </div>
+                    </div>
+
+                    <div v-else class="category">
+                      <div class="images">
+                        <div class="image" v-for="(image,index) in category.images" :style="{ backgroundImage: 'url(/img/animals/'+image+')' }" :key="index"></div>
+                      </div>
+                      <div class="title">
+                        <svg v-if="category.animals" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M352.26,273l-136,136a23.9,23.9,0,0,1-33.9,0l-22.6-22.6a23.9,23.9,0,0,1,0-33.9l96.4-96.4-96.4-96.4a23.9,23.9,0,0,1,0-33.9l22.5-22.8a23.9,23.9,0,0,1,33.9,0l136,136A23.93,23.93,0,0,1,352.26,273Z"/></svg>
+                        {{ category.name[language] }}
                       </div>
                     </div>
 
@@ -98,8 +120,13 @@
       <div class="content-wrapper">
         <div class="row">
 
-          <div class="col">
-            action bar
+          <div class="col col-tablet-portrait-6">
+            Sequenz 1 von 10000
+          </div>
+          <div class="col col-tablet-portrait-6">
+            <div class="button-group right-aligned">
+              <button class="button button-primary">Weiter</button>
+            </div>
           </div>
 
         </div>
@@ -203,8 +230,17 @@ export default {
   data() {
       return {
           animals: animals,
+          openCategory: null,
 
-          openCategory: null
+          task: {
+              "videos": [
+                  "09170086.mp4",
+                  "09170086_2.mp4",
+                  "09170086_3.mp4",
+                  "09170086_4.mp4"
+              ]
+          },
+          activeVideo: 0
       }
   },
   computed: {
@@ -214,6 +250,7 @@ export default {
     },
   mounted() {
       var self = this;
+
       window.addEventListener('resize', function() {
           self.resize();
       } );
@@ -229,9 +266,13 @@ export default {
             this.openCategory = null;
         }
         this.resize();
+
+        this.$scrollTo('#category-item-'+index, 600, {
+            container: '#answer-section',
+            offset: -48
+        });
     },
     resize() {
-        console.log( 'resize');
         for( var i=0; i< this.animals.length; i++ ) {
             if( this.openCategory === i ) {
                 console.log( this.$refs['animalList'+this.openCategory][0].offsetHeight );
@@ -242,7 +283,16 @@ export default {
                 this.$refs['animalListWrapper'+i][0].style.height = 0+'px';
             }
         }
+    },
+    onVideoEnd() {
+        if( this.activeVideo < this.task.videos.length-1 ) {
+            this.activeVideo++;
+        }
+        else {
+            this.activeVideo = 0;
+        }
     }
+
   }
 }
 
@@ -260,15 +310,31 @@ export default {
 
   .mustelid-identification {
 
-    .left-section {
+    .video-section {
       video {
         display: block;
         width: 100%;
         border-radius: $border-radius;
       }
+
+      .thumbnails {
+        li {
+          padding: 0;
+          margin: 0;
+          &:before {
+            display: none;
+          }
+
+          display: inline-block;
+
+          &.active {
+            color: $color-primary;
+          }
+        }
+      }
     }
 
-    .right-section {
+    .answer-section {
       .animal-categories {
 
         .category-item {
@@ -280,8 +346,8 @@ export default {
           margin: 0;
 
 
-          margin-bottom: $spacing-2;
-          transition: margin $transition-duration-short $transition-timing-function;
+          margin-bottom: $spacing-3;
+          transition: padding $transition-duration-short $transition-timing-function;
 
           .category {
             cursor: pointer;
@@ -291,46 +357,74 @@ export default {
             box-shadow: 0px 4px 8px -4px rgba($color-black,0.2);
             transition: margin-bottom $transition-duration-short $transition-timing-function;
 
+            .images {
+              display: flex;
+              overflow: hidden;
+
+              height: 10vh;
+
+              transition: height $transition-duration-long $transition-timing-function;
+
+              .image {
+                flex: 1;
+                background-size: cover;
+                background-position: 50% 50%;
+              }
+
+              position: relative;
+              &:after {
+                content: '';
+                display: block;
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 50%;
+                height: 100%;
+                background: linear-gradient(120deg, $color-black, rgba($color-black, 0) 100% );
+                opacity: 0.8;
+                transition: all $transition-duration-long $transition-timing-function;
+              }
+            }
+
+            position: relative;
+
             .title {
-              background: $color-primary;
+              position: absolute;
+              top: 0;
+              left: 0;
               color: white;
+              font-size: $font-size-normal;
+              text-transform: uppercase;
               padding: calc( (40px - 1.5rem) / 2) $spacing-2;
               font-weight: 700;
 
               transition: background-color $transition-duration-short $transition-timing-function;
+
+              padding-left: $spacing-4;
+              svg {
+                position: absolute;
+                top: calc( (40px - #{$font-size-normal}) / 2  - 2px);
+                left: $spacing-1;
+                width: $font-size-normal;
+                height: $font-size-normal;
+                fill: white;
+                transition: transform $transition-duration-long $transition-timing-function;
+              }
             }
 
 
             &:active, &:focus {
               .title {
-                background-color: $color-primary-shade-20;
               }
             }
             @media (hover: hover) {
               &:hover {
                 .title {
-                  background-color: $color-primary-shade-20;
+
                 }
               }
             }
 
-
-            .images {
-              display: flex;
-              overflow: hidden;
-
-              height: 128px;
-
-              transition: height $transition-duration-long $transition-timing-function;
-              transition-delay: $transition-delay-1;
-
-              .image {
-                height: 128px;
-                flex: 1;
-                background-size: cover;
-                background-position: 50% 50%;
-              }
-            }
           }
 
           .animal-list-wrapper {
@@ -339,6 +433,9 @@ export default {
             transition: height $transition-duration-long $transition-timing-function;
 
             .animals {
+
+              padding: 0 $spacing-1;
+              transition: padding $transition-duration-long $transition-timing-function;
 
               .animal-item {
 
@@ -372,13 +469,11 @@ export default {
                   }
                   .info {
                     flex: 1;
-                    .title {
-                      color: white;
-                      padding: calc((40px - 1.5rem) / 2) $spacing-2;
-                      background: $color-primary;
-                      font-weight: 700;
 
-                      transition: background-color $transition-duration-short $transition-timing-function;
+                    .title {
+                      color: $color-primary;
+                      padding: calc((40px - 1.5rem) / 2) $spacing-2;
+                      font-weight: 700;
                     }
                     .text {
                       width: 100%;
@@ -403,7 +498,7 @@ export default {
                   &:active, &:focus {
                     .info {
                       .title {
-                        background-color: $color-primary-shade-20;
+                        color: $color-primary-shade-20;
                       }
                     }
                   }
@@ -411,7 +506,7 @@ export default {
                     &:hover {
                       .info {
                         .title {
-                          background-color: $color-primary-shade-20;
+                          color: $color-primary-shade-20;
                         }
                       }
                     }
@@ -421,28 +516,29 @@ export default {
             }
           }
 
+
           &.open {
 
             margin-bottom: $spacing-4;
 
             &:not(.animal) {
 
-              &:not(:first-child) {
-                margin-top: $spacing-4;
-              }
-
               .category {
                 margin-bottom: $spacing-2;
                 .title {
-                  background-color: $color-primary-shade-20;
+                  svg {
+                    transform: rotate(90deg);
+                  }
                 }
                 .images {
-                  transition-delay: 0s;
-                  height: 0;
+                  height: 40px;
+                  &:after {
+                    opacity: 1;
+                    width: 100%;
+                  }
                 }
               }
               .animal-list-wrapper {
-                transition-delay: $transition-delay-1;
                 .animals {
                 }
               }
@@ -466,6 +562,15 @@ export default {
     bottom: 0;
 
     box-shadow: 0px -4px 8px +4px rgba($color-black, 0.2);
+
+    .content-wrapper {
+      display: flex;
+      align-items: center;
+      height: 100%;
+      .row {
+        width: 100%;
+      }
+    }
   }
 
 
@@ -474,7 +579,7 @@ export default {
 
     .mustelid-identification {
 
-      .left-section {
+      .video-section {
         video {
           display: block;
           width: 100%;
@@ -482,12 +587,16 @@ export default {
         }
       }
 
-      .right-section {
+      .answer-section {
         .animal-categories {
           .category-item {
             .category {
               .title {
                 padding: calc((48px - 1.5rem) / 2) $spacing-2;
+                padding-left: $spacing-4;
+                svg {
+                  top: calc( (48px - #{$font-size-normal}) / 2  - 2px);
+                }
               }
             }
 
@@ -500,6 +609,26 @@ export default {
                         padding: calc((48px - 1.5rem) / 2) $spacing-2;
                       }
                     }
+                  }
+                }
+              }
+            }
+
+            &.open {
+
+              &:not(.animal) {
+
+
+                .category {
+                  .title {
+
+                  }
+                  .images {
+                    height: 48px;
+                  }
+                }
+                .animal-list-wrapper {
+                  .animals {
                   }
                 }
               }
@@ -523,7 +652,7 @@ export default {
       overflow: hidden;
 
 
-      .left-section {
+      .video-section {
         position: absolute;
         top: 0;
         right: 50%;
@@ -536,7 +665,7 @@ export default {
           padding-right: 0;
         }
       }
-      .right-section {
+      .answer-section {
         position: absolute;
         top: 0;
         left: 50%;
@@ -544,8 +673,11 @@ export default {
         height: 100%;
         max-width: $grid-max-width/2;
         overflow-y: scroll;
-        .content-wrapper {
-          padding-left: 0;
+
+        .content-section {
+          .content-wrapper {
+            padding-left: 0;
+          }
         }
 
         /*
