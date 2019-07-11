@@ -18,6 +18,11 @@ const About = resolve => {
         resolve(require("@/views/About.vue"));
     });
 };
+const Mustelids = resolve => {
+    require.ensure(["@/views/Mustelids.vue"], () => {
+        resolve(require("@/views/Mustelids.vue"));
+    });
+};
 const Terms = resolve => {
     require.ensure(["@/views/shared/static/Terms.vue"], () => {
         resolve(require("@/views/shared/static/Terms.vue"));
@@ -46,6 +51,11 @@ export const routes = [
                 path: "about",
                 component: About,
                 meta: {i18n: 'navigation-about', nav: true}
+            },
+            {
+                path: "mustelids",
+                component: Mustelids,
+                meta: {i18n: 'navigation-mustelids', nav: true}
             },
             {
                 path: "forum",

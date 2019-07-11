@@ -36,7 +36,7 @@
                   <source type="video/mp4" src="/videos/09170086.mp4">
                 </video>
                 -->
-                <video autoplay playsinline muted v-for="(video,index) in task.videos" :key="'video'+index" v-show="index === activeVideo" @ended="onVideoEnd">
+                <video autoplay playsinline muted v-for="(video,index) in task.videos" :key="'video'+index" v-if="index === activeVideo" @ended="onVideoEnd">
                   <source type="video/mp4" :src="'/videos/'+video">
                 </video>
 
@@ -259,25 +259,41 @@ export default {
   },
   methods: {
     clickCategory( index ) {
+
+        let closeFirst = false;
+
         if( this.openCategory !== index ) {
+            if( this.openCategory !== null ) {
+                closeFirst = true;
+            }
             this.openCategory = index;
         }
         else {
+            // close accordion
             this.openCategory = null;
         }
         this.resize();
 
-        this.$scrollTo('#category-item-'+index, 600, {
-            container: '#answer-section',
-            offset: -48
-        });
+        if( closeFirst ) {
+            let self = this;
+            setTimeout( function() {
+                self.$scrollTo('#category-item-'+index, 600, {
+                    container: '#answer-section',
+                    offset: -48
+                });
+            }, 300)
+        }
+        else {
+            this.$scrollTo('#category-item-'+index, 600, {
+                container: '#answer-section',
+                offset: -48
+            });
+        }
     },
     resize() {
         for( var i=0; i< this.animals.length; i++ ) {
             if( this.openCategory === i ) {
-                console.log( this.$refs['animalList'+this.openCategory][0].offsetHeight );
                 this.$refs['animalListWrapper'+i][0].style.height = this.$refs['animalList'+this.openCategory][0].offsetHeight +'px';
-                console.log( this.$refs['animalListWrapper'+i][0].style.height );
             }
             else {
                 this.$refs['animalListWrapper'+i][0].style.height = 0+'px';
@@ -381,7 +397,7 @@ export default {
                 width: 50%;
                 height: 100%;
                 background: linear-gradient(120deg, $color-black, rgba($color-black, 0) 100% );
-                opacity: 0.8;
+                opacity: 0.5;
                 transition: all $transition-duration-long $transition-timing-function;
               }
             }
@@ -397,6 +413,7 @@ export default {
               text-transform: uppercase;
               padding: calc( (40px - 1.5rem) / 2) $spacing-2;
               font-weight: 700;
+              text-shadow: 0px 1px 1px rgba($color-black,0.5);
 
               transition: background-color $transition-duration-short $transition-timing-function;
 
@@ -464,7 +481,7 @@ export default {
                     &:after {
                       content: '';
                       display: block;
-                      padding-bottom: 75%;
+                      padding-bottom: 50%;
                     }
                   }
                   .info {
@@ -477,12 +494,11 @@ export default {
                     }
                     .text {
                       width: 100%;
-                      padding: $spacing-2;
-                      padding-left: $spacing-1;
+                      padding: 0 $spacing-2 $spacing-2 $spacing-1;
 
                       li {
                         padding-left: $spacing-3;
-                        margin-bottom: $spacing-1;
+                        margin-bottom: calc( #{$spacing-1} / 2);
                         font-size: $font-size-small;
                         &:before {
                           width: 0.3rem;

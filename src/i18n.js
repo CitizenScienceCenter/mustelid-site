@@ -48,8 +48,8 @@ export const i18n = new VueI18n({
           'navigation-about': {
               'link': 'About the Project'
           },
-          'navigation-sources': {
-              'link': 'Image Sources'
+          'navigation-mustelids': {
+              'link': 'Mustelid Population in Switzerland'
           },
           'navigation-terms': {
               'link': 'Privacy Policy & Terms of Use'
@@ -87,8 +87,8 @@ export const i18n = new VueI18n({
           'navigation-about': {
               'link': 'Über das Projekt'
           },
-          'navigation-sources': {
-              'link': 'Bildquellen'
+          'navigation-mustelids': {
+              'link': 'Wiesel in der Schweiz'
           },
           'navigation-terms': {
               'link': 'Privacy Policy & Terms of Use'
