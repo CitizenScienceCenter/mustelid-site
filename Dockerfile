@@ -2,7 +2,7 @@ FROM node:9.11-alpine AS build
 
 WORKDIR /app
 COPY . .
-RUN apk add python make gcc g++
+RUN apk update && apk add python make gcc g++
 RUN npm install
 RUN npm run build
 RUN ls dist
