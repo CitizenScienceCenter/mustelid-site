@@ -45,7 +45,14 @@ export const routes = [
             {
                 path: "identification",
                 component: Identification,
-                meta: {requiresAuth: true, i18n: 'navigation-identification', nav: true}
+                meta: {requiresAuth: true, i18n: 'navigation-identification', nav: true},
+                children: [
+                    {
+                        path: ":id",
+                        component: Identification,
+                        meta: { requiresAuth: true, i18n: 'navigation-identification' }
+                    }
+                ]
             },
             {
                 path: "about",
