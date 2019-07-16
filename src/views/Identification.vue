@@ -36,15 +36,21 @@
                   <source type="video/mp4" src="/videos/09170086.mp4">
                 </video>
                 -->
-                <video autoplay playsinline muted v-for="(video,index) in task.videos" :key="'video'+index" v-if="index === activeVideo" @ended="onVideoEnd">
-                  <source type="video/mp4" :src="'/videos/'+video">
-                </video>
+                <div class="video-player">
 
-                <ul class="thumbnails">
-                  <li v-for="(video,index) in task.videos" :key="'thumbnail'+index" :class="{active: index === activeVideo}">
-                    {{ video }}
-                  </li>
-                </ul>
+                  <video :autoplay="index === 0" playsinline muted v-for="(video,index) in task.videos" :key="'video'+index" :class="{ activeVideo: index === activeVideo }" :ref="'video'+index" @ended="onVideoEnd" @click="fullscreen(index)" class="reduced-bottom-margin">
+                    <source type="video/mp4" :src="'/videos/'+video">
+                  </video>
+
+                  <div class="thumbnails">
+                    <ul>
+                      <li v-for="(video,index) in task.videos" :key="'thumbnail'+index" :class="{active: index === activeVideo}" @click="startVideo(index)">
+                        <img src="/videos/thumbnails/thumbnail.jpg" />
+                      </li>
+                    </ul>
+                  </div>
+
+                </div>
 
               </div>
             </div>
@@ -121,7 +127,7 @@
         <div class="row">
 
           <div class="col col-tablet-portrait-6">
-            Sequenz 1 von 10000
+            Aufnahme <b>1</b> von 10000 (Bestehend aus {{ task.videos.length }} Sequenzen)
           </div>
           <div class="col col-tablet-portrait-6">
             <div class="button-group right-aligned">
@@ -237,6 +243,13 @@ export default {
                   "09170086.mp4",
                   "09170086_2.mp4",
                   "09170086_3.mp4",
+                  "09170086_4.mp4",
+                  "09170086.mp4",
+                  "09170086_2.mp4",
+                  "09170086_3.mp4",
+                  "09170086_4.mp4",
+                  "09170086_2.mp4",
+                  "09170086_3.mp4",
                   "09170086_4.mp4"
               ]
           },
@@ -301,12 +314,30 @@ export default {
         }
     },
     onVideoEnd() {
+        document.exitFullscreen();
+        this.$refs['video'+this.activeVideo][0].pause();
+        this.$refs['video'+this.activeVideo][0].currentTime = 0;
+
         if( this.activeVideo < this.task.videos.length-1 ) {
             this.activeVideo++;
         }
         else {
             this.activeVideo = 0;
         }
+
+        this.$refs['video'+this.activeVideo][0].currentTime = 0;
+        this.$refs['video'+this.activeVideo][0].play();
+    },
+    startVideo(index) {
+        this.$refs['video'+this.activeVideo][0].pause();
+        this.$refs['video'+this.activeVideo][0].currentTime = 0;
+        this.activeVideo = index;
+        this.$refs['video'+index][0].currentTime = 0;
+        this.$refs['video'+index][0].play();
+    },
+    fullscreen(index) {
+        console.log( this.$refs['video'+index] );
+      this.$refs['video'+index][0].requestFullscreen();
     }
 
   }
@@ -327,27 +358,59 @@ export default {
   .mustelid-identification {
 
     .video-section {
-      video {
-        display: block;
-        width: 100%;
-        border-radius: $border-radius;
-      }
 
-      .thumbnails {
-        li {
-          padding: 0;
-          margin: 0;
-          &:before {
-            display: none;
+      .video-player {
+        position: relative;
+        video {
+          display: block;
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          border-radius: $border-radius;
+          opacity: 0;
+          pointer-events: none;
+
+          box-shadow: 0px 4px 8px -4px rgba($color-black,0.2);
+          &.activeVideo {
+            pointer-events: all;
+            cursor: pointer;
+            opacity: 1;
           }
+        }
+        .thumbnails {
+          overflow-x: scroll;
+          z-index: 1;
+          ul {
+            position: relative;
+            line-height: 0;
 
-          display: inline-block;
+            width: 3000px;
+            li {
+              padding: 0;
+              margin: 0;
+              &:before {
+                display: none;
+              }
 
-          &.active {
-            color: $color-primary;
+              display: inline-block;
+
+              cursor: pointer;
+
+              img {
+                height: 48px;
+                border-radius: $border-radius;
+              }
+
+              opacity: 0.5;
+              &.active {
+                opacity: 1;
+              }
+            }
           }
         }
       }
+
     }
 
     .answer-section {
@@ -371,7 +434,7 @@ export default {
             border-radius: $border-radius;
 
             box-shadow: 0px 4px 8px -4px rgba($color-black,0.2);
-            transition: margin-bottom $transition-duration-short $transition-timing-function;
+            transition: all $transition-duration-short $transition-timing-function;
 
             .images {
               display: flex;
