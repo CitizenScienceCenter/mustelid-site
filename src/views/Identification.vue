@@ -253,12 +253,21 @@ export default {
                   "09170086_4.mp4"
               ]
           },
-          activeVideo: 0
+          activeVideo: 0,
+
+          taskId: undefined,
+          hasSubmissionAlready: false
       }
   },
   computed: {
       ...mapState({
-          language: state => state.settings.language
+          language: state => state.settings.language,
+
+          currentUser: state => state.c3s.user.currentUser,
+          activityId: state => state.consts.identificationActivity,
+
+          tasks: state => state.c3s.task.tasks,
+          taskMedia: state => state.c3s.task.media,
       })
     },
   mounted() {
@@ -269,8 +278,213 @@ export default {
       } );
 
       this.resize();
+
+
+      /*
+      this.$store.dispatch("c3s/activity/getActivity", [this.activityId, false]).then(activity => {
+          //console.log('activity loaded');
+
+          if( this.$route.params.id ) {
+              if( this.$route.params.id.length !== 36 ) {
+                  console.log('invalid id');
+                  delete this.$route.params.id;
+                  this.$router.replace('/challenge');
+                  this.id = null;
+                  //this.loadTask();
+              }
+              else {
+                  this.id = this.$route.params.id;
+                  //this.loadTask();
+              }
+          }
+          else {
+              this.id = null;
+              //this.loadTask();
+          }
+      });
+      */
+      this.loadTask();
   },
   methods: {
+    loadTask() {
+
+        let taskQuery;
+        if( !this.taskId ) {
+
+            taskQuery = {
+                'select': {
+                    'fields': [
+                        '*'
+                    ],
+                    'tables': [
+                        'tasks'
+                    ],
+                    'orderBy': {
+                        'random()': ''
+                    }
+                },
+                'where': [
+                    {
+                        "field": 'tasks.activity_id',
+                        'op': 'e',
+                        'val': this.activityId
+                    },
+                    {
+                        'field': 'tasks.id',
+                        'op': 'ni',
+                        'val': "(SELECT task_id FROM submissions WHERE submissions.task_id = tasks.id AND user_id = '" + this.currentUser.id + "')",
+                        'join': 'a',
+                        'type': 'sql'
+                    }/*,
+                    {
+                        'field': 'tasks.info ->> \'difficulty\'',
+                        'op': 'e',
+                        'val': this.difficulty.toString(),
+                        'join': 'a'
+                    }*/
+                ]
+            };
+
+        }
+        else {
+            taskQuery = {
+                'select': {
+                    'fields': [
+                        '*'
+                    ],
+                    'tables': [
+                        'tasks'
+                    ]
+                },
+                'where': [
+                    {
+                        "field": 'id',
+                        'op': 'e',
+                        'val': this.taskId
+                    }
+                ]
+            };
+
+        }
+
+
+        this.$store.dispatch('c3s/task/getTasks', [taskQuery, 1]).then(tasks => {
+
+            //console.log('responded tasks');
+
+            this.hasSubmissionAlready = false;
+
+            if( this.id ) {
+
+                let query = {
+                    'select': {
+                        'fields': [
+                            '*'
+                        ],
+                        'tables': [
+                            'submissions'
+                        ]
+                    },
+                    'where': [
+                        {
+                            'field': 'task_id',
+                            'op': 'e',
+                            'val': this.id
+                        },
+                        {
+                            'field': 'user_id',
+                            'op': 'e',
+                            'val': this.currentUser.id,
+                            'join': 'a'
+                        }
+                    ]
+                };
+
+                this.$store.dispatch('c3s/submission/getSubmissions', [query,0] ).then(submissions => {
+
+
+                    if( submissions.body.length > 0 ) {
+                        this.hasSubmissionAlready = true;
+                    }
+                    else {
+                        this.hasSubmissionAlready = false;
+                    }
+
+                    this.id = false;
+
+                });
+
+            }
+
+            if ( this.tasks[0] ) {
+
+                console.log( 'task loaded');
+                //console.log('load media');
+
+                const mediaQuery = {
+                    'select': {
+                        'fields': [
+                            '*'
+                        ],
+                        'tables': [
+                            'media'
+                        ]
+                    },
+                    'where': [
+                        {
+                            "field": "source_id",
+                            'op': 'e',
+                            'val': this.tasks[0].id
+                        }
+                    ]
+                };
+
+
+                this.$store.dispatch('c3s/media/getMedia', [mediaQuery, 'c3s/task/SET_MEDIA', 1]).then(media => {
+
+                    //console.log('media loaded');
+                    this.evaluation = null;
+                    this.value = null;
+                    this.loadTime = new Date();
+                    this.loading = false;
+                    this.showNext = false;
+
+                });
+
+            }
+
+            else {
+
+                console.log('no more tasks');
+
+                if ( this.difficulty === '0') {
+                    this.completedDifficulties.push('0');
+
+                    if (this.completedDifficulties.indexOf('1') === -1) {
+                        this.difficulty = '1';
+                    }
+                    else {
+                        this.complete = true;
+                    }
+                }
+                else if ( this.difficulty === '1') {
+                    this.completedDifficulties.push('1');
+
+                    if (this.completedDifficulties.indexOf('0') === -1) {
+                        this.difficulty = '0';
+                    }
+                    else {
+                        this.complete = true;
+                    }
+                }
+
+
+            }
+
+
+        });
+
+    },
     clickCategory( index ) {
 
         let closeFirst = false;
