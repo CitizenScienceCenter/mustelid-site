@@ -52,15 +52,15 @@ export default {
               },
               {
                   property: 'og:url',
-                  content: 'https://'+window.location.host+this.$route.path
+                  content: 'https://mustelids-staging.citizenscience.ch'+this.$route.path
               },
               {
                   property: 'og:image',
-                  content: 'https://'+window.location.host+'img/promo.jpg'
+                  content: 'https://mustelids-staging.citizenscience.ch/img/promo.jpg'
               }
           ],
           link: [
-              {rel: 'canonical', href: 'https://'+window.location.host+this.$route.path}
+              {rel: 'canonical', href: 'https://mustelids-staging.citizenscience.ch'+this.$route.path}
           ],
           htmlAttrs: {
               lang: this.language
@@ -72,6 +72,7 @@ export default {
   }),
   mounted: function() {
       // body fade
+      console.log( 'host:'+window.location.host );
       var app = this.$el;
       var cover = new Image();
       cover.src = '/img/cover.jpg';
