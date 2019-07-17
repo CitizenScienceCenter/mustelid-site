@@ -52,15 +52,15 @@ export default {
               },
               {
                   property: 'og:url',
-                  content: 'https://wiesel.citizenscience.ch'+this.$route.path
+                  content: 'https://mustelid.citizenscience.ch'+this.$route.path
               },
               {
                   property: 'og:image',
-                  content: 'https://citizenscience.ch/img/citsci-promo.jpg'
+                  content: 'https://mustelid.citizenscience.ch/img/promo.jpg'
               }
           ],
           link: [
-              {rel: 'canonical', href: 'https://wiesel.citizenscience.ch'+this.$route.path}
+              {rel: 'canonical', href: 'https://mustelid.citizenscience.ch'+this.$route.path}
           ],
           htmlAttrs: {
               lang: this.language
