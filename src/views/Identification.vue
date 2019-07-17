@@ -38,17 +38,23 @@
                 -->
                 <div class="video-player">
 
-                  <video :autoplay="index === 0" playsinline muted v-for="(video,index) in task.videos" :key="'video'+index" :class="{ activeVideo: index === activeVideo }" :ref="'video'+index" @ended="onVideoEnd" @click="fullscreen(index)" class="reduced-bottom-margin">
+                  <video :autoplay="index === 0" playsinline muted v-for="(video,index) in task.videos" :key="'video'+index" :class="{ activeVideo: index === activeVideo }" :ref="'video'+index" @ended="onVideoEnd(index)" class="reduced-bottom-margin">
                     <source type="video/mp4" :src="'/videos/'+video">
                   </video>
 
                   <div class="thumbnails">
                     <ul>
+                      <!--
                       <li v-for="(video,index) in task.videos" :key="'thumbnail'+index" :class="{active: index === activeVideo}" @click="startVideo(index)">
                         <img src="/videos/thumbnails/thumbnail.jpg" />
                       </li>
+                      -->
                     </ul>
                   </div>
+
+                  <button class="button button-secondary button-secondary-naked button-icon button-icon-only fullscreen-button" @click="fullscreen()" >
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M32,180V56A23.94,23.94,0,0,1,56,32H180a12,12,0,0,1,12,12V84a12,12,0,0,1-12,12H96v84a12,12,0,0,1-12,12H44A12,12,0,0,1,32,180ZM320,44V84a12,12,0,0,0,12,12h84v84a12,12,0,0,0,12,12h40a12,12,0,0,0,12-12V56a23.94,23.94,0,0,0-24-24H332A12,12,0,0,0,320,44ZM468,320H428a12,12,0,0,0-12,12v84H332a12,12,0,0,0-12,12v40a12,12,0,0,0,12,12H456a23.94,23.94,0,0,0,24-24V332A12,12,0,0,0,468,320ZM192,468V428a12,12,0,0,0-12-12H96V332a12,12,0,0,0-12-12H44a12,12,0,0,0-12,12V456a23.94,23.94,0,0,0,24,24H180A12,12,0,0,0,192,468Z"/></svg>
+                  </button>
 
                 </div>
 
@@ -527,10 +533,13 @@ export default {
             }
         }
     },
-    onVideoEnd() {
-        document.exitFullscreen();
-        this.$refs['video'+this.activeVideo][0].pause();
-        this.$refs['video'+this.activeVideo][0].currentTime = 0;
+    onVideoEnd(index) {
+        if (document.fullscreenElement) {
+            document.exitFullscreen();
+        }
+
+        this.$refs['video'+index][0].pause();
+        this.$refs['video'+index][0].currentTime = 0;
 
         if( this.activeVideo < this.task.videos.length-1 ) {
             this.activeVideo++;
@@ -550,8 +559,7 @@ export default {
         this.$refs['video'+index][0].play();
     },
     fullscreen(index) {
-        console.log( this.$refs['video'+index] );
-      this.$refs['video'+index][0].requestFullscreen();
+        this.$refs['video'+this.activeVideo][0].requestFullscreen();
     }
 
   }
@@ -575,6 +583,13 @@ export default {
 
       .video-player {
         position: relative;
+
+        &:after {
+          content: "";
+          display: block;
+          padding-bottom: 56.25%;
+        }
+
         video {
           display: block;
           position: absolute;
@@ -587,17 +602,51 @@ export default {
 
           box-shadow: 0px 4px 8px -4px rgba($color-black,0.2);
           &.activeVideo {
+            /*
             pointer-events: all;
             cursor: pointer;
+            */
             opacity: 1;
           }
         }
+
         .thumbnails {
+          display: block;
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 48px;
+
           overflow-x: scroll;
           z-index: 1;
+
+          background: red;
+
+          /*
+          &::-webkit-scrollbar {
+            height: 4px;
+          }
+          &::-webkit-scrollbar-track {
+            background-color: transparent;
+          }
+          &::-webkit-scrollbar-thumb {
+            border-radius: 2px;
+          }
+          &:hover {
+            &::-webkit-scrollbar-thumb {
+              background-color: $color-black-tint-90;
+            }
+          }
+          &::-webkit-scrollbar-thumb:hover {
+            background-color: $color-black-tint-90;
+          }
+          */
+
           ul {
             position: relative;
             line-height: 0;
+            display: block;
 
             width: 3000px;
             li {
@@ -622,6 +671,12 @@ export default {
               }
             }
           }
+        }
+
+        .fullscreen-button {
+          position: absolute;
+          bottom: $spacing-1;
+          right: $spacing-1;
         }
       }
 
@@ -973,29 +1028,6 @@ export default {
           }
         }
 
-        /*
-
-        &::-webkit-scrollbar {
-          width: 4px;
-        }
-
-        &::-webkit-scrollbar-track {
-          background-color: transparent;
-        }
-
-        &::-webkit-scrollbar-thumb {
-          border-radius: 2px;
-        }
-        &:hover {
-          &::-webkit-scrollbar-thumb {
-            background-color: $color-black-tint-90;
-          }
-        }
-
-        &::-webkit-scrollbar-thumb:hover {
-          background-color: $color-black-tint-90;
-        }
-        */
       }
 
 
