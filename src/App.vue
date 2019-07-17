@@ -72,7 +72,7 @@ export default {
   }),
   mounted: function() {
       // body fade
-      console.log( window.location.host );
+      console.log( 'host:'+window.location.host );
       var app = this.$el;
       var cover = new Image();
       cover.src = '/img/cover.jpg';
