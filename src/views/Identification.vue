@@ -44,15 +44,13 @@
 
                   <div class="thumbnails">
                     <ul>
-                      <!--
                       <li v-for="(video,index) in task.videos" :key="'thumbnail'+index" :class="{active: index === activeVideo}" @click="startVideo(index)">
                         <img src="/videos/thumbnails/thumbnail.jpg" />
                       </li>
-                      -->
                     </ul>
                   </div>
 
-                  <button class="button button-secondary button-secondary-naked button-icon button-icon-only fullscreen-button" @click="fullscreen()" >
+                  <button class="button button-secondary button-secondary-naked button-secondary-inverted button-icon button-icon-only fullscreen-button" @click="fullscreen" >
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M32,180V56A23.94,23.94,0,0,1,56,32H180a12,12,0,0,1,12,12V84a12,12,0,0,1-12,12H96v84a12,12,0,0,1-12,12H44A12,12,0,0,1,32,180ZM320,44V84a12,12,0,0,0,12,12h84v84a12,12,0,0,0,12,12h40a12,12,0,0,0,12-12V56a23.94,23.94,0,0,0-24-24H332A12,12,0,0,0,320,44ZM468,320H428a12,12,0,0,0-12,12v84H332a12,12,0,0,0-12,12v40a12,12,0,0,0,12,12H456a23.94,23.94,0,0,0,24-24V332A12,12,0,0,0,468,320ZM192,468V428a12,12,0,0,0-12-12H96V332a12,12,0,0,0-12-12H44a12,12,0,0,0-12,12V456a23.94,23.94,0,0,0,24,24H180A12,12,0,0,0,192,468Z"/></svg>
                   </button>
 
@@ -536,6 +534,10 @@ export default {
     onVideoEnd(index) {
         if (document.fullscreenElement) {
             document.exitFullscreen();
+        } else if (document.mozFullScreenElement) {
+            document.mozCancelFullScreen();
+        } else if (document.webkitFullscreenElement) {
+            document.webkitCancelFullScreen();
         }
 
         this.$refs['video'+index][0].pause();
@@ -558,8 +560,15 @@ export default {
         this.$refs['video'+index][0].currentTime = 0;
         this.$refs['video'+index][0].play();
     },
-    fullscreen(index) {
-        this.$refs['video'+this.activeVideo][0].requestFullscreen();
+    fullscreen() {
+        if (this.$refs['video'+this.activeVideo][0].requestFullScreen) {
+            this.$refs['video'+this.activeVideo][0].requestFullScreen();
+        } else if (this.$refs['video'+this.activeVideo][0].mozRequestFullScreen) {
+            this.$refs['video'+this.activeVideo][0].mozRequestFullScreen();
+        } else if (this.$refs['video'+this.activeVideo][0].webkitRequestFullScreen) {
+            this.$refs['video'+this.activeVideo][0].webkitRequestFullScreen();
+        }
+        //this.$refs['video'+this.activeVideo][0].requestFullscreen();
     }
 
   }
@@ -598,7 +607,6 @@ export default {
           width: 100%;
           border-radius: $border-radius;
           opacity: 0;
-          pointer-events: none;
 
           box-shadow: 0px 4px 8px -4px rgba($color-black,0.2);
           &.activeVideo {
@@ -613,15 +621,14 @@ export default {
         .thumbnails {
           display: block;
           position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 48px;
+          top: $spacing-1;
+          left: $spacing-1;
+          width: calc( 100% - 2 * #{$spacing-1} );
 
+          overflow-scrolling: touch;
+          overflow: hidden;
           overflow-x: scroll;
           z-index: 1;
-
-          background: red;
 
           /*
           &::-webkit-scrollbar {
@@ -644,11 +651,13 @@ export default {
           */
 
           ul {
-            position: relative;
             line-height: 0;
             display: block;
+            margin: 0;
+            padding: 0;
 
             width: 3000px;
+
             li {
               padding: 0;
               margin: 0;
@@ -677,6 +686,7 @@ export default {
           position: absolute;
           bottom: $spacing-1;
           right: $spacing-1;
+          background-color: rgba( $color-black, 0.5 );
         }
       }
 
