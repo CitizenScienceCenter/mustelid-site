@@ -56,11 +56,11 @@ export default {
               },
               {
                   property: 'og:image',
-                  content: 'https://mustelid.citizenscience.ch/img/promo.jpg'
+                  content: 'https://mustelids-staging.citizenscience.ch/img/promo.jpg'
               }
           ],
           link: [
-              {rel: 'canonical', href: 'https://mustelid.citizenscience.ch'+this.$route.path}
+              {rel: 'canonical', href: 'https://mustelids-staging.citizenscience.ch'+this.$route.path}
           ],
           htmlAttrs: {
               lang: this.language
@@ -72,6 +72,7 @@ export default {
   }),
   mounted: function() {
       // body fade
+      console.log( window.location.host );
       var app = this.$el;
       var cover = new Image();
       cover.src = '/img/cover.jpg';
