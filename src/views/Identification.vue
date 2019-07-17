@@ -21,6 +21,19 @@
 
     <app-content-section class="content-section-flat mustelid-identification" color="light-greyish">
 
+      <div class="video-section-new">
+        <div class="title">
+          title
+        </div>
+        <div class="video-player">
+          <video class="video-stream html5-main-video" controlslist="nodownload" src="/videos/09170086.mp4"></video>
+        </div>
+      </div>
+
+      <div class="answer-section-new">
+        answer
+      </div>
+
       <div class="video-section">
 
         <app-content-section class="content-section-condensed" color="transparent">
@@ -568,7 +581,6 @@ export default {
         } else if (this.$refs['video'+this.activeVideo][0].webkitRequestFullScreen) {
             this.$refs['video'+this.activeVideo][0].webkitRequestFullScreen();
         }
-        //this.$refs['video'+this.activeVideo][0].requestFullscreen();
     }
 
   }
@@ -589,6 +601,7 @@ export default {
   .mustelid-identification {
 
     .video-section {
+      display: none;
 
       .video-player {
         position: relative;
@@ -693,6 +706,9 @@ export default {
     }
 
     .answer-section {
+
+      display: none;
+
       .animal-categories {
 
         .category-item {
@@ -919,7 +935,7 @@ export default {
     left: 0;
     bottom: 0;
 
-    box-shadow: 0px -4px 8px +4px rgba($color-black, 0.2);
+    box-shadow: 0px -2px 4px +2px rgba($color-black, 0.05);
 
     .content-wrapper {
       display: flex;
@@ -1008,6 +1024,44 @@ export default {
       height: calc( 100vh - 160px );
       //max-height: 900px;
       overflow: hidden;
+
+
+      position: relative;
+      display: flex;
+      flex-direction: row;
+      align-items: start;
+      .video-section-new {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        flex-grow: 1;
+
+        .title {
+          background: grey;
+        }
+        .video-player {
+          flex-grow: 1;
+          background: darkgrey;
+          display: flex;
+          position: relative;
+
+          video {
+            position: absolute;
+            top: $spacing-2;
+            left: $spacing-2;
+            min-width: auto;
+            min-height: auto;
+            max-width: calc( 100% - #{$spacing-2} * 2 );
+            max-height: calc( 100% - #{$spacing-2} * 2 );
+            width: auto;
+            height: auto;
+          }
+        }
+
+      }
+      .answer-section-new {
+        min-width: 33.333%;
+      }
 
 
       .video-section {
