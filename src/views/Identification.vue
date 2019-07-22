@@ -21,22 +21,9 @@
 
     <app-content-section class="content-section-flat mustelid-identification" color="light-greyish">
 
-      <div class="video-section-new">
-        <div class="title">
-          title
-        </div>
-        <div class="video-player">
-          <video class="video-stream html5-main-video" controlslist="nodownload" src="/videos/09170086.mp4"></video>
-        </div>
-      </div>
-
-      <div class="answer-section-new">
-        answer
-      </div>
-
       <div class="video-section">
 
-        <app-content-section class="content-section-condensed" color="transparent">
+        <app-content-section class="content-section-condensed title-section" color="transparent">
           <div class="content-wrapper">
 
             <div class="row">
@@ -49,31 +36,37 @@
                   <source type="video/mp4" src="/videos/09170086.mp4">
                 </video>
                 -->
-                <div class="video-player">
-
-                  <video :autoplay="index === 0" playsinline muted v-for="(video,index) in task.videos" :key="'video'+index" :class="{ activeVideo: index === activeVideo }" :ref="'video'+index" @ended="onVideoEnd(index)" class="reduced-bottom-margin">
-                    <source type="video/mp4" :src="'/videos/'+video">
-                  </video>
-
-                  <div class="thumbnails">
-                    <ul>
-                      <li v-for="(video,index) in task.videos" :key="'thumbnail'+index" :class="{active: index === activeVideo}" @click="startVideo(index)">
-                        <img src="/videos/thumbnails/thumbnail.jpg" />
-                      </li>
-                    </ul>
-                  </div>
-
-                  <button class="button button-secondary button-secondary-naked button-secondary-inverted button-icon button-icon-only fullscreen-button" @click="fullscreen" >
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M32,180V56A23.94,23.94,0,0,1,56,32H180a12,12,0,0,1,12,12V84a12,12,0,0,1-12,12H96v84a12,12,0,0,1-12,12H44A12,12,0,0,1,32,180ZM320,44V84a12,12,0,0,0,12,12h84v84a12,12,0,0,0,12,12h40a12,12,0,0,0,12-12V56a23.94,23.94,0,0,0-24-24H332A12,12,0,0,0,320,44ZM468,320H428a12,12,0,0,0-12,12v84H332a12,12,0,0,0-12,12v40a12,12,0,0,0,12,12H456a23.94,23.94,0,0,0,24-24V332A12,12,0,0,0,468,320ZM192,468V428a12,12,0,0,0-12-12H96V332a12,12,0,0,0-12-12H44a12,12,0,0,0-12,12V456a23.94,23.94,0,0,0,24,24H180A12,12,0,0,0,192,468Z"/></svg>
-                  </button>
-
-                </div>
 
               </div>
             </div>
 
           </div>
         </app-content-section>
+
+
+        <div class="video-player">
+
+          <div class="video-wrapper">
+
+            <video :autoplay="index === 0" playsinline muted v-for="(video,index) in task.videos" :key="'video'+index" :class="{ activeVideo: index === activeVideo }" :ref="'video'+index" @ended="onVideoEnd(index)">
+              <source type="video/mp4" :src="'/videos/'+video">
+            </video>
+
+            <div class="thumbnails">
+              <ul>
+                <li v-for="(video,index) in task.videos" :key="'thumbnail'+index" :class="{active: index === activeVideo}" @click="startVideo(index)">
+                  <img src="/videos/thumbnails/thumbnail.jpg" />
+                </li>
+              </ul>
+            </div>
+
+            <button class="button button-secondary button-secondary-naked button-secondary-inverted button-icon button-icon-only fullscreen-button" @click="fullscreen" >
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M32,180V56A23.94,23.94,0,0,1,56,32H180a12,12,0,0,1,12,12V84a12,12,0,0,1-12,12H96v84a12,12,0,0,1-12,12H44A12,12,0,0,1,32,180ZM320,44V84a12,12,0,0,0,12,12h84v84a12,12,0,0,0,12,12h40a12,12,0,0,0,12-12V56a23.94,23.94,0,0,0-24-24H332A12,12,0,0,0,320,44ZM468,320H428a12,12,0,0,0-12,12v84H332a12,12,0,0,0-12,12v40a12,12,0,0,0,12,12H456a23.94,23.94,0,0,0,24-24V332A12,12,0,0,0,468,320ZM192,468V428a12,12,0,0,0-12-12H96V332a12,12,0,0,0-12-12H44a12,12,0,0,0-12,12V456a23.94,23.94,0,0,0,24,24H180A12,12,0,0,0,192,468Z"/></svg>
+            </button>
+
+          </div>
+
+        </div>
 
       </div>
 
@@ -523,14 +516,14 @@ export default {
             setTimeout( function() {
                 self.$scrollTo('#category-item-'+index, 600, {
                     container: '#answer-section',
-                    offset: -48
+                    offset: -32
                 });
             }, 300)
         }
         else {
             this.$scrollTo('#category-item-'+index, 600, {
                 container: '#answer-section',
-                offset: -48
+                offset: -32
             });
         }
     },
@@ -601,113 +594,118 @@ export default {
   .mustelid-identification {
 
     .video-section {
-      display: none;
+
+      .title-section {
+        padding-bottom: 0;
+      }
 
       .video-player {
         position: relative;
 
-        &:after {
-          content: "";
-          display: block;
-          padding-bottom: 56.25%;
-        }
+        .video-wrapper {
 
-        video {
-          display: block;
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          border-radius: $border-radius;
-          opacity: 0;
+          &:after {
+            content: "";
+            display: block;
+            padding-bottom: calc( 100% / 16 * 9 );
+          }
 
-          box-shadow: 0px 4px 8px -4px rgba($color-black,0.2);
-          &.activeVideo {
+          video {
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            opacity: 0;
+
+            &.activeVideo {
+              /*
+              pointer-events: all;
+              cursor: pointer;
+              */
+              opacity: 1;
+            }
+          }
+
+          .thumbnails {
+            display: block;
+            position: absolute;
+            top: $spacing-1;
+            left: $spacing-1;
+            width: calc( 100% - 2 * #{$spacing-1} );
+
+            overflow-scrolling: touch;
+            overflow: hidden;
+            z-index: 1;
+
             /*
-            pointer-events: all;
-            cursor: pointer;
-            */
-            opacity: 1;
-          }
-        }
-
-        .thumbnails {
-          display: block;
-          position: absolute;
-          top: $spacing-1;
-          left: $spacing-1;
-          width: calc( 100% - 2 * #{$spacing-1} );
-
-          overflow-scrolling: touch;
-          overflow: hidden;
-          overflow-x: scroll;
-          z-index: 1;
-
-          /*
-          &::-webkit-scrollbar {
-            height: 4px;
-          }
-          &::-webkit-scrollbar-track {
-            background-color: transparent;
-          }
-          &::-webkit-scrollbar-thumb {
-            border-radius: 2px;
-          }
-          &:hover {
+            &::-webkit-scrollbar {
+              height: 4px;
+            }
+            &::-webkit-scrollbar-track {
+              background-color: transparent;
+            }
             &::-webkit-scrollbar-thumb {
+              border-radius: 2px;
+            }
+            &:hover {
+              &::-webkit-scrollbar-thumb {
+                background-color: $color-black-tint-90;
+              }
+            }
+            &::-webkit-scrollbar-thumb:hover {
               background-color: $color-black-tint-90;
             }
-          }
-          &::-webkit-scrollbar-thumb:hover {
-            background-color: $color-black-tint-90;
-          }
-          */
+            */
 
-          ul {
-            line-height: 0;
-            display: block;
-            margin: 0;
-            padding: 0;
-
-            width: 3000px;
-
-            li {
-              padding: 0;
+            ul {
+              line-height: 0;
+              display: block;
               margin: 0;
-              &:before {
-                display: none;
-              }
+              padding: 0;
 
-              display: inline-block;
+              width: 3000px;
 
-              cursor: pointer;
+              li {
+                padding: 0;
+                margin: 0;
+                &:before {
+                  display: none;
+                }
 
-              img {
-                height: 48px;
-                border-radius: $border-radius;
-              }
+                display: inline-block;
 
-              opacity: 0.5;
-              &.active {
-                opacity: 1;
+                cursor: pointer;
+
+                img {
+                  height: 48px;
+                  border-radius: $border-radius;
+                }
+
+                opacity: 0.5;
+                &.active {
+                  opacity: 1;
+                }
               }
             }
           }
+
+          .fullscreen-button {
+            display: none;
+            position: absolute;
+            bottom: $spacing-1;
+            right: $spacing-1;
+            background-color: rgba( $color-black, 0.5 );
+          }
+
         }
 
-        .fullscreen-button {
-          position: absolute;
-          bottom: $spacing-1;
-          right: $spacing-1;
-          background-color: rgba( $color-black, 0.5 );
-        }
       }
 
     }
 
     .answer-section {
-
-      display: none;
+      margin-bottom: 80px;
 
       .animal-categories {
 
@@ -717,10 +715,7 @@ export default {
             display: none;
           }
           padding: 0;
-          margin: 0;
 
-
-          margin-bottom: $spacing-3;
           transition: padding $transition-duration-short $transition-timing-function;
 
           .category {
@@ -729,15 +724,15 @@ export default {
             border-radius: $border-radius;
 
             box-shadow: 0px 4px 8px -4px rgba($color-black,0.2);
-            transition: all $transition-duration-short $transition-timing-function;
+            transition: all $transition-duration-long $transition-timing-function;
+
+            height: calc( ( 100vh - 160px - 64px - ( 4 * 16px ) ) / 5 );
 
             .images {
               display: flex;
               overflow: hidden;
 
-              height: 10vh;
-
-              transition: height $transition-duration-long $transition-timing-function;
+              height: calc( ( 100vh - 160px - 64px - ( 4 * 16px ) ) / 5 );
 
               .image {
                 flex: 1;
@@ -755,7 +750,7 @@ export default {
                 width: 50%;
                 height: 100%;
                 background: linear-gradient(120deg, $color-black, rgba($color-black, 0) 100% );
-                opacity: 0.5;
+                opacity: 0.667;
                 transition: all $transition-duration-long $transition-timing-function;
               }
             }
@@ -832,7 +827,7 @@ export default {
                   box-shadow: 0px 4px 8px -4px rgba($color-black,0.2);
 
                   .image {
-                    flex: 0 0 33.333%;
+                    flex: 0 0 37%;
                     background-size: cover;
                     background-position: 50% 50%;
 
@@ -858,6 +853,7 @@ export default {
                         padding-left: $spacing-3;
                         margin-bottom: calc( #{$spacing-1} / 2);
                         font-size: $font-size-small;
+                        line-height: 1.25;
                         &:before {
                           width: 0.3rem;
                           height: 0.3rem;
@@ -893,28 +889,25 @@ export default {
 
           &.open {
 
-            margin-bottom: $spacing-4;
+            //margin-bottom: $spacing-4;
 
-            &:not(.animal) {
-
-              .category {
-                margin-bottom: $spacing-2;
-                .title {
-                  svg {
-                    transform: rotate(90deg);
-                  }
-                }
-                .images {
-                  height: 40px;
-                  &:after {
-                    opacity: 1;
-                    width: 100%;
-                  }
+            .category {
+              height: 40px;
+              margin-bottom: $spacing-2;
+              .title {
+                svg {
+                  transform: rotate(90deg);
                 }
               }
-              .animal-list-wrapper {
-                .animals {
+              .images {
+                &:after {
+                  opacity: 1;
+                  width: 100%;
                 }
+              }
+            }
+            .animal-list-wrapper {
+              .animals {
               }
             }
           }
@@ -957,7 +950,6 @@ export default {
         video {
           display: block;
           width: 100%;
-          border-radius: $border-radius;
         }
       }
 
@@ -989,21 +981,17 @@ export default {
             }
 
             &.open {
+              .category {
+                height: 48px;
+                .title {
 
-              &:not(.animal) {
-
-
-                .category {
-                  .title {
-
-                  }
-                  .images {
-                    height: 48px;
-                  }
                 }
-                .animal-list-wrapper {
-                  .animals {
-                  }
+                .images {
+                  //height: 48px;
+                }
+              }
+              .animal-list-wrapper {
+                .animals {
                 }
               }
             }
@@ -1025,78 +1013,78 @@ export default {
       //max-height: 900px;
       overflow: hidden;
 
-
-      position: relative;
       display: flex;
       flex-direction: row;
-      align-items: start;
-      .video-section-new {
-        display: flex;
-        flex-direction: column;
-        height: 100%;
-        flex-grow: 1;
-
-        .title {
-          background: grey;
-        }
-        .video-player {
-          flex-grow: 1;
-          background: darkgrey;
-          display: flex;
-          position: relative;
-
-          video {
-            position: absolute;
-            top: $spacing-2;
-            left: $spacing-2;
-            min-width: auto;
-            min-height: auto;
-            max-width: calc( 100% - #{$spacing-2} * 2 );
-            max-height: calc( 100% - #{$spacing-2} * 2 );
-            width: auto;
-            height: auto;
-          }
-        }
-
-      }
-      .answer-section-new {
-        min-width: 33.333%;
-      }
-
 
       .video-section {
-        position: absolute;
-        top: 0;
-        right: 50%;
-        width: 50%;
-        height: 100%;
-        max-width: $grid-max-width/2;
-        overflow: hidden;
-        overflow-y: auto;
-        .content-wrapper {
-          padding-right: 0;
+        min-width: 50%;
+        position: relative;
+
+        .video-player {
+          height: calc( 100vh - 160px - 135px );
+          width: calc( ( 100vh - 160px - 135px ) / 9 * 16 );
+          overflow: hidden;
+
+          max-width: 100%;
+          min-width: 100%;
+
+          .video-wrapper {
+            width: 100%;
+            height: 100%;
+            max-height: calc( 100% / 16 * 9 );
+
+            video {
+              border-radius: 0 $border-radius $border-radius 0;
+              box-shadow: 0px 4px 8px -4px rgba($color-black,0.2);
+            }
+          }
         }
       }
       .answer-section {
-        position: absolute;
-        top: 0;
-        left: 50%;
-        width: 50%;
-        height: 100%;
-        max-width: $grid-max-width/2;
+        margin-bottom: 0;
+
+        flex-grow: 1;
+        max-width: 50%;
+        min-width: 41.667%;
         overflow-y: scroll;
 
-        .content-section {
-          .content-wrapper {
-            padding-left: 0;
-          }
+        .content-wrapper {
+          padding-left: $grid-gutter-large / 2;
         }
-
       }
 
 
     }
     .action-bar {
+    }
+
+  }
+
+  @media only screen and (min-width: $viewport-xlarge) {
+
+    .mustelid-identification {
+      .video-section {
+        .video-player {
+          height: calc(100vh - 160px - 151px);
+          width: calc((100vh - 160px - 151px) / 9 * 16);
+        }
+      }
+      .answer-section {
+        .content-wrapper {
+          padding-left: $grid-gutter-xlarge /2;
+        }
+
+        .animal-categories {
+          .category-item {
+            .category {
+              height: calc((100vh - 160px - 96px - (4 * 16px)) / 5);
+              .images {
+                height: calc((100vh - 160px - 96px - (4 * 16px)) / 5);
+              }
+            }
+          }
+        }
+      }
     }
 
   }
