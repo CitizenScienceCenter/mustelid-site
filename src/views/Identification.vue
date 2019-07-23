@@ -1022,13 +1022,6 @@ export default {
 
     .mustelid-identification {
 
-      .video-section {
-        video {
-          display: block;
-          width: 100%;
-        }
-      }
-
       .answer-section {
         .animal-categories {
           .category-item {
@@ -1095,7 +1088,7 @@ export default {
       flex-direction: row;
 
       .video-section {
-        min-width: 50%;
+        min-width: 41.667%;
         position: relative;
 
         .video-player {
@@ -1107,8 +1100,8 @@ export default {
           min-width: 100%;
 
           .video-wrapper {
-            width: 100%;
-            height: 100%;
+            //width: 100%;
+            //height: 100%;
             //max-height: calc( 100% / 16 * 9 );
 
             video {
@@ -1122,7 +1115,7 @@ export default {
         margin-bottom: 0;
 
         flex-grow: 1;
-        max-width: 50%;
+        max-width: 58.333%;
         min-width: 41.667%;
         overflow-y: scroll;
 
