@@ -19,7 +19,7 @@
 <template>
   <div>
 
-    <app-content-section class="content-section-flat mustelid-identification" color="light-greyish">
+    <app-content-section v-if="uiImagesLoaded" class="content-section-flat mustelid-identification" color="light-greyish">
 
       <div class="video-section">
 
@@ -29,13 +29,7 @@
             <div class="row">
               <div class="col">
 
-                <h2 class="heading small">Welches Tier ist zu sehen?</h2>
-
-                <!--
-                <video autoplay loop playsinline>
-                  <source type="video/mp4" src="/videos/09170086.mp4">
-                </video>
-                -->
+                <h2 class="heading small scroll-effect">Welches Tier ist zu sehen?</h2>
 
               </div>
             </div>
@@ -44,23 +38,33 @@
         </app-content-section>
 
 
-        <div class="video-player">
+        <div class="video-player scroll-effect scroll-effect-delayed-1">
 
-          <div class="video-wrapper">
+          <div class="video-wrapper" v-if="taskMedia">
 
-            <video :autoplay="index === 0" playsinline muted v-for="(video,index) in task.videos" :key="'video'+index" :class="{ activeVideo: index === activeVideo }" :ref="'video'+index" @ended="onVideoEnd(index)">
-              <source type="video/mp4" :src="'/videos/'+video">
+            <video :autoplay="index === 0" playsinline muted v-for="(video,index) in taskMedia" :key="'video'+index" :class="{ activeVideo: index === activeVideo }" :ref="'video'+index" @ended="onVideoEnd(index)" @timeupdate="onVideoUpdate" @loadeddata="index ? 0 : onLoadedData()">
+              <source type="video/mp4" :src="'/videos/'+video.path">
             </video>
 
-            <div class="thumbnails">
+            <div class="thumbnails" v-if="taskMedia.length > 1">
               <ul>
-                <li v-for="(video,index) in task.videos" :key="'thumbnail'+index" :class="{active: index === activeVideo}" @click="startVideo(index)">
-                  <img src="/videos/thumbnails/thumbnail.jpg" />
+                <li v-for="(video,index) in taskMedia" :key="'thumbnail'+index" :class="{active: index === activeVideo}" @click="startVideo(index)">
+                  <img :src="'/videos/thumbnails/'+video.info.thumb" />
                 </li>
               </ul>
             </div>
 
-            <button class="button button-secondary button-secondary-naked button-secondary-inverted button-icon button-icon-only fullscreen-button" @click="fullscreen" >
+            <button v-if="playing" class="button button-secondary button-secondary-naked button-secondary-inverted button-icon button-icon-only video-button play-button" @click="pause" >
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M176,480H80a48,48,0,0,1-48-48V80A48,48,0,0,1,80,32h96a48,48,0,0,1,48,48V432A48,48,0,0,1,176,480Zm304-48V80a48,48,0,0,0-48-48H336a48,48,0,0,0-48,48V432a48,48,0,0,0,48,48h96A48,48,0,0,0,480,432Z"/></svg>
+            </button>
+            <button v-else class="button button-secondary button-secondary-naked button-secondary-inverted button-icon button-icon-only video-button play-button" @click="play" >
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M456.41,214.66l-352-208.1C75.81-10.34,32,6.06,32,47.86V464c0,37.5,40.7,60.1,72.4,41.3l352-208c31.4-18.5,31.5-64.1,0-82.6Z"/></svg>
+            </button>
+
+            <input type="range" class="seek-bar" ref="seekBar" @change="onSeekBarChange">
+
+
+            <button class="button button-secondary button-secondary-naked button-secondary-inverted button-icon button-icon-only video-button fullscreen-button" @click="fullscreen" >
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M32,180V56A23.94,23.94,0,0,1,56,32H180a12,12,0,0,1,12,12V84a12,12,0,0,1-12,12H96v84a12,12,0,0,1-12,12H44A12,12,0,0,1,32,180ZM320,44V84a12,12,0,0,0,12,12h84v84a12,12,0,0,0,12,12h40a12,12,0,0,0,12-12V56a23.94,23.94,0,0,0-24-24H332A12,12,0,0,0,320,44ZM468,320H428a12,12,0,0,0-12,12v84H332a12,12,0,0,0-12,12v40a12,12,0,0,0,12,12H456a23.94,23.94,0,0,0,24-24V332A12,12,0,0,0,468,320ZM192,468V428a12,12,0,0,0-12-12H96V332a12,12,0,0,0-12-12H44a12,12,0,0,0-12,12V456a23.94,23.94,0,0,0,24,24H180A12,12,0,0,0,192,468Z"/></svg>
             </button>
 
@@ -72,7 +76,7 @@
 
       <div class="answer-section" id="answer-section" ref="answerSection">
 
-        <app-content-section class="content-section-condensed" color="transparent">
+        <app-content-section class="content-section-condensed scroll-effect scroll-effect-delayed-2" color="transparent">
           <div class="content-wrapper">
 
             <div class="row">
@@ -101,7 +105,7 @@
                       </div>
                     </div>
 
-                    <div class="animal-list-wrapper" :ref="'animalListWrapper'+index">
+                    <div class="animal-list-wrapper" :ref="'animalListWrapper'+index" style="height: 0px;">
                       <ul class="animals" :ref="'animalList'+index">
                         <li class="animal-item" v-for="(animal,index) in category.animals" :key="index">
                           <div class="animal">
@@ -131,13 +135,19 @@
 
     </app-content-section>
 
+    <div v-else>
+      <app-content-section class="content-section-flat mustelid-identification" color="light-greyish">
+        <Loader></Loader>
+      </app-content-section>
+    </div>
+
 
     <app-content-section class="content-section-flat action-bar">
       <div class="content-wrapper">
         <div class="row">
 
           <div class="col col-tablet-portrait-6">
-            Aufnahme <b>1</b> von 10000 (Bestehend aus {{ task.videos.length }} Sequenzen)
+            Aufnahme <b>1</b> von 10000
           </div>
           <div class="col col-tablet-portrait-6">
             <div class="button-group right-aligned">
@@ -222,10 +232,12 @@ import SectionNewsletterSignup from "@/components/shared/SectionNewsletterSignup
 import ContentSection from "@/components/shared/ContentSection";
 
 import animals from "@/assets/animals.json";
+import Loader from "@/components/shared/Loader";
 
 export default {
   name: 'Home',
   components: {
+      Loader,
       ContentSection,
       SectionNewsletterSignup,
     'app-content-section': ContentSection,
@@ -248,21 +260,13 @@ export default {
           animals: animals,
           openCategory: null,
 
-          task: {
-              "videos": [
-                  "09170086.mp4",
-                  "09170086_2.mp4",
-                  "09170086_3.mp4",
-                  "09170086_4.mp4",
-                  "09170086.mp4",
-                  "09170086_2.mp4",
-                  "09170086_3.mp4",
-                  "09170086_4.mp4",
-                  "09170086_2.mp4",
-                  "09170086_3.mp4",
-                  "09170086_4.mp4"
-              ]
-          },
+          noOfUiImages: 0,
+          noOfUiImagesLoaded: 0,
+          uiImagesLoaded: false,
+          videoLoaded: false,
+
+          playing: true,
+
           activeVideo: 0,
 
           taskId: undefined,
@@ -286,8 +290,6 @@ export default {
       window.addEventListener('resize', function() {
           self.resize();
       } );
-
-      this.resize();
 
 
       /*
@@ -313,14 +315,68 @@ export default {
           }
       });
       */
-      this.loadTask();
+
+      this.loadUiImages();
+
+
+      // load task with or without id
+      if( this.$route.params.id ) {
+          if( this.$route.params.id.length !== 36 ) {
+              console.log('invalid id');
+              delete this.$route.params.id;
+              this.$router.replace('/identification');
+              this.taskId = null;
+              this.loadTask();
+          }
+          else {
+              console.log('load task from id');
+              this.taskId = this.$route.params.id;
+              this.loadTask();
+          }
+      }
+      else {
+          this.taskId = null;
+          console.log('load without id');
+          this.loadTask();
+      }
   },
   methods: {
+      onLoadedData() {
+          this.videoLoaded = true;
+      },
+      loadUiImages() {
+          this.noOfUiImages = 0;
+          this.noOfUiImagesLoaded = 0;
+          let self = this;
+          for( let i = 0; i < this.animals.length; i++ ) {
+              for( let j = 0; j < this.animals[i].images.length; j++ ) {
+                  this.noOfUiImages++;
+                  let image = new Image();
+                  image.src = '/img/animals/'+this.animals[i].images[j];
+                  image.onload = function() {
+                      self.noOfUiImagesLoaded++;
+                      if( self.noOfUiImagesLoaded === self.noOfUiImages ) {
+                          self.uiImagesLoaded = true;
+                      }
+                  };
+              }
+          }
+      },
+    resize() {
+        for( var i=0; i< this.animals.length; i++ ) {
+            if( this.openCategory === i ) {
+                this.$refs['animalListWrapper'+i][0].style.height = this.$refs['animalList'+this.openCategory][0].offsetHeight +'px';
+            }
+            else if( this.$refs['animalListWrapper'+i][0] ) {
+                this.$refs['animalListWrapper'+i][0].style.height = 0+'px';
+            }
+        }
+    },
     loadTask() {
 
         let taskQuery;
         if( !this.taskId ) {
-
+            // without id
             taskQuery = {
                 'select': {
                     'fields': [
@@ -357,6 +413,7 @@ export default {
 
         }
         else {
+            // with id
             taskQuery = {
                 'select': {
                     'fields': [
@@ -384,7 +441,8 @@ export default {
 
             this.hasSubmissionAlready = false;
 
-            if( this.id ) {
+            if( this.taskId ) {
+                // loaded with id, check for submissions
 
                 let query = {
                     'select': {
@@ -399,7 +457,7 @@ export default {
                         {
                             'field': 'task_id',
                             'op': 'e',
-                            'val': this.id
+                            'val': this.taskId
                         },
                         {
                             'field': 'user_id',
@@ -420,7 +478,7 @@ export default {
                         this.hasSubmissionAlready = false;
                     }
 
-                    this.id = false;
+                    this.taskId = false;
 
                 });
 
@@ -429,7 +487,7 @@ export default {
             if ( this.tasks[0] ) {
 
                 console.log( 'task loaded');
-                //console.log('load media');
+                this.$router.replace('/identification/'+this.tasks[0].id);
 
                 const mediaQuery = {
                     'select': {
@@ -450,14 +508,10 @@ export default {
                 };
 
 
-                this.$store.dispatch('c3s/media/getMedia', [mediaQuery, 'c3s/task/SET_MEDIA', 1]).then(media => {
+                this.$store.dispatch('c3s/media/getMedia', [mediaQuery, 'c3s/task/SET_MEDIA', 0]).then(media => {
 
-                    //console.log('media loaded');
-                    this.evaluation = null;
-                    this.value = null;
-                    this.loadTime = new Date();
-                    this.loading = false;
-                    this.showNext = false;
+                    console.log('media loaded');
+                    console.log( this.taskMedia );
 
                 });
 
@@ -466,28 +520,6 @@ export default {
             else {
 
                 console.log('no more tasks');
-
-                if ( this.difficulty === '0') {
-                    this.completedDifficulties.push('0');
-
-                    if (this.completedDifficulties.indexOf('1') === -1) {
-                        this.difficulty = '1';
-                    }
-                    else {
-                        this.complete = true;
-                    }
-                }
-                else if ( this.difficulty === '1') {
-                    this.completedDifficulties.push('1');
-
-                    if (this.completedDifficulties.indexOf('0') === -1) {
-                        this.difficulty = '0';
-                    }
-                    else {
-                        this.complete = true;
-                    }
-                }
-
 
             }
 
@@ -514,26 +546,36 @@ export default {
         if( closeFirst ) {
             let self = this;
             setTimeout( function() {
-                self.$scrollTo('#category-item-'+index, 600, {
-                    container: '#answer-section',
-                    offset: -32
-                });
+                if( self.$refs.answerSection.getBoundingClientRect().x > 0 ) {
+                    // big screen
+                    self.$scrollTo('#category-item-' + index, 600, {
+                        container: '#answer-section',
+                        offset: -32
+                    });
+                }
+                else {
+                    // mobile
+                    self.$scrollTo('#category-item-' + index, 600, {
+                        container: 'body',
+                        offset: -32
+                    });
+                }
             }, 300)
         }
         else {
-            this.$scrollTo('#category-item-'+index, 600, {
-                container: '#answer-section',
-                offset: -32
-            });
-        }
-    },
-    resize() {
-        for( var i=0; i< this.animals.length; i++ ) {
-            if( this.openCategory === i ) {
-                this.$refs['animalListWrapper'+i][0].style.height = this.$refs['animalList'+this.openCategory][0].offsetHeight +'px';
+            if( this.$refs.answerSection.getBoundingClientRect().x > 0 ) {
+                // big screen
+                this.$scrollTo('#category-item-'+index, 600, {
+                    container: '#answer-section',
+                    offset: -32
+                });
             }
             else {
-                this.$refs['animalListWrapper'+i][0].style.height = 0+'px';
+                // mobile
+                this.$scrollTo('#category-item-'+index, 600, {
+                    container: 'body',
+                    offset: -32
+                });
             }
         }
     },
@@ -549,7 +591,7 @@ export default {
         this.$refs['video'+index][0].pause();
         this.$refs['video'+index][0].currentTime = 0;
 
-        if( this.activeVideo < this.task.videos.length-1 ) {
+        if( this.activeVideo < this.taskMedia.length-1 ) {
             this.activeVideo++;
         }
         else {
@@ -566,6 +608,10 @@ export default {
         this.$refs['video'+index][0].currentTime = 0;
         this.$refs['video'+index][0].play();
     },
+    onVideoUpdate() {
+        let value = (100 / this.$refs['video'+this.activeVideo][0].duration) * this.$refs['video'+this.activeVideo][0].currentTime;
+        this.$refs.seekBar.value = value;
+    },
     fullscreen() {
         if (this.$refs['video'+this.activeVideo][0].requestFullScreen) {
             this.$refs['video'+this.activeVideo][0].requestFullScreen();
@@ -574,6 +620,20 @@ export default {
         } else if (this.$refs['video'+this.activeVideo][0].webkitRequestFullScreen) {
             this.$refs['video'+this.activeVideo][0].webkitRequestFullScreen();
         }
+    },
+    pause() {
+          console.log('pause');
+        this.$refs['video'+this.activeVideo][0].pause();
+        this.playing = false;
+    },
+    play() {
+        console.log('play');
+        this.$refs['video'+this.activeVideo][0].play();
+        this.playing = true;
+    },
+    onSeekBarChange() {
+        let time = this.$refs['video'+this.activeVideo][0].duration * (this.$refs.seekBar.value / 100);
+        this.$refs['video'+this.activeVideo][0].currentTime = time;
     }
 
   }
@@ -603,6 +663,7 @@ export default {
         position: relative;
 
         .video-wrapper {
+          position: relative;
 
           &:after {
             content: "";
@@ -690,12 +751,25 @@ export default {
             }
           }
 
-          .fullscreen-button {
-            display: none;
-            position: absolute;
-            bottom: $spacing-1;
-            right: $spacing-1;
+          .video-button {
             background-color: rgba( $color-black, 0.5 );
+            &.fullscreen-button {
+              display: none;
+              position: absolute;
+              bottom: $spacing-1;
+              right: $spacing-1;
+            }
+            &.play-button {
+              position: absolute;
+              bottom: $spacing-1;
+              left: $spacing-1;
+            }
+          }
+          .seek-bar {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 100%;
           }
 
         }
@@ -727,12 +801,13 @@ export default {
             transition: all $transition-duration-long $transition-timing-function;
 
             height: calc( ( 100vh - 160px - 64px - ( 4 * 16px ) ) / 5 );
+            min-height: 40px;
+            max-height: 15vw;
 
             .images {
               display: flex;
               overflow: hidden;
-
-              height: calc( ( 100vh - 160px - 64px - ( 4 * 16px ) ) / 5 );
+              height: 100%;
 
               .image {
                 flex: 1;
@@ -747,10 +822,10 @@ export default {
                 position: absolute;
                 top: 0;
                 left: 0;
-                width: 50%;
+                width: 100%;
                 height: 100%;
                 background: linear-gradient(120deg, $color-black, rgba($color-black, 0) 100% );
-                opacity: 0.667;
+                opacity: 0.5;
                 transition: all $transition-duration-long $transition-timing-function;
               }
             }
@@ -931,6 +1006,7 @@ export default {
     box-shadow: 0px -2px 4px +2px rgba($color-black, 0.05);
 
     .content-wrapper {
+      max-width: none;
       display: flex;
       align-items: center;
       height: 100%;
@@ -964,6 +1040,8 @@ export default {
                   top: calc( (48px - #{$font-size-normal}) / 2  - 2px);
                 }
               }
+
+              min-height: 48px;
             }
 
             .animal-list-wrapper {
@@ -1031,7 +1109,7 @@ export default {
           .video-wrapper {
             width: 100%;
             height: 100%;
-            max-height: calc( 100% / 16 * 9 );
+            //max-height: calc( 100% / 16 * 9 );
 
             video {
               border-radius: 0 $border-radius $border-radius 0;
@@ -1050,6 +1128,14 @@ export default {
 
         .content-wrapper {
           padding-left: $grid-gutter-large / 2;
+        }
+
+        .animal-categories {
+          .category-item {
+            .category {
+              max-height: 8vw;
+            }
+          }
         }
       }
 
@@ -1078,9 +1164,6 @@ export default {
           .category-item {
             .category {
               height: calc((100vh - 160px - 96px - (4 * 16px)) / 5);
-              .images {
-                height: calc((100vh - 160px - 96px - (4 * 16px)) / 5);
-              }
             }
           }
         }
