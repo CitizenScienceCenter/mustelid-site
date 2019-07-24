@@ -46,6 +46,11 @@
               <source type="video/mp4" :src="'/videos/'+video.path">
             </video>
 
+            <div class="overlay">
+              <div class="grey"></div>
+              <div class="white"></div>
+            </div>
+
             <div class="thumbnails" v-if="taskMedia.length > 1">
               <ul>
                 <li v-for="(video,index) in taskMedia" :key="'thumbnail'+index" :class="{active: index === activeVideo}" @click="startVideo(index)">
@@ -54,19 +59,18 @@
               </ul>
             </div>
 
-            <button v-if="playing" class="button button-secondary button-secondary-naked button-secondary-inverted button-icon button-icon-only video-button play-button" @click="pause" >
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M176,480H80a48,48,0,0,1-48-48V80A48,48,0,0,1,80,32h96a48,48,0,0,1,48,48V432A48,48,0,0,1,176,480Zm304-48V80a48,48,0,0,0-48-48H336a48,48,0,0,0-48,48V432a48,48,0,0,0,48,48h96A48,48,0,0,0,480,432Z"/></svg>
-            </button>
-            <button v-else class="button button-secondary button-secondary-naked button-secondary-inverted button-icon button-icon-only video-button play-button" @click="play" >
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M456.41,214.66l-352-208.1C75.81-10.34,32,6.06,32,47.86V464c0,37.5,40.7,60.1,72.4,41.3l352-208c31.4-18.5,31.5-64.1,0-82.6Z"/></svg>
+            <button class="button button-secondary button-secondary-naked button-secondary-inverted button-icon button-icon-only video-button play-button" @click="play" >
+              <svg v-if="playing" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M176,480H80a48,48,0,0,1-48-48V80A48,48,0,0,1,80,32h96a48,48,0,0,1,48,48V432A48,48,0,0,1,176,480Zm304-48V80a48,48,0,0,0-48-48H336a48,48,0,0,0-48,48V432a48,48,0,0,0,48,48h96A48,48,0,0,0,480,432Z"/></svg>
+              <svg v-else xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M456.41,214.66l-352-208.1C75.81-10.34,32,6.06,32,47.86V464c0,37.5,40.7,60.1,72.4,41.3l352-208c31.4-18.5,31.5-64.1,0-82.6Z"/></svg>
             </button>
 
             <input type="range" class="seek-bar" ref="seekBar" @change="onSeekBarChange">
 
-
+            <!--
             <button class="button button-secondary button-secondary-naked button-secondary-inverted button-icon button-icon-only video-button fullscreen-button" @click="fullscreen" >
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M32,180V56A23.94,23.94,0,0,1,56,32H180a12,12,0,0,1,12,12V84a12,12,0,0,1-12,12H96v84a12,12,0,0,1-12,12H44A12,12,0,0,1,32,180ZM320,44V84a12,12,0,0,0,12,12h84v84a12,12,0,0,0,12,12h40a12,12,0,0,0,12-12V56a23.94,23.94,0,0,0-24-24H332A12,12,0,0,0,320,44ZM468,320H428a12,12,0,0,0-12,12v84H332a12,12,0,0,0-12,12v40a12,12,0,0,0,12,12H456a23.94,23.94,0,0,0,24-24V332A12,12,0,0,0,468,320ZM192,468V428a12,12,0,0,0-12-12H96V332a12,12,0,0,0-12-12H44a12,12,0,0,0-12,12V456a23.94,23.94,0,0,0,24,24H180A12,12,0,0,0,192,468Z"/></svg>
             </button>
+            -->
 
           </div>
 
@@ -621,15 +625,17 @@ export default {
             this.$refs['video'+this.activeVideo][0].webkitRequestFullScreen();
         }
     },
-    pause() {
-          console.log('pause');
-        this.$refs['video'+this.activeVideo][0].pause();
-        this.playing = false;
-    },
     play() {
-        console.log('play');
-        this.$refs['video'+this.activeVideo][0].play();
-        this.playing = true;
+        if( !this.playing ) {
+            console.log('play');
+            this.$refs['video'+this.activeVideo][0].play();
+            this.playing = true;
+        }
+        else {
+            console.log('pause');
+            this.$refs['video'+this.activeVideo][0].pause();
+            this.playing = false;
+        }
     },
     onSeekBarChange() {
         let time = this.$refs['video'+this.activeVideo][0].duration * (this.$refs.seekBar.value / 100);
@@ -664,19 +670,21 @@ export default {
 
         .video-wrapper {
           position: relative;
+          overflow: hidden;
 
-          &:after {
+
+          &:before {
             content: "";
             display: block;
-            padding-bottom: calc( 100% / 16 * 9 );
+            padding-bottom: calc( 100% / 16 * 8.6 );
           }
 
           video {
             display: block;
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
+            top: 0%;
+            right: 0%;
+            height: 105%;
             opacity: 0;
 
             &.activeVideo {
@@ -685,6 +693,38 @@ export default {
               cursor: pointer;
               */
               opacity: 1;
+            }
+          }
+
+          .overlay {
+            display: none;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+
+            .grey {
+              position: absolute;
+              width: 5.5%;
+              height: 10%;
+              left: 0;
+              bottom: 0;
+              background: #3e3c3f;
+              box-shadow: 0 0 8px 12px #3e3c3f;
+              border-radius: 50%;
+              transform: scale(1.1);
+            }
+            .white {
+              position: absolute;
+              width: 10%;
+              height: 4.5%;
+              left: 0;
+              bottom: 0;
+              background: white;
+              //transform: scale( 1.42 );
+              //border-radius: 50%;
+              //box-shadow: 0px 0px 16px 20px $color-black-tint-20;
             }
           }
 
@@ -752,24 +792,59 @@ export default {
           }
 
           .video-button {
-            background-color: rgba( $color-black, 0.5 );
+            border-radius: 0;
+            background: linear-gradient(to top, rgba( $color-black, 0.5 ), rgba( $color-black, 0 ) );
+            &:focus  {
+              svg {
+                fill: white;
+              }
+            }
+            &:active {
+              svg {
+                fill: rgba( white, 0.75 );
+              }
+            }
             &.fullscreen-button {
-              display: none;
               position: absolute;
-              bottom: $spacing-1;
-              right: $spacing-1;
+              bottom: 0;
+              right: 0;
             }
             &.play-button {
               position: absolute;
-              bottom: $spacing-1;
-              left: $spacing-1;
+              bottom: 0;
+              left: 0;
             }
           }
           .seek-bar {
+            appearance: none;
+            margin: 0;
             position: absolute;
             bottom: 0;
             right: 0;
-            width: 100%;
+            width: calc( 100% - 40px );
+            height: 40px;
+            //background-color: rgba( $color-black, 0.5 );
+            background: linear-gradient(to top, rgba( $color-black, 0.5 ), rgba( $color-black, 0 ) );
+            //background: rgba( white, 0.8 );
+            //background: none;
+
+            outline: none;
+            overflow: hidden;
+
+            &::-webkit-slider-thumb {
+              appearance: none;
+              background-color: rgba( white, 0.5 );
+              width: 20px;
+              height: 20px;
+              border-radius: 50%;
+            }
+            &::-moz-range-thumb {
+              appearance: none;
+              background-color: rgba( white, 0.5 );
+              width: 20px;
+              height: 20px;
+              border-radius: 50%;
+            }
           }
 
         }
@@ -1022,6 +1097,26 @@ export default {
 
     .mustelid-identification {
 
+      .video-section {
+        .video-player {
+          .video-wrapper {
+            .seek-bar {
+              width: calc( 100% - 48px );
+              height: 48px;
+
+              &::-webkit-slider-thumb {
+                width: 24px;
+                height: 24px;
+              }
+              &::-moz-range-thumb {
+                width: 24px;
+                height: 24px;
+              }
+            }
+          }
+        }
+      }
+
       .answer-section {
         .animal-categories {
           .category-item {
@@ -1104,9 +1199,10 @@ export default {
             //height: 100%;
             //max-height: calc( 100% / 16 * 9 );
 
+            border-radius: 0 $border-radius $border-radius 0;
+            box-shadow: 0px 4px 8px -4px rgba($color-black,0.2);
+
             video {
-              border-radius: 0 $border-radius $border-radius 0;
-              box-shadow: 0px 4px 8px -4px rgba($color-black,0.2);
             }
           }
         }
