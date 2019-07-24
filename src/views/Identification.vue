@@ -56,11 +56,14 @@
             <div class="overlay"></div>
 
             <div class="thumbnails" v-if="taskMedia.length > 1">
-              <ul ref="thumbnailList">
-                <li v-for="(video,index) in taskMedia" :key="'thumbnail'+index" :class="{active: index === activeVideo}" @click="startVideo(index)">
-                  <img :src="'/videos/thumbnails/'+video.info.thumb" />
-                </li>
-              </ul>
+              <div class="drawer">
+                <div class="progress"><div class="bar" :style="{width: totalProgress+'%'}"></div></div>
+                <ul ref="thumbnailList">
+                  <li v-for="(video,index) in taskMedia" :key="'thumbnail'+index" :class="{active: index === activeVideo}" @click="startVideo(index)">
+                    <img :src="'/videos/thumbnails/'+video.info.thumb" />
+                  </li>
+                </ul>
+              </div>
             </div>
 
             <button class="button button-secondary button-secondary-naked button-secondary-inverted button-icon button-icon-only video-button play-button" @click="play" >
@@ -161,7 +164,7 @@
           </div>
           <div class="col col-tablet-portrait-6">
             <div class="button-group right-aligned">
-              <button class="button button-primary" :disabled="!videoLoaded" @click="next">Bubu</button>
+              <button class="button button-primary" :disabled="!videoLoaded" @click="next">Weiter</button>
             </div>
           </div>
 
@@ -276,6 +279,7 @@ export default {
           videoLoaded: false,
 
           playing: true,
+          totalProgress: 0,
 
           activeVideo: 0,
 
@@ -298,7 +302,6 @@ export default {
       var self = this;
 
       window.addEventListener('resize', function() {
-          self.resizeThumbnailList();
           self.resizeAnimalList();
       } );
 
@@ -369,10 +372,6 @@ export default {
                   };
               }
           }
-      },
-      resizeThumbnailList() {
-          //console.log('tödmf');
-          //console.log( this.$refs.thumbnailList );
       },
     resizeAnimalList() {
         for( var i=0; i< this.animals.length; i++ ) {
@@ -527,6 +526,8 @@ export default {
 
                     this.videoLoaded = false;
                     this.activeVideo = 0;
+                    this.openCategory = null;
+                    this.resizeAnimalList();
                     this.$refs.video0[0].load();
 
                 });
@@ -638,6 +639,10 @@ export default {
         //console.log('video update');
         let value = (100 / this.$refs['video'+this.activeVideo][0].duration) * this.$refs['video'+this.activeVideo][0].currentTime;
         this.$refs.seekBar.value = value;
+
+        this.totalProgress = ( this.taskMedia.length - (this.taskMedia.length - this.activeVideo) ) * ( 100 / this.taskMedia.length );
+        let thisVideoProgress = this.$refs.seekBar.value / this.taskMedia.length;
+        this.totalProgress += thisVideoProgress;
     },
       /*
     fullscreen() {
@@ -717,7 +722,7 @@ export default {
             height: 100%;
           }
           &.loading {
-            video, .overlay, .thumbnails, .video-button, .seek-bar {
+            video, .thumbnails, .overlay, .video-button, .seek-bar {
               display: none;
             }
             .loader-wrapper {
@@ -759,64 +764,83 @@ export default {
             top: 0;
             left: 0;
             width: 100%;
-            padding: $spacing-1;
 
             overflow: hidden;
             overflow-x: scroll;
             overflow-scrolling: touch;
 
-            /*
             &::-webkit-scrollbar {
-              height: 4px;
+              height: 2px;
             }
             &::-webkit-scrollbar-track {
               background-color: transparent;
             }
             &::-webkit-scrollbar-thumb {
-              border-radius: 2px;
+              border-radius: 1px;
+              background-color: transparent;
             }
             &:hover {
               &::-webkit-scrollbar-thumb {
-                background-color: $color-black-tint-90;
+                background-color: rgba( white, 0.1 );
               }
             }
             &::-webkit-scrollbar-thumb:hover {
               background-color: $color-black-tint-90;
             }
-            */
 
-            ul {
-              line-height: 0;
-              display: block;
-              margin: 0;
-              padding: 0;
+            .drawer {
+              padding: $spacing-1;
+              display: table-cell;
 
-              width: 3000px;
-
-              li {
-                padding: 0;
-                margin: 0;
-                &:before {
-                  display: none;
-                }
-
-                display: inline-block;
-
-                cursor: pointer;
-
-                border-radius: $border-radius;
+              .progress {
+                display: block;
+                background-color: rgba( white, 0.1 );
+                min-width: 100%;
+                height: 2px;
+                margin-bottom: 4px;
+                border-radius: 1px;
                 overflow: hidden;
-
-                height: 40px;
-
-                img {
+                .bar {
                   height: 100%;
+                  background-color: rgba( white, 0.5 );
                 }
+              }
 
-                opacity: 0.5;
-                &.active {
-                  opacity: 1;
-                  border: 1px solid white;
+              ul {
+                margin: 0;
+                line-height: 0;
+                display: table-row;
+
+                li {
+                  display: table-cell;
+                  position: relative;
+                  overflow: hidden;
+
+                  padding: 0;
+                  margin: 0;
+                  &:before {
+                    display: none;
+                  }
+
+                  height: 40px;
+                  min-width: calc( 40px / 8.6 * 16 );
+
+                  cursor: pointer;
+
+                  border-radius: $border-radius;
+
+                  img {
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    width: 110%;
+                  }
+
+                  opacity: 0.5;
+                  &.active {
+                    opacity: 1;
+                    border: 2px solid rgba( white, 0.5 );
+                  }
                 }
               }
             }
@@ -862,6 +886,8 @@ export default {
 
             outline: none;
             overflow: hidden;
+
+            touch-action: cross-slide-x;
 
             &::-webkit-slider-thumb {
               appearance: none;
@@ -1134,9 +1160,12 @@ export default {
           .video-wrapper {
 
             .thumbnails {
-              ul {
-                li {
-                  height: 48px;
+              .drawer {
+                ul {
+                  li {
+                    height: 48px;
+                    min-width: calc( 48px / 8.6 * 16 );
+                  }
                 }
               }
             }
