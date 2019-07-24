@@ -666,6 +666,7 @@ export default {
         this.$refs['video'+this.activeVideo][0].currentTime = time;
     },
     next() {
+        console.log('next');
         this.loadTask();
     }
 
