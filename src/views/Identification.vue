@@ -161,7 +161,7 @@
           </div>
           <div class="col col-tablet-portrait-6">
             <div class="button-group right-aligned">
-              <button class="button button-primary" :disabled="!videoLoaded" @click="next">Weiter</button>
+              <button class="button button-primary" :disabled="!videoLoaded" @click="next">Bubu</button>
             </div>
           </div>
 
