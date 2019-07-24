@@ -802,7 +802,7 @@ export default {
                 overflow: hidden;
                 .bar {
                   height: 100%;
-                  background-color: rgba( white, 0.5 );
+                  background-color: rgba( white, 0.75 );
                 }
               }
 
@@ -822,8 +822,8 @@ export default {
                     display: none;
                   }
 
-                  height: 40px;
-                  min-width: calc( 40px / 8.6 * 16 );
+                  height: 32px;
+                  min-width: calc( 32px / 8.6 * 16 );
 
                   cursor: pointer;
 
@@ -837,9 +837,10 @@ export default {
                   }
 
                   opacity: 0.5;
+                  transition: border $transition-duration-short $transition-timing-function;
                   &.active {
                     opacity: 1;
-                    border: 2px solid rgba( white, 0.5 );
+                    border: 2px solid rgba( white, 0.75 );
                   }
                 }
               }
@@ -1163,8 +1164,8 @@ export default {
               .drawer {
                 ul {
                   li {
-                    height: 48px;
-                    min-width: calc( 48px / 8.6 * 16 );
+                    height: 40px;
+                    min-width: calc( 40px / 8.6 * 16 );
                   }
                 }
               }
