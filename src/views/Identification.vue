@@ -40,16 +40,23 @@
 
         <div class="video-player scroll-effect scroll-effect-delayed-1">
 
-          <div class="video-wrapper" v-if="taskMedia">
+          <div class="video-wrapper" v-if="taskMedia" :class="{loading: !videoLoaded}">
 
-            <video :autoplay="index === 0" playsinline muted v-for="(video,index) in taskMedia" :key="'video'+index" :class="{ activeVideo: index === activeVideo }" :ref="'video'+index" @ended="onVideoEnd(index)" @timeupdate="onVideoUpdate" @loadeddata="index ? 0 : onLoadedData()">
-              <source type="video/mp4" :src="'/videos/'+video.path">
-            </video>
+            <loader></loader>
+
+            <template v-for="(video,index) in taskMedia">
+              <video v-if="index === 0" :key="'video'+index" :ref="'video'+index" playsinline muted :class="{ activeVideo: index === activeVideo }" @timeupdate="onVideoUpdate" @ended="onVideoEnd" @loadeddata="onFirstVideoLoaded">
+                <source type="video/mp4" :src="'/videos/'+video.path">
+              </video>
+              <video v-else :key="'video'+index" :ref="'video'+index" playsinline muted :class="{ activeVideo: index === activeVideo }" @timeupdate="onVideoUpdate" @ended="onVideoEnd">
+                <source type="video/mp4" :src="'/videos/'+video.path">
+              </video>
+            </template>
 
             <div class="overlay"></div>
 
             <div class="thumbnails" v-if="taskMedia.length > 1">
-              <ul>
+              <ul ref="thumbnailList">
                 <li v-for="(video,index) in taskMedia" :key="'thumbnail'+index" :class="{active: index === activeVideo}" @click="startVideo(index)">
                   <img :src="'/videos/thumbnails/'+video.info.thumb" />
                 </li>
@@ -70,6 +77,8 @@
             -->
 
           </div>
+
+          <div v-else style="background: red;">michi</div>
 
         </div>
 
@@ -152,7 +161,7 @@
           </div>
           <div class="col col-tablet-portrait-6">
             <div class="button-group right-aligned">
-              <button class="button button-primary">Weiter</button>
+              <button class="button button-primary" :disabled="!videoLoaded" @click="next">Weiter</button>
             </div>
           </div>
 
@@ -289,7 +298,8 @@ export default {
       var self = this;
 
       window.addEventListener('resize', function() {
-          self.resize();
+          self.resizeThumbnailList();
+          self.resizeAnimalList();
       } );
 
 
@@ -323,28 +333,25 @@ export default {
       // load task with or without id
       if( this.$route.params.id ) {
           if( this.$route.params.id.length !== 36 ) {
-              console.log('invalid id');
+              //console.log('invalid id');
               delete this.$route.params.id;
               this.$router.replace('/identification');
               this.taskId = null;
               this.loadTask();
           }
           else {
-              console.log('load task from id');
+              //console.log('load task from id');
               this.taskId = this.$route.params.id;
               this.loadTask();
           }
       }
       else {
           this.taskId = null;
-          console.log('load without id');
+          //console.log('load without id');
           this.loadTask();
       }
   },
   methods: {
-      onLoadedData() {
-          this.videoLoaded = true;
-      },
       loadUiImages() {
           this.noOfUiImages = 0;
           this.noOfUiImagesLoaded = 0;
@@ -363,7 +370,11 @@ export default {
               }
           }
       },
-    resize() {
+      resizeThumbnailList() {
+          //console.log('tödmf');
+          //console.log( this.$refs.thumbnailList );
+      },
+    resizeAnimalList() {
         for( var i=0; i< this.animals.length; i++ ) {
             if( this.openCategory === i ) {
                 this.$refs['animalListWrapper'+i][0].style.height = this.$refs['animalList'+this.openCategory][0].offsetHeight +'px';
@@ -511,8 +522,12 @@ export default {
 
                 this.$store.dispatch('c3s/media/getMedia', [mediaQuery, 'c3s/task/SET_MEDIA', 0]).then(media => {
 
-                    console.log('media loaded');
-                    console.log( this.taskMedia );
+                    // media loaded
+                    //console.log('media loaded');
+
+                    this.videoLoaded = false;
+                    this.activeVideo = 0;
+                    this.$refs.video0[0].load();
 
                 });
 
@@ -542,7 +557,7 @@ export default {
             // close accordion
             this.openCategory = null;
         }
-        this.resize();
+        this.resizeAnimalList();
 
         if( closeFirst ) {
             let self = this;
@@ -580,7 +595,8 @@ export default {
             }
         }
     },
-    onVideoEnd(index) {
+    onVideoEnd() {
+          /*
         if (document.fullscreenElement) {
             document.exitFullscreen();
         } else if (document.mozFullScreenElement) {
@@ -588,9 +604,12 @@ export default {
         } else if (document.webkitFullscreenElement) {
             document.webkitCancelFullScreen();
         }
+        */
 
-        this.$refs['video'+index][0].pause();
-        this.$refs['video'+index][0].currentTime = 0;
+        //console.log( 'video end');
+
+        this.$refs['video'+this.activeVideo][0].pause();
+        this.$refs['video'+this.activeVideo][0].currentTime = 0;
 
         if( this.activeVideo < this.taskMedia.length-1 ) {
             this.activeVideo++;
@@ -601,18 +620,26 @@ export default {
 
         this.$refs['video'+this.activeVideo][0].currentTime = 0;
         this.$refs['video'+this.activeVideo][0].play();
+
     },
     startVideo(index) {
         this.$refs['video'+this.activeVideo][0].pause();
         this.$refs['video'+this.activeVideo][0].currentTime = 0;
         this.activeVideo = index;
-        this.$refs['video'+index][0].currentTime = 0;
-        this.$refs['video'+index][0].play();
+        this.$refs['video'+this.activeVideo][0].currentTime = 0;
+        this.$refs['video'+this.activeVideo][0].play();
+    },
+    onFirstVideoLoaded() {
+        this.videoLoaded = true;
+        this.$refs.video0[0].currentTime = 0;
+        this.$refs.video0[0].play();
     },
     onVideoUpdate() {
+        //console.log('video update');
         let value = (100 / this.$refs['video'+this.activeVideo][0].duration) * this.$refs['video'+this.activeVideo][0].currentTime;
         this.$refs.seekBar.value = value;
     },
+      /*
     fullscreen() {
         if (this.$refs['video'+this.activeVideo][0].requestFullScreen) {
             this.$refs['video'+this.activeVideo][0].requestFullScreen();
@@ -621,15 +648,15 @@ export default {
         } else if (this.$refs['video'+this.activeVideo][0].webkitRequestFullScreen) {
             this.$refs['video'+this.activeVideo][0].webkitRequestFullScreen();
         }
-    },
+    },*/
     play() {
         if( !this.playing ) {
-            console.log('play');
+            //console.log('play');
             this.$refs['video'+this.activeVideo][0].play();
             this.playing = true;
         }
         else {
-            console.log('pause');
+            //console.log('pause');
             this.$refs['video'+this.activeVideo][0].pause();
             this.playing = false;
         }
@@ -637,6 +664,9 @@ export default {
     onSeekBarChange() {
         let time = this.$refs['video'+this.activeVideo][0].duration * (this.$refs.seekBar.value / 100);
         this.$refs['video'+this.activeVideo][0].currentTime = time;
+    },
+    next() {
+        this.loadTask();
     }
 
   }
@@ -676,6 +706,24 @@ export default {
             padding-bottom: calc( 100% / 16 * 8.6 );
           }
 
+
+          background-color: $color-black-tint-90;
+          .loader-wrapper {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+          }
+          &.loading {
+            video, .overlay, .thumbnails, .video-button, .seek-bar {
+              display: none;
+            }
+            .loader-wrapper {
+              display: flex;
+            }
+          }
+
           video {
             display: block;
             position: absolute;
@@ -706,15 +754,15 @@ export default {
           }
 
           .thumbnails {
-            display: block;
             position: absolute;
-            top: $spacing-1;
-            left: $spacing-1;
-            width: calc( 100% - 2 * #{$spacing-1} );
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: $spacing-1;
 
-            overflow-scrolling: touch;
             overflow: hidden;
-            z-index: 1;
+            overflow-x: scroll;
+            overflow-scrolling: touch;
 
             /*
             &::-webkit-scrollbar {
@@ -755,14 +803,19 @@ export default {
 
                 cursor: pointer;
 
+                border-radius: $border-radius;
+                overflow: hidden;
+
+                height: 40px;
+
                 img {
-                  height: 48px;
-                  border-radius: $border-radius;
+                  height: 100%;
                 }
 
                 opacity: 0.5;
                 &.active {
                   opacity: 1;
+                  border: 1px solid white;
                 }
               }
             }
@@ -800,6 +853,7 @@ export default {
             right: 0;
             width: calc( 100% - 40px );
             height: 40px;
+            padding-right: $spacing-1;
             //background-color: rgba( $color-black, 0.5 );
             background: linear-gradient(to top, rgba( $color-black, 0.5 ), rgba( $color-black, 0 ) );
             //background: rgba( white, 0.8 );
@@ -1077,6 +1131,15 @@ export default {
       .video-section {
         .video-player {
           .video-wrapper {
+
+            .thumbnails {
+              ul {
+                li {
+                  height: 48px;
+                }
+              }
+            }
+
             .seek-bar {
               width: calc( 100% - 48px );
               height: 48px;
@@ -1165,7 +1228,7 @@ export default {
 
         .video-player {
           height: calc( 100vh - 160px - 135px );
-          width: calc( ( 100vh - 160px - 135px ) / 9 * 16 );
+          width: calc( ( 100vh - 160px - 135px ) / 8.6 * 16 );
           overflow: hidden;
 
           max-width: 100%;
@@ -1218,7 +1281,7 @@ export default {
       .video-section {
         .video-player {
           height: calc(100vh - 160px - 151px);
-          width: calc((100vh - 160px - 151px) / 9 * 16);
+          width: calc((100vh - 160px - 151px) / 8.6 * 16);
         }
       }
       .answer-section {
