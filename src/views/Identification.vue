@@ -46,10 +46,7 @@
               <source type="video/mp4" :src="'/videos/'+video.path">
             </video>
 
-            <div class="overlay">
-              <div class="grey"></div>
-              <div class="white"></div>
-            </div>
+            <div class="overlay"></div>
 
             <div class="thumbnails" v-if="taskMedia.length > 1">
               <ul>
@@ -697,35 +694,15 @@ export default {
           }
 
           .overlay {
-            display: none;
             position: absolute;
-            bottom: 0;
+            width: 5.4%;
+            height: 5.5%;
             left: 0;
-            width: 100%;
-            height: 100%;
-
-            .grey {
-              position: absolute;
-              width: 5.5%;
-              height: 10%;
-              left: 0;
-              bottom: 0;
-              background: #3e3c3f;
-              box-shadow: 0 0 8px 12px #3e3c3f;
-              border-radius: 50%;
-              transform: scale(1.1);
-            }
-            .white {
-              position: absolute;
-              width: 10%;
-              height: 4.5%;
-              left: 0;
-              bottom: 0;
-              background: white;
-              //transform: scale( 1.42 );
-              //border-radius: 50%;
-              //box-shadow: 0px 0px 16px 20px $color-black-tint-20;
-            }
+            bottom: 0;
+            background: $color-black-tint-20;
+            box-shadow: 0 0 32px 32px $color-black-tint-20;
+            border-radius: 50%;
+            transform: scale(1.3);
           }
 
           .thumbnails {
