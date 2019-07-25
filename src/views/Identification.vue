@@ -81,8 +81,6 @@
 
           </div>
 
-          <div v-else style="background: red;">michi</div>
-
         </div>
 
       </div>
@@ -120,8 +118,9 @@
 
                     <div class="animal-list-wrapper" :ref="'animalListWrapper'+index" style="height: 0px;">
                       <ul class="animals" :ref="'animalList'+index">
+
                         <li class="animal-item" v-for="(animal,index) in category.animals" :key="index">
-                          <div class="animal">
+                          <div class="animal" @click="clickAnimal(index)" :class="{selected: index === selectedAnimal}">
                             <div class="image" :style="{ 'background-image' : 'url(/img/animals/'+animal.image+')' }"></div>
                             <div class="info">
                               <div class="title">
@@ -131,6 +130,16 @@
                             </div>
                           </div>
                         </li>
+                        <li class="animal-item">
+                          <div class="animal" @click="clickAnimal(null)" :class="{selected: selectedAnimal === null}">
+                            <div class="info">
+                              <div class="title">
+                                Don't know
+                              </div>
+                            </div>
+                          </div>
+                        </li>
+
                       </ul>
                     </div>
 
@@ -164,7 +173,8 @@
           </div>
           <div class="col col-tablet-portrait-6">
             <div class="button-group right-aligned">
-              <button class="button button-primary" :disabled="!videoLoaded" @click="next">Weiter</button>
+              <button class="button button-secondary" :disabled="!videoLoaded" @click="next">Überspringen</button>
+              <button class="button button-primary" :disabled="!videoLoaded || openCategory === null" @click="submit">Senden</button>
             </div>
           </div>
 
@@ -272,6 +282,7 @@ export default {
       return {
           animals: animals,
           openCategory: null,
+          selectedAnimal: null,
 
           noOfUiImages: 0,
           noOfUiImagesLoaded: 0,
@@ -296,7 +307,21 @@ export default {
 
           tasks: state => state.c3s.task.tasks,
           taskMedia: state => state.c3s.task.media,
-      })
+      }),
+      answer() {
+          if( this.selectedAnimal !== null ) {
+              return {
+                  'category': this.animals[this.openCategory].name.en,
+                  'animal': this.animals[this.openCategory].animals[this.selectedAnimal].name.en,
+              }
+          }
+          else {
+              return {
+                  'category': this.animals[this.openCategory].name.en,
+                  'animal': '',
+              }
+          }
+      }
     },
   mounted() {
       var self = this;
@@ -527,6 +552,7 @@ export default {
                     this.videoLoaded = false;
                     this.activeVideo = 0;
                     this.openCategory = null;
+                    this.selectedAnimal = null;
                     this.resizeAnimalList();
                     this.$refs.video0[0].load();
 
@@ -544,6 +570,34 @@ export default {
         });
 
     },
+    next() {
+        console.log('next');
+        this.loadTask();
+    },
+    submit() {
+        console.log('submit');
+        console.log( this.answer );
+
+        let submissionObject = {
+            "info": {},
+            "content": {
+                "category": this.answer.category,
+                "animal": this.answer.animal,
+            },
+            "task_id": this.tasks[0].id,
+            "user_id": this.currentUser.id
+        };
+
+        this.$store.commit('c3s/submission/SET_SUBMISSION', submissionObject );
+
+        this.$store.dispatch('c3s/submission/createSubmission').then(submission => {
+
+            console.log('submission sent');
+
+        });
+
+        this.loadTask();
+    },
     clickCategory( index ) {
 
         let closeFirst = false;
@@ -560,41 +614,54 @@ export default {
         }
         this.resizeAnimalList();
 
-        if( closeFirst ) {
-            let self = this;
-            setTimeout( function() {
-                if( self.$refs.answerSection.getBoundingClientRect().x > 0 ) {
+        console.log('click category: '+this.openCategory);
+        if( this.openCategory !== null ) {
+
+            // auto scrolling
+            if( closeFirst ) {
+                let self = this;
+                setTimeout( function() {
+                    if( self.$refs.answerSection.getBoundingClientRect().x > 0 ) {
+                        // big screen
+                        self.$scrollTo('#category-item-' + index, 600, {
+                            container: '#answer-section',
+                            offset: -32
+                        });
+                    }
+                    else {
+                        // mobile
+                        self.$scrollTo('#category-item-' + index, 600, {
+                            container: 'body',
+                            offset: -32
+                        });
+                    }
+                }, 300)
+            }
+            else {
+                if( this.$refs.answerSection.getBoundingClientRect().x > 0 ) {
                     // big screen
-                    self.$scrollTo('#category-item-' + index, 600, {
+                    this.$scrollTo('#category-item-'+index, 600, {
                         container: '#answer-section',
                         offset: -32
                     });
                 }
                 else {
                     // mobile
-                    self.$scrollTo('#category-item-' + index, 600, {
+                    this.$scrollTo('#category-item-'+index, 600, {
                         container: 'body',
                         offset: -32
                     });
                 }
-            }, 300)
+            }
         }
         else {
-            if( this.$refs.answerSection.getBoundingClientRect().x > 0 ) {
-                // big screen
-                this.$scrollTo('#category-item-'+index, 600, {
-                    container: '#answer-section',
-                    offset: -32
-                });
-            }
-            else {
-                // mobile
-                this.$scrollTo('#category-item-'+index, 600, {
-                    container: 'body',
-                    offset: -32
-                });
-            }
+            console.log('deselect ');
+            this.selectedAnimal = null;
         }
+    },
+    clickAnimal(index) {
+        console.log('click animal '+index);
+        this.selectedAnimal = index;
     },
     onVideoEnd() {
           /*
@@ -669,10 +736,6 @@ export default {
     onSeekBarChange() {
         let time = this.$refs['video'+this.activeVideo][0].duration * (this.$refs.seekBar.value / 100);
         this.$refs['video'+this.activeVideo][0].currentTime = time;
-    },
-    next() {
-        console.log('next');
-        this.loadTask();
     }
 
   }
@@ -777,15 +840,15 @@ export default {
             }
             &::-webkit-scrollbar-thumb {
               border-radius: 1px;
-              background-color: transparent;
+              //background-color: rgba( white, 0.25 );
             }
             &:hover {
               &::-webkit-scrollbar-thumb {
-                background-color: rgba( white, 0.1 );
+                //background-color: rgba( white, 0.1 );
               }
             }
             &::-webkit-scrollbar-thumb:hover {
-              background-color: $color-black-tint-90;
+              //background-color: $color-black-tint-90;
             }
 
             .drawer {
@@ -822,12 +885,17 @@ export default {
                     display: none;
                   }
 
-                  height: 32px;
-                  min-width: calc( 32px / 8.6 * 16 );
+                  height: 40px;
+                  min-width: calc( 40px / 8.6 * 16 );
 
                   cursor: pointer;
 
-                  border-radius: $border-radius;
+                  &:first-child {
+                    border-radius: $border-radius 0 0 $border-radius;
+                  }
+                  &:last-child {
+                    border-radius: 0 $border-radius $border-radius 0;
+                  }
 
                   img {
                     position: absolute;
@@ -912,6 +980,7 @@ export default {
 
     }
 
+
     .answer-section {
       margin-bottom: 80px;
 
@@ -938,10 +1007,23 @@ export default {
             min-height: 40px;
             max-height: 15vw;
 
+            position: relative;
+
+            &:after {
+              content: '';
+              display: block;
+              position: absolute;
+              top: 0;
+              left: 0;
+              width: 100%;
+              height: 100%;
+              transition: border $transition-duration-short $transition-timing-function;
+            }
+
             .images {
               display: flex;
               overflow: hidden;
-              height: 100%;
+              height: calc( ( 100vh - 160px - 64px - ( 4 * 16px ) ) / 5 );
 
               .image {
                 flex: 1;
@@ -964,7 +1046,6 @@ export default {
               }
             }
 
-            position: relative;
 
             .title {
               position: absolute;
@@ -1032,8 +1113,26 @@ export default {
                   background: white;
                   cursor: pointer;
                   overflow: hidden;
+                  position: relative;
 
                   box-shadow: 0px 4px 8px -4px rgba($color-black,0.2);
+
+                  &:after {
+                    content: '';
+                    display: block;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    transition: border $transition-duration-short $transition-timing-function;
+                  }
+
+                  &.selected {
+                    &:after {
+                      border: 4px solid $color-primary;
+                    }
+                  }
 
                   .image {
                     flex: 0 0 37%;
@@ -1098,11 +1197,16 @@ export default {
 
           &.open {
 
-            //margin-bottom: $spacing-4;
+            margin-bottom: $spacing-4;
 
             .category {
               height: 40px;
               margin-bottom: $spacing-2;
+
+              &:after {
+                border: 4px solid $color-primary;
+              }
+
               .title {
                 svg {
                   transform: rotate(90deg);
@@ -1164,8 +1268,8 @@ export default {
               .drawer {
                 ul {
                   li {
-                    height: 40px;
-                    min-width: calc( 40px / 8.6 * 16 );
+                    height: 48px;
+                    min-width: calc( 48px / 8.6 * 16 );
                   }
                 }
               }
@@ -1324,6 +1428,9 @@ export default {
           .category-item {
             .category {
               height: calc((100vh - 160px - 96px - (4 * 16px)) / 5);
+              .images {
+                height: calc((100vh - 160px - 96px - (4 * 16px)) / 5);
+              }
             }
           }
         }
