@@ -42,6 +42,9 @@ export const i18n = new VueI18n({
           'navigation-identification': {
               'link': 'Identification'
           },
+          'navigation-complete': {
+              'link': 'Identification Complete'
+          },
           'navigation-forum': {
               'link': 'Forum'
           },
@@ -80,6 +83,9 @@ export const i18n = new VueI18n({
           },
           'navigation-identification': {
               'link': 'Identifikation'
+          },
+          'navigation-complete': {
+              'link': 'Identifikation Vollständig'
           },
           'navigation-forum': {
               'link': 'Forum'

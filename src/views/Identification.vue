@@ -131,10 +131,10 @@
                           </div>
                         </li>
                         <li class="animal-item">
-                          <div class="animal" @click="clickAnimal(null)" :class="{selected: selectedAnimal === null}">
+                          <div class="animal" @click="clickAnimal(-1)" :class="{selected: selectedAnimal === -1}">
                             <div class="info">
                               <div class="title">
-                                Don't know
+                                Andere / Nicht genauer erkennbar
                               </div>
                             </div>
                           </div>
@@ -166,15 +166,30 @@
 
     <app-content-section class="content-section-flat action-bar">
       <div class="content-wrapper">
-        <div class="row">
+        <div class="row row-wrapping">
 
-          <div class="col col-tablet-portrait-6">
+          <div class="col col-wrapping col-tablet-portrait-4">
             Aufnahme <b>1</b> von 10000
           </div>
-          <div class="col col-tablet-portrait-6">
+          <div class="col col-wrapping col-tablet-portrait-8">
+
+            <div class="form-field form-field-no-animal">
+              <div class="options">
+                <label>
+                  <input type="checkbox">
+                  <div class="checkbox">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                      <path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"></path>
+                    </svg>
+                  </div>
+                  <span>Kein Tier sichtbar</span>
+                </label>
+              </div>
+            </div>
+
             <div class="button-group right-aligned">
               <button class="button button-secondary" :disabled="!videoLoaded" @click="next">Überspringen</button>
-              <button class="button button-primary" :disabled="!videoLoaded || openCategory === null" @click="submit">Senden</button>
+              <button class="button button-primary" :disabled="!videoLoaded || selectedAnimal === null" @click="submit">Antworten</button>
             </div>
           </div>
 
@@ -310,9 +325,17 @@ export default {
       }),
       answer() {
           if( this.selectedAnimal !== null ) {
-              return {
-                  'category': this.animals[this.openCategory].name.en,
-                  'animal': this.animals[this.openCategory].animals[this.selectedAnimal].name.en,
+              if( this.selectedAnimal >= 0 ) {
+                  return {
+                      'category': this.animals[this.openCategory].name.en,
+                      'animal': this.animals[this.openCategory].animals[this.selectedAnimal].name.en,
+                  }
+              }
+              else {
+                  return {
+                      'category': this.animals[this.openCategory].name.en,
+                      'animal': 'n/a',
+                  }
               }
           }
           else {
@@ -413,6 +436,7 @@ export default {
         let taskQuery;
         if( !this.taskId ) {
             // without id
+            console.log('without id');
             taskQuery = {
                 'select': {
                     'fields': [
@@ -450,6 +474,7 @@ export default {
         }
         else {
             // with id
+            console.log('with id');
             taskQuery = {
                 'select': {
                     'fields': [
@@ -479,6 +504,7 @@ export default {
 
             if( this.taskId ) {
                 // loaded with id, check for submissions
+                console.log('has task id, check for submissions');
 
                 let query = {
                     'select': {
@@ -563,6 +589,8 @@ export default {
             else {
 
                 console.log('no more tasks');
+                this.$router.push('/complete');
+
 
             }
 
@@ -585,7 +613,8 @@ export default {
                 "animal": this.answer.animal,
             },
             "task_id": this.tasks[0].id,
-            "user_id": this.currentUser.id
+            "user_id": this.currentUser.id,
+            "draft": true
         };
 
         this.$store.commit('c3s/submission/SET_SUBMISSION', submissionObject );
@@ -654,10 +683,8 @@ export default {
                 }
             }
         }
-        else {
-            console.log('deselect ');
-            this.selectedAnimal = null;
-        }
+
+        this.selectedAnimal = null;
     },
     clickAnimal(index) {
         console.log('click animal '+index);
@@ -704,12 +731,14 @@ export default {
     },
     onVideoUpdate() {
         //console.log('video update');
-        let value = (100 / this.$refs['video'+this.activeVideo][0].duration) * this.$refs['video'+this.activeVideo][0].currentTime;
-        this.$refs.seekBar.value = value;
+        if( this.$refs['video'+this.activeVideo][0] ) {
+          let value = (100 / this.$refs['video'+this.activeVideo][0].duration) * this.$refs['video'+this.activeVideo][0].currentTime;
+          this.$refs.seekBar.value = value;
 
-        this.totalProgress = ( this.taskMedia.length - (this.taskMedia.length - this.activeVideo) ) * ( 100 / this.taskMedia.length );
-        let thisVideoProgress = this.$refs.seekBar.value / this.taskMedia.length;
-        this.totalProgress += thisVideoProgress;
+          this.totalProgress = ( this.taskMedia.length - (this.taskMedia.length - this.activeVideo) ) * ( 100 / this.taskMedia.length );
+          let thisVideoProgress = this.$refs.seekBar.value / this.taskMedia.length;
+          this.totalProgress += thisVideoProgress;
+        }
     },
       /*
     fullscreen() {
@@ -1032,6 +1061,7 @@ export default {
               }
 
               position: relative;
+
               &:after {
                 content: '';
                 display: block;
@@ -1110,10 +1140,11 @@ export default {
 
                   margin-bottom: $spacing-2;
                   border-radius: $border-radius;
-                  background: white;
+                  background-color: white;
                   cursor: pointer;
                   overflow: hidden;
                   position: relative;
+                  transition: background-color $transition-duration-short $transition-timing-function;
 
                   box-shadow: 0px 4px 8px -4px rgba($color-black,0.2);
 
@@ -1129,8 +1160,14 @@ export default {
                   }
 
                   &.selected {
+                    background-color: $color-primary-tint-90;
                     &:after {
-                      border: 4px solid $color-primary;
+                      border: 4px solid $color-primary-shade-20;
+                    }
+                    .info {
+                      .title {
+                        color: $color-primary-shade-20;
+                      }
                     }
                   }
 
@@ -1150,6 +1187,7 @@ export default {
 
                     .title {
                       color: $color-primary;
+                      transition: color $transition-duration-short $transition-timing-function;
                       padding: calc((40px - 1.5rem) / 2) $spacing-2;
                       font-weight: 700;
                     }
@@ -1173,18 +1211,20 @@ export default {
                     }
                   }
 
-                  &:active, &:focus {
-                    .info {
-                      .title {
-                        color: $color-primary-shade-20;
-                      }
-                    }
-                  }
-                  @media (hover: hover) {
-                    &:hover {
+                  &:not(.selected) {
+                    &:active, &:focus {
                       .info {
                         .title {
                           color: $color-primary-shade-20;
+                        }
+                      }
+                    }
+                    @media (hover: hover) {
+                      &:hover {
+                        .info {
+                          .title {
+                            color: $color-primary-shade-20;
+                          }
                         }
                       }
                     }
@@ -1204,7 +1244,7 @@ export default {
               margin-bottom: $spacing-2;
 
               &:after {
-                border: 4px solid $color-primary;
+                border: 4px solid $color-primary-shade-20;
               }
 
               .title {
@@ -1216,6 +1256,7 @@ export default {
                 &:after {
                   opacity: 1;
                   width: 100%;
+                  background: linear-gradient(120deg, $color-primary-shade-20, rgba($color-primary-shade-20, 1) 100% );
                 }
               }
             }
@@ -1250,6 +1291,21 @@ export default {
       height: 100%;
       .row {
         width: 100%;
+      }
+
+      .col:last-child {
+        text-align: right;
+        .form-field-no-animal {
+          margin-bottom: 0;
+          display: inline-block;
+          .options {
+            margin: 0;
+          }
+          margin-right: $spacing-4;
+        }
+        .button-group {
+          display: inline-block;
+        }
       }
     }
   }
