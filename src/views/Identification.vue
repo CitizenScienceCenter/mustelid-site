@@ -71,7 +71,7 @@
               <svg v-else xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M456.41,214.66l-352-208.1C75.81-10.34,32,6.06,32,47.86V464c0,37.5,40.7,60.1,72.4,41.3l352-208c31.4-18.5,31.5-64.1,0-82.6Z"/></svg>
             </button>
 
-            <input type="range" class="seek-bar" ref="seekBar" @change="onSeekBarChange" @click="onSeekBarClick" @touchstart="onSeekBarTouch">
+            <input type="range" class="seek-bar" ref="seekBar" @change="onSeekBarChange" @click="onSeekBarClick" @touchstart="onSeekBarTouch" @touchend="onSeekBarTouch">
 
             <!--
             <button class="button button-secondary button-secondary-naked button-secondary-inverted button-icon button-icon-only video-button fullscreen-button" @click="fullscreen" >
@@ -581,6 +581,7 @@ export default {
                     this.selectedAnimal = null;
                     this.resizeAnimalList();
                     this.$refs.video0[0].load();
+                    this.playing = true;
 
                 });
 
@@ -718,11 +719,13 @@ export default {
 
     },
     startVideo(index) {
+        this.playing = false;
         this.$refs['video'+this.activeVideo][0].pause();
         this.$refs['video'+this.activeVideo][0].currentTime = 0;
         this.activeVideo = index;
         this.$refs['video'+this.activeVideo][0].currentTime = 0;
         this.$refs['video'+this.activeVideo][0].play();
+        this.playing = true;
     },
     onFirstVideoLoaded() {
         this.videoLoaded = true;
@@ -765,8 +768,8 @@ export default {
     onSeekBarChange(event) {
         //console.log('seekbar change');
         //console.log(event.target.value);
-        //console.log('change at '+this.$refs['video'+this.activeVideo][0].currentTime);
-        //this.videoSeek(event.target.value);
+        console.log('change at '+this.$refs['video'+this.activeVideo][0].currentTime);
+        this.videoSeek(event.target.value);
     },
     onSeekBarClick(event) {
         //console.log('seekbar click');
@@ -779,7 +782,8 @@ export default {
     },
     videoSeek(value) {
         //console.log('video seek ...'+value);
-        this.$refs['video'+this.activeVideo][0].pause();
+        //this.$refs['video'+this.activeVideo][0].pause();
+        //this.playing = false;
         let time = this.$refs['video'+this.activeVideo][0].duration * (value / 100);
         this.$refs['video'+this.activeVideo][0].currentTime = time;
     },
@@ -788,7 +792,8 @@ export default {
         this.$refs['video'+this.activeVideo][0].play();
         console.log('seeked, then '+this.$refs['video'+this.activeVideo][0].currentTime);
         */
-        this.$refs['video'+this.activeVideo][0].play();
+        //this.$refs['video'+this.activeVideo][0].play();
+        //this.playing = true;
     },
 
   }
