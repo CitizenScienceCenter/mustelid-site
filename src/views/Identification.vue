@@ -45,10 +45,10 @@
             <loader></loader>
 
             <template v-for="(video,index) in taskMedia">
-              <video v-if="index === 0" :key="'video'+index" :ref="'video'+index" playsinline muted :class="{ activeVideo: index === activeVideo }" @timeupdate="onVideoUpdate" @ended="onVideoEnd" @loadeddata="onFirstVideoLoaded">
+              <video v-if="index === 0" :key="'video'+index" :ref="'video'+index" playsinline muted :class="{ activeVideo: index === activeVideo }" @timeupdate="onVideoUpdate" @ended="onVideoEnd" @loadeddata="onFirstVideoLoaded" @seeked="onVideoSeeked">
                 <source type="video/mp4" :src="'/videos/'+video.path">
               </video>
-              <video v-else :key="'video'+index" :ref="'video'+index" playsinline muted :class="{ activeVideo: index === activeVideo }" @timeupdate="onVideoUpdate" @ended="onVideoEnd">
+              <video v-else :key="'video'+index" :ref="'video'+index" playsinline muted :class="{ activeVideo: index === activeVideo }" @timeupdate="onVideoUpdate" @ended="onVideoEnd" @seeked="onVideoSeeked">
                 <source type="video/mp4" :src="'/videos/'+video.path">
               </video>
             </template>
@@ -71,7 +71,7 @@
               <svg v-else xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M456.41,214.66l-352-208.1C75.81-10.34,32,6.06,32,47.86V464c0,37.5,40.7,60.1,72.4,41.3l352-208c31.4-18.5,31.5-64.1,0-82.6Z"/></svg>
             </button>
 
-            <input type="range" class="seek-bar" ref="seekBar" @change="onSeekBarChange">
+            <input type="range" class="seek-bar" ref="seekBar" @change="onSeekBarChange" @click="onSeekBarClick" @touchstart="onSeekBarTouch">
 
             <!--
             <button class="button button-secondary button-secondary-naked button-secondary-inverted button-icon button-icon-only video-button fullscreen-button" @click="fullscreen" >
@@ -762,10 +762,34 @@ export default {
             this.playing = false;
         }
     },
-    onSeekBarChange() {
-        let time = this.$refs['video'+this.activeVideo][0].duration * (this.$refs.seekBar.value / 100);
+    onSeekBarChange(event) {
+        //console.log('seekbar change');
+        //console.log(event.target.value);
+        //console.log('change at '+this.$refs['video'+this.activeVideo][0].currentTime);
+        //this.videoSeek(event.target.value);
+    },
+    onSeekBarClick(event) {
+        //console.log('seekbar click');
+        this.videoSeek( event.layerX / event.target.clientWidth * 100);
+    },
+    onSeekBarTouch(event) {
+        //console.log('seekbar touch');
+        this.videoSeek( (event.touches[0].clientX - event.target.offsetLeft) / event.target.clientWidth  * 100);
+        //this.videoSeek( event.layerX / event.target.clientWidth * 100);
+    },
+    videoSeek(value) {
+        //console.log('video seek ...'+value);
+        this.$refs['video'+this.activeVideo][0].pause();
+        let time = this.$refs['video'+this.activeVideo][0].duration * (value / 100);
         this.$refs['video'+this.activeVideo][0].currentTime = time;
-    }
+    },
+    onVideoSeeked() {
+        /*
+        this.$refs['video'+this.activeVideo][0].play();
+        console.log('seeked, then '+this.$refs['video'+this.activeVideo][0].currentTime);
+        */
+        this.$refs['video'+this.activeVideo][0].play();
+    },
 
   }
 }
@@ -946,7 +970,7 @@ export default {
 
           .video-button {
             border-radius: 0;
-            background: linear-gradient(to top, rgba( $color-black, 0.5 ), rgba( $color-black, 0 ) );
+            background: linear-gradient(to top, rgba( $color-black, 0.5 ), rgba( $color-black, 0.25 ) );
             &:focus  {
               svg {
                 fill: white;
@@ -978,7 +1002,7 @@ export default {
             height: 40px;
             padding-right: $spacing-1;
             //background-color: rgba( $color-black, 0.5 );
-            background: linear-gradient(to top, rgba( $color-black, 0.5 ), rgba( $color-black, 0 ) );
+            background: linear-gradient(to top, rgba( $color-black, 0.5 ), rgba( $color-black, 0.25 ) );
             //background: rgba( white, 0.8 );
             //background: none;
 
@@ -991,15 +1015,15 @@ export default {
               appearance: none;
               background-color: rgba( white, 0.5 );
               width: 20px;
-              height: 20px;
-              border-radius: 50%;
+              height: 40px;
+              border-radius: $border-radius;
             }
             &::-moz-range-thumb {
               appearance: none;
               background-color: rgba( white, 0.5 );
               width: 20px;
-              height: 20px;
-              border-radius: 50%;
+              height: 40px;
+              border-radius: $border-radius;
             }
           }
 
@@ -1256,7 +1280,7 @@ export default {
                 &:after {
                   opacity: 1;
                   width: 100%;
-                  background: linear-gradient(120deg, $color-primary-shade-20, rgba($color-primary-shade-20, 1) 100% );
+                  background: linear-gradient(120deg, $color-primary-shade-20, rgba($color-primary-shade-20, 0.5) 100% );
                 }
               }
             }
@@ -1337,11 +1361,11 @@ export default {
 
               &::-webkit-slider-thumb {
                 width: 24px;
-                height: 24px;
+                height: 48px;
               }
               &::-moz-range-thumb {
                 width: 24px;
-                height: 24px;
+                height: 48px;
               }
             }
           }
