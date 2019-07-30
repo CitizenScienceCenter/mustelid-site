@@ -171,6 +171,11 @@
                               <div class="title">
                                 Andere
                               </div>
+                              <div class="text">
+                                <div class="form-field form-field-block">
+                                  <input placeholder="Kommentar" v-model="email" />
+                                </div>
+                              </div>
                             </div>
                           </div>
                         </li>
@@ -1441,7 +1446,7 @@ export default {
                     }
                     .text {
                       width: 100%;
-                      padding: 0 $spacing-2 $spacing-2 $spacing-1;
+                      padding: 0 $spacing-2 $spacing-2 $spacing-2;
 
                       li {
                         padding-left: $spacing-3;
@@ -1451,8 +1456,8 @@ export default {
                         &:before {
                           width: 0.3rem;
                           height: 0.3rem;
-                          top: 0.5rem;
-                          left: 0.5rem;
+                          top: 0.4rem;
+                          left: 0.333rem;
                           transform: translateY(-2px);
                         }
                       }
