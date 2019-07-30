@@ -157,9 +157,8 @@
                               <div class="title">
                                 {{ animal.name[language] }}
                               </div>
-                              <div class="text" v-html="animal.text[language]"></div>
+                              <div v-if="animal.text[language]" class="text" v-html="animal.text[language]"></div>
                             </div>
-
 
                           </div>
                         </li>
@@ -1325,7 +1324,7 @@ export default {
                         &:after {
                           content: '';
                           display: block;
-                          padding-bottom: 66.667%;
+                          padding-bottom: 50%;
                         }
 
                         .image {
