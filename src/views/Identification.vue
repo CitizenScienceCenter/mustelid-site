@@ -119,14 +119,58 @@
                     <div class="animal-list-wrapper" :ref="'animalListWrapper'+index" style="height: 0px;">
                       <ul class="animals" :ref="'animalList'+index">
 
-                        <li class="animal-item" v-for="(animal,index) in category.animals" :key="index">
-                          <div class="animal" @click="clickAnimal(index)" :class="{selected: index === selectedAnimal}">
-                            <div class="image" :style="{ 'background-image' : 'url(/img/animals/'+animal.image+')' }"></div>
+                        <li class="animal-item" v-for="(animal,index2) in category.animals" :key="'animal'+index+''+index2">
+                          <div class="animal" @click="clickAnimal(index2)" :class="{ selected: index2 === selectedAnimal, zoomed: animalListStates[index][index2].zoomed }">
+
+                            <div class="images">
+
+                              <ul class="image-list">
+                                <li class="image-item" v-for="(image, index3) in animal.images" :key="'animalImage'+index+''+index2+''+index3"  :style="{left: -(animalListStates[index][index2].activeImage * 100) +'%'}">
+                                  <div class="image" :style="{ 'background-image' : 'url(/img/animals/'+image+')' }"></div>
+                                </li>
+                              </ul>
+
+
+                              <button class="button button-secondary button-secondary-inverted button-secondary-naked button-icon button-icon-only zoom-button" @click="zoomImage(index2)">
+                                <svg v-if="!animalListStates[index][index2].zoomed" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M304 192v32c0 6.6-5.4 12-12 12h-56v56c0 6.6-5.4 12-12 12h-32c-6.6 0-12-5.4-12-12v-56h-56c-6.6 0-12-5.4-12-12v-32c0-6.6 5.4-12 12-12h56v-56c0-6.6 5.4-12 12-12h32c6.6 0 12 5.4 12 12v56h56c6.6 0 12 5.4 12 12zm201 284.7L476.7 505c-9.4 9.4-24.6 9.4-33.9 0L343 405.3c-4.5-4.5-7-10.6-7-17V372c-35.3 27.6-79.7 44-128 44C93.1 416 0 322.9 0 208S93.1 0 208 0s208 93.1 208 208c0 48.3-16.4 92.7-44 128h16.3c6.4 0 12.5 2.5 17 7l99.7 99.7c9.3 9.4 9.3 24.6 0 34zM344 208c0-75.2-60.8-136-136-136S72 132.8 72 208s60.8 136 136 136 136-60.8 136-136z"></path></svg>
+                                <svg v-else xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M304 192v32c0 6.6-5.4 12-12 12H124c-6.6 0-12-5.4-12-12v-32c0-6.6 5.4-12 12-12h168c6.6 0 12 5.4 12 12zm201 284.7L476.7 505c-9.4 9.4-24.6 9.4-33.9 0L343 405.3c-4.5-4.5-7-10.6-7-17V372c-35.3 27.6-79.7 44-128 44C93.1 416 0 322.9 0 208S93.1 0 208 0s208 93.1 208 208c0 48.3-16.4 92.7-44 128h16.3c6.4 0 12.5 2.5 17 7l99.7 99.7c9.3 9.4 9.3 24.6 0 34zM344 208c0-75.2-60.8-136-136-136S72 132.8 72 208s60.8 136 136 136 136-60.8 136-136z"></path></svg>
+                              </button>
+
+                              <template v-if="animal.images.length > 1">
+
+                                <ul class="thumbs-list" v-if="animal.images.length > 1">
+                                  <li class="thumb-item" v-for="(image,index3) in animal.images" :key="'animalThumb'+index+''+index2+''+index3" :style="{ 'background-image' : 'url(/img/animals/'+image+')' }" :class="{active: animalListStates[index][index2].activeImage === index3 }"></li>
+                                </ul>
+
+                                <button class="button button-secondary button-secondary-inverted button-secondary-naked button-icon button-icon-only left-button" @click="prevImage(index2)">
+                                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M130.52,239,324.87,44.69a24,24,0,0,1,33.94,0l22.67,22.66a24,24,0,0,1,0,33.9L227.49,256l154,154.75a24,24,0,0,1,0,33.9l-22.67,22.66a24,24,0,0,1-33.94,0L130.52,273A24,24,0,0,1,130.52,239Z"/></svg>
+                                </button>
+                                <button class="button button-secondary button-secondary-inverted button-secondary-naked button-icon button-icon-only right-button" @click="nextImage(index2)">
+                                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M381.48,273,187.13,467.31a24,24,0,0,1-33.94,0l-22.67-22.66a24,24,0,0,1,0-33.9L284.51,256l-154-154.75a24,24,0,0,1,0-33.9l22.67-22.66a24,24,0,0,1,33.94,0L381.48,239A24,24,0,0,1,381.48,273Z"/></svg>
+                                </button>
+
+                              </template>
+
+                            </div>
+
                             <div class="info">
                               <div class="title">
                                 {{ animal.name[language] }}
                               </div>
                               <div class="text" v-html="animal.text[language]"></div>
+                            </div>
+
+
+                          </div>
+                        </li>
+
+
+                        <li class="animal-item">
+                          <div class="animal" @click="clickAnimal(-2)" :class="{selected: selectedAnimal === -2}">
+                            <div class="info">
+                              <div class="title">
+                                Andere
+                              </div>
                             </div>
                           </div>
                         </li>
@@ -134,7 +178,7 @@
                           <div class="animal" @click="clickAnimal(-1)" :class="{selected: selectedAnimal === -1}">
                             <div class="info">
                               <div class="title">
-                                Andere / Nicht genauer erkennbar
+                                Nicht genauer erkennbar
                               </div>
                             </div>
                           </div>
@@ -298,6 +342,8 @@ export default {
           animals: animals,
           openCategory: null,
           selectedAnimal: null,
+          animalListState: undefined,
+          animalListStates: undefined,
 
           noOfUiImages: 0,
           noOfUiImagesLoaded: 0,
@@ -353,30 +399,21 @@ export default {
           self.resizeAnimalList();
       } );
 
-
-      /*
-      this.$store.dispatch("c3s/activity/getActivity", [this.activityId, false]).then(activity => {
-          //console.log('activity loaded');
-
-          if( this.$route.params.id ) {
-              if( this.$route.params.id.length !== 36 ) {
-                  console.log('invalid id');
-                  delete this.$route.params.id;
-                  this.$router.replace('/challenge');
-                  this.id = null;
-                  //this.loadTask();
+      this.animalListStates = [];
+      for( let i=0; i < animals.length; i++ ) {
+          if( this.animals[i].animals ) {
+              let animalListState = [];
+              for( let j=0; j < this.animals[i].animals.length; j++ ) {
+                  animalListState.push( {
+                      'zoomed': false,
+                      'activeImage': 0,
+                      'noOfImages': this.animals[i].animals[j].images.length
+                  } );
               }
-              else {
-                  this.id = this.$route.params.id;
-                  //this.loadTask();
-              }
+              this.animalListStates.push(animalListState);
           }
-          else {
-              this.id = null;
-              //this.loadTask();
-          }
-      });
-      */
+      }
+      console.log( this.animalListStates );
 
       this.loadUiImages();
 
@@ -402,6 +439,23 @@ export default {
           this.loadTask();
       }
   },
+  watch: {
+    openCategory( to, from ) {
+        if( to !== null ) {
+          this.animalListState = [];
+          for( let i=0; i < this.animals[ to ].animals.length; i++ ) {
+              this.animalListState.push( {
+                'zoomed': false,
+                'activeImage': 0,
+                'noOfImages': this.animals[ to ].animals[i].images.length
+              } );
+          }
+        }
+        else {
+            this.animalListState = undefined;
+        }
+    }
+  },
   methods: {
       loadUiImages() {
           this.noOfUiImages = 0;
@@ -423,8 +477,9 @@ export default {
       },
     resizeAnimalList() {
         for( var i=0; i< this.animals.length; i++ ) {
-            if( this.openCategory === i ) {
-                this.$refs['animalListWrapper'+i][0].style.height = this.$refs['animalList'+this.openCategory][0].offsetHeight +'px';
+            if( this.openCategory === i && this.$refs['animalListWrapper'+i][0] ) {
+                console.log( this.$refs['animalList'+this.openCategory][0].offsetHeight );
+                this.$refs['animalListWrapper'+i][0].style.height = this.$refs['animalList'+this.openCategory][0].offsetHeight +8 +'px';
             }
             else if( this.$refs['animalListWrapper'+i][0] ) {
                 this.$refs['animalListWrapper'+i][0].style.height = 0+'px';
@@ -690,6 +745,38 @@ export default {
     clickAnimal(index) {
         console.log('click animal '+index);
         this.selectedAnimal = index;
+    },
+    zoomImage(index) {
+        if( !this.animalListStates[this.openCategory][index].zoomed ) {
+            this.animalListStates[this.openCategory][index].zoomed = true;
+        }
+        else {
+            this.animalListStates[this.openCategory][index].zoomed = false;
+        }
+        event.stopPropagation();
+
+        let self = this;
+        setTimeout( function(){
+            self.resizeAnimalList();
+        },1 );
+    },
+    nextImage(index) {
+        if( this.animalListStates[this.openCategory][index].activeImage < this.animalListStates[this.openCategory][index].noOfImages -1) {
+            this.animalListStates[this.openCategory][index].activeImage++;
+        }
+        else {
+            this.animalListStates[this.openCategory][index].activeImage = 0;
+        }
+        event.stopPropagation();
+    },
+    prevImage(index) {
+        if( this.animalListStates[this.openCategory][index].activeImage > 0 ) {
+            this.animalListStates[this.openCategory][index].activeImage--;
+        }
+        else {
+            this.animalListStates[this.openCategory][index].activeImage = this.animalListStates[this.openCategory][index].noOfImages -1;
+        }
+        event.stopPropagation();
     },
     onVideoEnd() {
           /*
@@ -1082,6 +1169,7 @@ export default {
               display: flex;
               overflow: hidden;
               height: calc( ( 100vh - 160px - 64px - ( 4 * 16px ) ) / 5 );
+              min-height: 40px;
 
               .image {
                 flex: 1;
@@ -1186,6 +1274,7 @@ export default {
                     width: 100%;
                     height: 100%;
                     transition: border $transition-duration-short $transition-timing-function;
+                    pointer-events: none;
                   }
 
                   &.selected {
@@ -1200,17 +1289,147 @@ export default {
                     }
                   }
 
-                  .image {
-                    flex: 0 0 37%;
-                    background-size: cover;
-                    background-position: 50% 50%;
+                  .images {
+                    flex: 0 0 40%;
+                    position: relative;
 
-                    &:after {
-                      content: '';
-                      display: block;
-                      padding-bottom: 50%;
+                    .image-list {
+
+                      font-size: 0;
+
+                      margin: 0;
+                      display: table;
+                      white-space: nowrap;
+                      height: 100%;
+                      width: 100%;
+                      overflow: hidden;
+
+                      .image-item {
+                        padding: 0;
+                        margin: 0;
+                        &:before {
+                          display: none;
+                        }
+
+                        display: inline-block;
+                        width: 100%;
+                        height: 100%;
+
+                        transition: left $transition-duration-short $transition-timing-function;
+
+                        &:after {
+                          content: '';
+                          display: block;
+                          padding-bottom: 66.667%;
+                        }
+
+                        .image {
+                          position: absolute;
+                          top: 0;
+                          left: 0;
+                          background-size: cover;
+                          background-position: 50% 50%;
+                          width: 100%;
+                          height: 100%;
+                        }
+                      }
                     }
+
+                    .button {
+                      position: absolute;
+                      &:focus {
+                        svg {
+                          fill: rgba( white, 1);
+                        }
+                      }
+
+                      /*
+                      &:disabled {
+                        pointer-events: none;
+                        opacity: 0.5;
+                      }
+                      */
+
+                      &:before {
+                        content: '';
+                        position: absolute;
+                        display: block;
+                        pointer-events: none;
+                      }
+                      &.zoom-button {
+                        top: 0;
+                        left: 0;
+                        &:before {
+                          width: 200%;
+                          height: 200%;
+                          top: 0;
+                          left: 0;
+                          background: linear-gradient( to bottom right, rgba($color-black, 0.5), rgba($color-black, 0) 50% );
+                        }
+                      }
+                      &.left-button {
+                        bottom: 0;
+                        left: 0;
+                        &:before {
+                          width: 200%;
+                          height: 200%;
+                          bottom: 0;
+                          left: 0;
+                          background: linear-gradient( to top right, rgba($color-black, 0.5), rgba($color-black, 0) 50% );
+                        }
+                      }
+                      &.right-button {
+                        bottom: 0;
+                        right: 0;
+                        &:before {
+                          width: 200%;
+                          height: 200%;
+                          bottom: 0;
+                          right: 0;
+                          background: linear-gradient( to top left, rgba($color-black, 0.5), rgba($color-black, 0) 50% );
+                        }
+                      }
+                    }
+
+                    .thumbs-list {
+                      position: absolute;
+                      bottom: 0;
+                      left: 0;
+                      width: 100%;
+                      height: 48px;
+                      text-align: right;
+                      display: flex;
+                      justify-content: center;
+                      align-items: center;
+                      margin: 0;
+
+                      .thumb-item {
+                        padding: 0;
+                        width: 8px;
+                        height: 8px;
+                        background-size: cover;
+                        background-position: 50% 50%;
+                        border-radius: 50%;
+                        background-color: white;
+                        background-image: none!important;
+                        margin: 4px;
+
+                        opacity: 0.75;
+
+                        &:before {
+                          display: none;
+                        }
+
+                        &.active {
+                          opacity: 1;
+                          width: 10px;
+                          height: 10px;
+                        }
+                      }
+                    }
+
                   }
+
                   .info {
                     flex: 1;
 
@@ -1237,6 +1456,13 @@ export default {
                           transform: translateY(-2px);
                         }
                       }
+                    }
+                  }
+
+                  &.zoomed {
+                    flex-direction: column;
+                    .images {
+                      min-height: 50%;
                     }
                   }
 
@@ -1273,7 +1499,7 @@ export default {
               margin-bottom: $spacing-2;
 
               &:after {
-                border: 4px solid $color-primary-shade-20;
+                //border: 4px solid $color-primary-shade-20;
               }
 
               .title {
@@ -1381,6 +1607,9 @@ export default {
         .animal-categories {
           .category-item {
             .category {
+              .images {
+                min-height: 48px;
+              }
               .title {
                 padding: calc((48px - 1.5rem) / 2) $spacing-2;
                 padding-left: $spacing-4;

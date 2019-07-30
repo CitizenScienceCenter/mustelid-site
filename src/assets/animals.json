@@ -15,7 +15,10 @@
           "de": "Hermelin",
           "en": "Stoat"
         },
-        "image": "stoat.jpg",
+        "images": [
+          "stoat2.jpg",
+          "stoat.jpg"
+        ],
         "text": {
           "de": "<ul><li>Schwarze Schwanzspitze</li><li>Übergang heller Bauch zu dunklem Rückenfell bildet eine gerade Linie.</li><ul>",
           "en": "<ul><li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li></ul>"
@@ -26,7 +29,10 @@
           "de": "Mauswiesel",
           "en": "Least Weasel"
         },
-        "image": "leastweasel.jpg",
+        "images": [
+          "leastweasel.jpg",
+          "leastweasel2.jpg"
+        ],
         "text": {
           "de": "<ul><li>Kurzer Schwanz, ohne dunkle Spitze</li><li>Übergang heller Bauch zu dunklem Rückenfell ist gewellt</li><ul>",
           "en": "<ul><li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li></ul>"
@@ -37,7 +43,9 @@
           "de": "Iltis",
           "en": "Polecat"
         },
-        "image": "polecat.jpg",
+        "images": [
+          "polecat.jpg"
+        ],
         "text": {
           "de": "<ul><li>Gesichttsmaske (helles Gesucht mit dunklen Flecken um die Augen)</li><li>helle Ohren</li><li>Körper heller als Vorderbeine und Schwanz</li></ul>",
           "en": "<ul><li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li></ul>"
@@ -48,7 +56,9 @@
           "de": "Baummarder",
           "en": "Pine Marten"
         },
-        "image": "pinemarten.jpg",
+        "images": [
+          "pinemarten.jpg"
+        ],
         "text": {
           "de": "<ul><li>Dunkle Nasespitze</li><li>helle Ohren</li><li>Buschiger Schwanz</li><li>Kehlfleck meistens nicht geteilt</li></ul>",
           "en": "<ul><li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li></ul>"
@@ -59,7 +69,9 @@
           "de": "Steinmarder",
           "en": "Beech Marten"
         },
-        "image": "beechmarten.jpg",
+        "images": [
+          "beechmarten.jpg"
+        ],
         "text": {
           "de": "<ul><li>Helle Nasenspitze</li><li>Heller Kehlfleck meist gegabelt und bis zu den Beinen reichend</li></ul>",
           "en": "<ul><li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li></ul>"
@@ -83,7 +95,9 @@
           "de": "Spitzmaus",
           "en": "Shrew"
         },
-        "image": "shrew.jpg",
+        "images": [
+          "shrew.jpg"
+        ],
         "text": {
           "de": "<ul><li>Längliche, spitze Schnauze</li><li>Dünner bis körperlanger Schwanz</li><li>Ohren sichtbar</li></ul>",
           "en": "<ul><li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li></ul>"
@@ -94,7 +108,9 @@
           "de": "Wühlmaus",
           "en": "Vole"
         },
-        "image": "vole.jpg",
+        "images": [
+          "vole.jpg"
+        ],
         "text": {
           "de": "<ul><li>Schwanz ist kürzer als der Körper</li><li>Ohren schlecht bis gar nicht sichtbar</li><li>Runde Kopfform</li></ul>",
           "en": "<ul><li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li></ul>"
@@ -105,7 +121,9 @@
           "de": "Langschwanzmaus",
           "en": "Long tail Mouse"
         },
-        "image": "longtailmouse.jpg",
+        "images": [
+          "longtailmouse.jpg"
+        ],
         "text": {
           "de": "<ul><li>Schwanz ist ungefähr gleich lang wie der Körper oder länger</li><li>Ohren sind gut sichtbar</li><li>Dreieckige Kopfform</li></ul>",
           "en": "<ul><li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li></ul>"
@@ -116,7 +134,9 @@
           "de": "Schläfer (Bilche)",
           "en": "Dormouse"
         },
-        "image": "dormouse.jpg",
+        "images": [
+          "dormouse.jpg"
+        ],
         "text": {
           "de": "<ul><li>Schwanz lang und stark behaart</li></ul>",
           "en": "<ul><li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li></ul>"
@@ -140,7 +160,9 @@
           "de": "Igel",
           "en": "Hedgehog"
         },
-        "image": "hedgehog.jpg",
+        "images": [
+          "hedgehog.jpg"
+        ],
         "text": {
           "de": "",
           "en": ""
@@ -151,7 +173,9 @@
           "de": "Eichörnchen",
           "en": "Squirrel"
         },
-        "image": "squirrel.jpg",
+        "images": [
+          "squirrel.jpg"
+        ],
         "text": {
           "de": "",
           "en": ""
@@ -162,7 +186,9 @@
           "de": "Maulwurf",
           "en": "Mole"
         },
-        "image": "mole.jpg",
+        "images": [
+          "mole.jpg"
+        ],
         "text": {
           "de": "",
           "en": ""
@@ -186,7 +212,9 @@
           "de": "Frosch / Kröte",
           "en": "Frog / Toad"
         },
-        "image": "frog.jpg",
+        "images": [
+          "frog.jpg"
+        ],
         "text": {
           "de": "",
           "en": ""
@@ -197,7 +225,9 @@
           "de": "Molch",
           "en": "Newt"
         },
-        "image": "newt.jpg",
+        "images": [
+          "newt.jpg"
+        ],
         "text": {
           "de": "<ul><li>Langgezogener Körper</li><li>Abgeplatteter Schwanz</li></ul>",
           "en": "<ul><li>Langgezogener Körper</li><li>Abgeplatteter Schwanz</li></ul>"
@@ -208,7 +238,9 @@
           "de": "Salamander",
           "en": "Salamander"
         },
-        "image": "salamander.jpg",
+        "images": [
+          "salamander.jpg"
+        ],
         "text": {
           "de": "<ul><li>Runder Schwanz</li></ul>",
           "en": "<ul><li>Runder Schwanz</li></ul>"
@@ -219,7 +251,9 @@
           "de": "Eidechse",
           "en": "Lizard"
         },
-        "image": "lizard.jpg",
+        "images": [
+          "lizard.jpg"
+        ],
         "text": {
           "de": "",
           "en": ""
@@ -230,7 +264,9 @@
           "de": "Blindschleiche",
           "en": "Blindworm"
         },
-        "image": "blindworm.jpg",
+        "images": [
+          "blindworm.jpg"
+        ],
         "text": {
           "de": "",
           "en": ""
@@ -241,7 +277,9 @@
           "de": "Schlange",
           "en": "Snake"
         },
-        "image": "snake.jpg",
+        "images": [
+          "snake.jpg"
+        ],
         "text": {
           "de": "",
           "en": ""
