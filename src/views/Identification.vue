@@ -221,6 +221,7 @@
           </div>
           <div class="col col-wrapping col-tablet-portrait-8">
 
+            <!--
             <div class="form-field form-field-no-animal">
               <div class="options">
                 <label>
@@ -234,9 +235,13 @@
                 </label>
               </div>
             </div>
+            -->
 
             <div class="button-group right-aligned">
-              <button class="button button-secondary" :disabled="!videoLoaded" @click="next">Überspringen</button>
+              <button class="button button-secondary" :disabled="!videoLoaded" @click="next">
+                <span class="mobile-text">Überspr.</span>
+                <span class="tablet-text">Überspringen</span>
+              </button>
               <button class="button button-primary" :disabled="!videoLoaded || selectedAnimal === null" @click="submit">Antworten</button>
             </div>
           </div>
@@ -1551,9 +1556,16 @@ export default {
       .row {
         width: 100%;
       }
+      .row-wrapping {
+        margin-bottom: 0;
+        .col-wrapping {
+          margin-bottom: 0;
+        }
+      }
 
       .col:last-child {
         text-align: right;
+
         .form-field-no-animal {
           margin-bottom: 0;
           display: inline-block;
@@ -1562,8 +1574,16 @@ export default {
           }
           margin-right: $spacing-4;
         }
+
         .button-group {
           display: inline-block;
+          white-space: nowrap;
+
+          .button {
+            .tablet-text {
+              display: none;
+            }
+          }
         }
       }
     }
@@ -1660,6 +1680,23 @@ export default {
       }
     }
 
+    .action-bar {
+      .content-wrapper {
+        .col:last-child {
+          .button-group {
+            .button {
+              .mobile-text {
+                display: none;
+              }
+              .tablet-text {
+                display: inherit;
+              }
+            }
+          }
+        }
+      }
+    }
+
 
   }
 
@@ -1723,8 +1760,8 @@ export default {
 
 
     }
-    .action-bar {
-    }
+
+
 
   }
 
