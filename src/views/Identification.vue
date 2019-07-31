@@ -636,9 +636,7 @@ export default {
                     this.openCategory = null;
                     this.selectedAnimal = null;
                     //this.resizeAnimalList();
-                    if( this.$refs.video0[0] ) {
-                        this.$refs.video0[0].load();
-                    }
+                    this.$refs.video0[0].load();
                     this.playing = true;
 
                 });
@@ -649,7 +647,6 @@ export default {
 
                 console.log('no more tasks');
                 this.$router.push('/complete');
-
 
             }
 
@@ -1299,6 +1296,7 @@ export default {
                   .images {
                     flex: 0 0 40%;
                     position: relative;
+                    overflow: hidden;
 
                     .image-list {
 
@@ -1362,39 +1360,24 @@ export default {
                         position: absolute;
                         display: block;
                         pointer-events: none;
+
+                        width: 200%;
+                        height: 200%;
+                        top: -50%;
+                        left: -50%;
+                        background: radial-gradient( closest-side, rgba($color-black-tint-50, 0.25), rgba($color-black-tint-50, 0) );
                       }
                       &.zoom-button {
                         top: 0;
                         left: 0;
-                        &:before {
-                          width: 200%;
-                          height: 200%;
-                          top: 0;
-                          left: 0;
-                          background: linear-gradient( to bottom right, rgba($color-black, 0.5), rgba($color-black, 0) 50% );
-                        }
                       }
                       &.left-button {
                         bottom: 0;
                         left: 0;
-                        &:before {
-                          width: 200%;
-                          height: 200%;
-                          bottom: 0;
-                          left: 0;
-                          background: linear-gradient( to top right, rgba($color-black, 0.5), rgba($color-black, 0) 50% );
-                        }
                       }
                       &.right-button {
                         bottom: 0;
                         right: 0;
-                        &:before {
-                          width: 200%;
-                          height: 200%;
-                          bottom: 0;
-                          right: 0;
-                          background: linear-gradient( to top left, rgba($color-black, 0.5), rgba($color-black, 0) 50% );
-                        }
                       }
                     }
 
@@ -1471,6 +1454,14 @@ export default {
                     flex-direction: column;
                     .images {
                       min-height: 50%;
+                      .button {
+                        &:before {
+                          width: 300%;
+                          height: 300%;
+                          top: -100%;
+                          left: -100%;
+                        }
+                      }
                     }
                   }
 
