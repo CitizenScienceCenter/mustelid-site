@@ -1404,7 +1404,7 @@ export default {
                         background-image: none!important;
                         margin: 4px;
 
-                        opacity: 0.75;
+                        opacity: 0.5;
 
                         &:before {
                           display: none;
@@ -1412,8 +1412,6 @@ export default {
 
                         &.active {
                           opacity: 1;
-                          width: 10px;
-                          height: 10px;
                         }
                       }
                     }
