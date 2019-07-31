@@ -52,7 +52,7 @@ export const i18n = new VueI18n({
               'link': 'About the Project'
           },
           'navigation-mustelids': {
-              'link': 'Mustelid Population in Switzerland'
+              'link': 'Mustelids in Switzerland'
           },
           'navigation-terms': {
               'link': 'Privacy Policy & Terms of Use'

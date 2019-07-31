@@ -21,7 +21,6 @@
   <div>
 
     <app-content-section class="overflow-hidden">
-      <!--
       <div class="background-wrapper background-wrapper-move-left scroll-effect scroll-effect-delayed-1">
         <div class="content-wrapper">
           <div class="row row-centered row-in-background">
@@ -31,13 +30,11 @@
           </div>
         </div>
       </div>
-      -->
       <div class="content-wrapper">
-        <div class="row row-centered">
-          <div class="col col-tablet-portrait-7 col-large-6 scroll-effect">
+        <div class="row row-reverse-large">
+          <div class="col col-tablet-portrait-7 col-large-6 col-large-after-1 col-wrapping scroll-effect">
 
             <h2 class="heading centered left-aligned-large" id="projects">Sinn und Zweck des Projekts</h2>
-            <img src="/img/graphic-intro.png" class="margin-bottom" />
 
             <p>
               Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.

@@ -1329,7 +1329,7 @@ export default {
                         &:after {
                           content: '';
                           display: block;
-                          padding-bottom: 50%;
+                          padding-bottom: 58.333%;
                         }
 
                         .image {
