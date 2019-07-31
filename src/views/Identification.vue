@@ -1325,7 +1325,7 @@ export default {
                         &:after {
                           content: '';
                           display: block;
-                          padding-bottom: 58.333%;
+                          padding-bottom: 66.667%;
                         }
 
                         .image {
