@@ -94,29 +94,19 @@
               <div class="col">
 
                 <ul class="animal-categories margin-bottom">
-                  <li class="category-item" v-for="(category,index) in animals" :key="index" :class="{ open: openCategory === index, animal: !category.animals }" :id="'category-item-'+index">
+                  <li class="category-item" v-for="(category,index) in animals" :key="index" :class="{ open: openCategory === index, 'no-animals': !category.animals }" :id="'category-item-'+index">
 
-                    <div v-if="index < animals.length-1" class="category" @click="clickCategory(index)">
+                    <div class="category" @click="clickCategory(index)">
                       <div class="images">
                         <div class="image" v-for="(image,index) in category.images" :style="{ backgroundImage: 'url(/img/animals/'+image+')' }" :key="index"></div>
                       </div>
                       <div class="title">
-                        <svg v-if="category.animals" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M352.26,273l-136,136a23.9,23.9,0,0,1-33.9,0l-22.6-22.6a23.9,23.9,0,0,1,0-33.9l96.4-96.4-96.4-96.4a23.9,23.9,0,0,1,0-33.9l22.5-22.8a23.9,23.9,0,0,1,33.9,0l136,136A23.93,23.93,0,0,1,352.26,273Z"/></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M352.26,273l-136,136a23.9,23.9,0,0,1-33.9,0l-22.6-22.6a23.9,23.9,0,0,1,0-33.9l96.4-96.4-96.4-96.4a23.9,23.9,0,0,1,0-33.9l22.5-22.8a23.9,23.9,0,0,1,33.9,0l136,136A23.93,23.93,0,0,1,352.26,273Z"/></svg>
                         {{ category.name[language] }}
                       </div>
                     </div>
 
-                    <div v-else class="category">
-                      <div class="images">
-                        <div class="image" v-for="(image,index) in category.images" :style="{ backgroundImage: 'url(/img/animals/'+image+')' }" :key="index"></div>
-                      </div>
-                      <div class="title">
-                        <svg v-if="category.animals" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M352.26,273l-136,136a23.9,23.9,0,0,1-33.9,0l-22.6-22.6a23.9,23.9,0,0,1,0-33.9l96.4-96.4-96.4-96.4a23.9,23.9,0,0,1,0-33.9l22.5-22.8a23.9,23.9,0,0,1,33.9,0l136,136A23.93,23.93,0,0,1,352.26,273Z"/></svg>
-                        {{ category.name[language] }}
-                      </div>
-                    </div>
-
-                    <div class="animal-list-wrapper" :ref="'animalListWrapper'+index" style="height: 0px;">
+                    <div class="animal-list-wrapper" :ref="'animalListWrapper'+index">
                       <ul class="animals" :ref="'animalList'+index">
 
                         <li class="animal-item" v-for="(animal,index2) in category.animals" :key="'animal'+index+''+index2">
@@ -168,21 +158,12 @@
                           <div class="animal" @click="clickAnimal(-2)" :class="{selected: selectedAnimal === -2}">
                             <div class="info">
                               <div class="title">
-                                Andere
+                                Andere / Nicht genauer erkennbar
                               </div>
-                              <div class="text">
+                              <div class="text" v-if="selectedAnimal === -2">
                                 <div class="form-field form-field-block">
-                                  <input placeholder="Kommentar" v-model="email" />
+                                  <input placeholder="Kommentar hinzufügen" />
                                 </div>
-                              </div>
-                            </div>
-                          </div>
-                        </li>
-                        <li class="animal-item">
-                          <div class="animal" @click="clickAnimal(-1)" :class="{selected: selectedAnimal === -1}">
-                            <div class="info">
-                              <div class="title">
-                                Nicht genauer erkennbar
                               </div>
                             </div>
                           </div>
@@ -404,9 +385,11 @@ export default {
   mounted() {
       var self = this;
 
+      /*
       window.addEventListener('resize', function() {
-          self.resizeAnimalList();
+          //self.resizeAnimalList();
       } );
+      */
 
       this.animalListStates = [];
       for( let i=0; i < animals.length; i++ ) {
@@ -451,14 +434,16 @@ export default {
   watch: {
     openCategory( to, from ) {
         if( to !== null ) {
-          this.animalListState = [];
-          for( let i=0; i < this.animals[ to ].animals.length; i++ ) {
-              this.animalListState.push( {
-                'zoomed': false,
-                'activeImage': 0,
-                'noOfImages': this.animals[ to ].animals[i].images.length
-              } );
-          }
+            if( this.animals[ to ].animals ) {
+                this.animalListState = [];
+                for( let i=0; i < this.animals[ to ].animals.length; i++ ) {
+                    this.animalListState.push( {
+                        'zoomed': false,
+                        'activeImage': 0,
+                        'noOfImages': this.animals[ to ].animals[i].images.length
+                    } );
+                }
+            }
         }
         else {
             this.animalListState = undefined;
@@ -484,17 +469,24 @@ export default {
               }
           }
       },
-    resizeAnimalList() {
-        for( var i=0; i< this.animals.length; i++ ) {
-            if( this.openCategory === i && this.$refs['animalListWrapper'+i][0] ) {
-                console.log( this.$refs['animalList'+this.openCategory][0].offsetHeight );
-                this.$refs['animalListWrapper'+i][0].style.height = this.$refs['animalList'+this.openCategory][0].offsetHeight +8 +'px';
-            }
-            else if( this.$refs['animalListWrapper'+i][0] ) {
-                this.$refs['animalListWrapper'+i][0].style.height = 0+'px';
-            }
-        }
+      /*
+  resizeAnimalList() {
+      for( var i=0; i< this.animals.length; i++ ) {
+          if( this.openCategory === i && this.$refs['animalListWrapper'+i][0] ) {
+              //this.$refs['animalListWrapper'+i][0].style.height = this.$refs['animalList'+this.openCategory][0].offsetHeight +'px';
+              this.$refs['animalListWrapper'+i][0].style.height = 'auto';
+              let self = this;
+              setTimeout( function() {
+                  console.log( 'gaggi: '+i );
+                  self.$refs['animalListWrapper'+i][0].style.height = 'auto';
+              }, 300 );
+          }
+          else if( this.$refs['animalListWrapper'+i][0] ) {
+              this.$refs['animalListWrapper'+i][0].style.height = 0+'px';
+          }
+      }
     },
+      */
     loadTask() {
 
         let taskQuery;
@@ -643,8 +635,10 @@ export default {
                     this.activeVideo = 0;
                     this.openCategory = null;
                     this.selectedAnimal = null;
-                    this.resizeAnimalList();
-                    this.$refs.video0[0].load();
+                    //this.resizeAnimalList();
+                    if( this.$refs.video0[0] ) {
+                        this.$refs.video0[0].load();
+                    }
                     this.playing = true;
 
                 });
@@ -697,22 +691,36 @@ export default {
         let closeFirst = false;
 
         if( this.openCategory !== index ) {
-            if( this.openCategory !== null ) {
-                closeFirst = true;
+
+            if( !this.animals[index].animals ) {
+                this.selectedAnimal = -1;
             }
+            else {
+                this.selectedAnimal = null;
+            }
+
+            if( this.openCategory !== null ) {
+                if( this.animals[this.openCategory].animals ) {
+                    closeFirst = true;
+                }
+            }
+
             this.openCategory = index;
         }
         else {
             // close accordion
             this.openCategory = null;
+            this.selectedAnimal = null;
         }
-        this.resizeAnimalList();
+        //this.resizeAnimalList();
 
         console.log('click category: '+this.openCategory);
-        if( this.openCategory !== null ) {
 
-            // auto scrolling
+
+        // auto scrolling
+        if( this.openCategory !== null ) {
             if( closeFirst ) {
+                console.log('close first');
                 let self = this;
                 setTimeout( function() {
                     if( self.$refs.answerSection.getBoundingClientRect().x > 0 ) {
@@ -729,9 +737,10 @@ export default {
                             offset: -32
                         });
                     }
-                }, 300)
+                }, 300);
             }
             else {
+                console.log( 'scroll to '+index );
                 if( this.$refs.answerSection.getBoundingClientRect().x > 0 ) {
                     // big screen
                     this.$scrollTo('#category-item-'+index, 600, {
@@ -748,8 +757,6 @@ export default {
                 }
             }
         }
-
-        this.selectedAnimal = null;
     },
     clickAnimal(index) {
         console.log('click animal '+index);
@@ -764,10 +771,12 @@ export default {
         }
         event.stopPropagation();
 
+        /*
         let self = this;
         setTimeout( function(){
             self.resizeAnimalList();
         },1 );
+        */
     },
     nextImage(index) {
         if( this.animalListStates[this.openCategory][index].activeImage < this.animalListStates[this.openCategory][index].noOfImages -1) {
@@ -890,7 +899,7 @@ export default {
         */
         //this.$refs['video'+this.activeVideo][0].play();
         //this.playing = true;
-    },
+    }
 
   }
 }
@@ -1245,6 +1254,7 @@ export default {
 
           .animal-list-wrapper {
             overflow: hidden;
+            display: none;
 
             transition: height $transition-duration-long $transition-timing-function;
 
@@ -1284,18 +1294,6 @@ export default {
                     height: 100%;
                     transition: border $transition-duration-short $transition-timing-function;
                     pointer-events: none;
-                  }
-
-                  &.selected {
-                    background-color: $color-primary-tint-90;
-                    &:after {
-                      border: 4px solid $color-primary-shade-20;
-                    }
-                    .info {
-                      .title {
-                        color: $color-primary-shade-20;
-                      }
-                    }
                   }
 
                   .images {
@@ -1448,10 +1446,10 @@ export default {
                       padding: calc((40px - 1.5rem) / 2) $spacing-2;
                       font-weight: 700;
                     }
+
                     .text {
                       width: 100%;
                       padding: 0 $spacing-2 $spacing-2 $spacing-2;
-
                       li {
                         padding-left: $spacing-3;
                         margin-bottom: calc( #{$spacing-1} / 2);
@@ -1465,6 +1463,7 @@ export default {
                           transform: translateY(-2px);
                         }
                       }
+
                     }
                   }
 
@@ -1475,24 +1474,36 @@ export default {
                     }
                   }
 
-                  &:not(.selected) {
-                    &:active, &:focus {
+
+                  &.selected {
+                    background-color: $color-primary-tint-90;
+                    &:after {
+                      border: 4px solid $color-primary-shade-20;
+                    }
+                    .info {
+                      .title {
+                        color: $color-primary-shade-20;
+                      }
+                    }
+                  }
+
+                  &:active, &:focus {
+                    .info {
+                      .title {
+                        color: $color-primary-shade-20;
+                      }
+                    }
+                  }
+                  @media (hover: hover) {
+                    &:hover {
                       .info {
                         .title {
                           color: $color-primary-shade-20;
                         }
                       }
                     }
-                    @media (hover: hover) {
-                      &:hover {
-                        .info {
-                          .title {
-                            color: $color-primary-shade-20;
-                          }
-                        }
-                      }
-                    }
                   }
+
                 }
               }
             }
@@ -1500,33 +1511,52 @@ export default {
 
 
           &.open {
-
-            margin-bottom: $spacing-4;
-
             .category {
-              height: 40px;
-              margin-bottom: $spacing-2;
-
               &:after {
                 //border: 4px solid $color-primary-shade-20;
-              }
-
-              .title {
-                svg {
-                  transform: rotate(90deg);
-                }
               }
               .images {
                 &:after {
                   opacity: 1;
-                  width: 100%;
-                  background: linear-gradient(120deg, $color-primary-shade-20, rgba($color-primary-shade-20, 0.5) 100% );
+                  background: linear-gradient(120deg, $color-primary-shade-20, rgba($color-primary-shade-20, 0.5) 100%);
                 }
               }
             }
-            .animal-list-wrapper {
-              .animals {
+          }
+
+          &.no-animals {
+            .category {
+
+              .title {
+                padding-left: $spacing-2;
+                svg {
+                  display: none;
+                }
               }
+            }
+          }
+
+          &:not(.no-animals) {
+            &.open {
+
+              margin-bottom: $spacing-3;
+
+              .category {
+                height: 40px;
+                margin-bottom: $spacing-2;
+
+                .title {
+                  svg {
+                    transform: rotate(90deg);
+                  }
+                }
+              }
+              .animal-list-wrapper {
+                display: block;
+                .animals {
+                }
+              }
+
             }
           }
 
@@ -1659,18 +1689,20 @@ export default {
               }
             }
 
-            &.open {
-              .category {
-                height: 48px;
-                .title {
+            &:not(.no-animals) {
+              &.open {
+                .category {
+                  height: 48px;
+                  .title {
 
+                  }
+                  .images {
+                    //height: 48px;
+                  }
                 }
-                .images {
-                  //height: 48px;
-                }
-              }
-              .animal-list-wrapper {
-                .animals {
+                .animal-list-wrapper {
+                  .animals {
+                  }
                 }
               }
             }
