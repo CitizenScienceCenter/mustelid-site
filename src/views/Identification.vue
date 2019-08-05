@@ -383,9 +383,9 @@ export default {
       }
     },
   mounted() {
-      var self = this;
 
       /*
+      var self = this;
       window.addEventListener('resize', function() {
           //self.resizeAnimalList();
       } );
@@ -405,31 +405,37 @@ export default {
               this.animalListStates.push(animalListState);
           }
       }
-      console.log( this.animalListStates );
 
       this.loadUiImages();
 
 
-      // load task with or without id
-      if( this.$route.params.id ) {
-          if( this.$route.params.id.length !== 36 ) {
-              //console.log('invalid id');
-              delete this.$route.params.id;
-              this.$router.replace('/identification');
-              this.taskId = null;
-              this.loadTask();
+      this.$store.dispatch("c3s/activity/getActivity", [this.activityId, false]).then(activity => {
+
+          console.log('activity loaded');
+
+          // load task with or without id
+          if( this.$route.params.id ) {
+              if( this.$route.params.id.length !== 36 ) {
+                  //console.log('invalid id');
+                  delete this.$route.params.id;
+                  this.$router.replace('/identification');
+                  this.taskId = null;
+                  this.loadTask();
+              }
+              else {
+                  //console.log('load task from id');
+                  this.taskId = this.$route.params.id;
+                  this.loadTask();
+              }
           }
           else {
-              //console.log('load task from id');
-              this.taskId = this.$route.params.id;
+              this.taskId = null;
+              //console.log('load without id');
               this.loadTask();
           }
-      }
-      else {
-          this.taskId = null;
-          //console.log('load without id');
-          this.loadTask();
-      }
+
+      });
+
   },
   watch: {
     openCategory( to, from ) {
