@@ -98,7 +98,7 @@
               <h2 class="heading centered left-aligned-large">{{ $t('identification-heading') }}</h2>
               <p v-html="$t('identification-text')"></p>
               <div class="button-group centered left-aligned-large">
-                <router-link tag="button" to="/about" class="button button-primary">{{ $t('identification-button') }}</router-link>
+                <router-link tag="button" to="/identification" class="button button-primary">{{ $t('identification-button') }}</router-link>
               </div>
             </div>
           </div>
