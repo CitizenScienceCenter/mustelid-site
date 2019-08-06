@@ -635,7 +635,6 @@ export default {
                 this.$store.dispatch('c3s/media/getMedia', [mediaQuery, 'c3s/task/SET_MEDIA', 0]).then(media => {
 
                     // media loaded
-                    //console.log('media loaded');
 
                     this.videoLoaded = false;
                     this.activeVideo = 0;

@@ -72,9 +72,11 @@
         <div class="row row-reverse-large">
           <div class="col col-tablet-portrait-7 col-large-6 col-large-after-1 col-wrapping scroll-effect">
 
-            <h2 class="heading centered left-aligned-large">{{ $t('page-heading') }}</h2>
+            <!-- <h2 class="heading centered left-aligned-large">{{ $t('page-heading') }}</h2>
 
             <h3 class="subheading">{{ $t('subheading-1') }}</h3>
+             -->
+            <h2 class="heading centered left-aligned-large">{{ $t('subheading-1') }}</h2>
             <p v-html="$t('paragraph-1-1')"></p>
             <p v-html="$t('paragraph-1-2')"></p>
 
