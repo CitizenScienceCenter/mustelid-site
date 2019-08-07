@@ -195,9 +195,19 @@
 
     <app-content-section class="content-section-flat action-bar">
       <div class="content-wrapper">
-        <div class="row row-wrapping">
+        <div class="row row-reverse-tablet-portrait row-wrapping">
 
-          <div class="col col-wrapping col-tablet-portrait-4">
+          <div class="col col-wrapping col-large-8 button-column">
+            <div class="button-group right-aligned">
+              <button class="button button-secondary" :disabled="!videoLoaded" @click="next">
+                <span class="viewport-tablet-portrait-text">Überspr.</span>
+                <span class="viewport-large-text">Überspringen</span>
+              </button>
+              <button class="button button-primary" :disabled="!videoLoaded || selectedAnimal === null" @click="submit">Antworten</button>
+            </div>
+          </div>
+
+          <div class="col col-wrapping col-large-4 progress-column">
             <div class="progress">
               <div class="progress-bar">
                 <div class="progress-bar-back">
@@ -207,32 +217,6 @@
               <div class="text">
                 Fortschritt {{mySubmissionCount}} von {{totalTaskCount}}
               </div>
-            </div>
-          </div>
-          <div class="col col-wrapping col-tablet-portrait-8">
-
-            <!--
-            <div class="form-field form-field-no-animal">
-              <div class="options">
-                <label>
-                  <input type="checkbox">
-                  <div class="checkbox">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                      <path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"></path>
-                    </svg>
-                  </div>
-                  <span>Kein Tier sichtbar</span>
-                </label>
-              </div>
-            </div>
-            -->
-
-            <div class="button-group right-aligned">
-              <button class="button button-secondary" :disabled="!videoLoaded" @click="next">
-                <span class="mobile-text">Überspr.</span>
-                <span class="tablet-text">Überspringen</span>
-              </button>
-              <button class="button button-primary" :disabled="!videoLoaded || selectedAnimal === null" @click="submit">Antworten</button>
             </div>
           </div>
 
@@ -1591,7 +1575,6 @@ export default {
 
   .action-bar {
     background: white;
-    height: 80px;
     width: 100%;
     position: fixed;
     left: 0;
@@ -1599,33 +1582,13 @@ export default {
 
     box-shadow: 0px -2px 4px +2px rgba($color-black, 0.05);
 
-    .progress {
-      font-size: 0;
-      text-align: center;
-      .progress-bar {
-        height: 40px;
-        width: 48px;
-        padding-top: calc( 40px / 2 - #{$spacing-1} / 2 );
-        margin-right: $spacing-2;
-        display: inline-block;
-        .progress-bar-back {
-          width: 100%;
-          height: $spacing-1;
-          border-radius: $border-radius;
-          overflow: hidden;
-          background-color: $color-secondary-tint-90;
-          .progress-bar-fill {
-            height: 100%;
-            width: 50%;
-            background-color: $color-secondary;
-            transition: width $transition-duration-long $transition-timing-function;
-          }
-        }
-      }
-      .text {
-        display: inline-block;
-        line-height: 40px;
-        font-size: $font-size-small;
+    .row {
+      width: 100%;
+    }
+    .row-wrapping {
+      margin-bottom: 0;
+      .col-wrapping {
+        margin-bottom: 0;
       }
     }
 
@@ -1634,18 +1597,41 @@ export default {
       display: flex;
       align-items: center;
       height: 100%;
-      .row {
-        width: 100%;
-      }
-      .row-wrapping {
-        margin-bottom: 0;
-        .col-wrapping {
-          margin-bottom: 0;
+
+      .progress-column {
+        .progress {
+          font-size: 0;
+          text-align: right;
+          .progress-bar {
+            height: 40px;
+            width: 48px;
+            padding-top: calc( 40px / 2 - #{$spacing-1} / 2 );
+            margin-right: $spacing-2;
+            display: inline-block;
+            .progress-bar-back {
+              width: 100%;
+              height: $spacing-1;
+              border-radius: $border-radius;
+              overflow: hidden;
+              background-color: $color-secondary-tint-90;
+              .progress-bar-fill {
+                height: 100%;
+                width: 50%;
+                background-color: $color-secondary;
+                transition: width $transition-duration-long $transition-timing-function;
+              }
+            }
+          }
+          .text {
+            display: inline-block;
+            font-size: $font-size-small;
+          }
         }
       }
 
-      .col:last-child {
+      .button-column {
         text-align: right;
+        margin-top: $spacing-2;
 
         .form-field-no-animal {
           margin-bottom: 0;
@@ -1661,7 +1647,7 @@ export default {
           white-space: nowrap;
 
           .button {
-            .tablet-text {
+            .viewport-large-text {
               display: none;
             }
           }
@@ -1765,33 +1751,23 @@ export default {
 
     .action-bar {
 
-      .progress {
-        text-align: left;
-        .progress-bar {
-          height: 48px;
-          width: 64px;
-          padding-top: calc( 48px / 2 - #{$spacing-1} / 2 );
-          margin-right: $spacing-3;
-        }
-        .text {
-          line-height: 48px;
-        }
-      }
-
       .content-wrapper {
-        .col:last-child {
-          .button-group {
-            .button {
-              .mobile-text {
-                display: none;
-              }
-              .tablet-text {
-                display: inherit;
-              }
+
+        .progress-column {
+          .progress {
+            .progress-bar {
+              height: 48px;
+              width: 64px;
+              padding-top: calc( 48px / 2 - #{$spacing-1} / 2 );
+              margin-right: $spacing-3;
+            }
+            .text {
             }
           }
         }
+
       }
+
     }
 
 
@@ -1810,7 +1786,7 @@ export default {
       flex-direction: row;
 
       .video-section {
-        min-width: 41.667%;
+        min-width: 50%;
         position: relative;
 
         .video-player {
@@ -1839,7 +1815,7 @@ export default {
         margin-bottom: 0;
 
         flex-grow: 1;
-        max-width: 58.333%;
+        max-width: 50%;
         min-width: 41.667%;
         overflow-y: scroll;
 
@@ -1856,6 +1832,34 @@ export default {
         }
       }
 
+    }
+
+
+    .action-bar {
+
+      .content-wrapper {
+
+        .progress-column {
+          margin: $spacing-2 0;
+          .progress {
+            text-align: left;
+          }
+        }
+        .button-column {
+          margin-bottom: $spacing-2;
+          .button-group {
+            .button {
+              .viewport-tablet-portrait-text {
+                display: none;
+              }
+              .viewport-large-text {
+                display: inherit;
+              }
+            }
+          }
+        }
+
+      }
 
     }
 
