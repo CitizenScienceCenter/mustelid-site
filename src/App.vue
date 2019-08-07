@@ -29,6 +29,8 @@ import {mapState} from 'vuex';
 import Header from './components/shared/Header.vue';
 import GDPR from "./components/shared/GDPR";
 
+const url = 'https://mustelids-staging.citizenscience.ch';
+
 export default {
   name: 'app',
   components: {
@@ -52,15 +54,15 @@ export default {
               },
               {
                   property: 'og:url',
-                  content: 'https://mustelids-staging.citizenscience.ch'+this.$route.path
+                  content: url+this.$route.path
               },
               {
                   property: 'og:image',
-                  content: 'https://mustelids-staging.citizenscience.ch/img/promo.jpg'
+                  content: url+'/img/promo.jpg'
               }
           ],
           link: [
-              {rel: 'canonical', href: 'https://mustelids-staging.citizenscience.ch'+this.$route.path}
+              {rel: 'canonical', href: url+this.$route.path}
           ],
           htmlAttrs: {
               lang: this.language
