@@ -198,7 +198,16 @@
         <div class="row row-wrapping">
 
           <div class="col col-wrapping col-tablet-portrait-4">
-            Aufnahme <b>1</b> von 10000
+            <div class="progress">
+              <div class="progress-bar">
+                <div class="progress-bar-back">
+                  <div class="progress-bar-fill" :style="{width:(mySubmissionCount/totalTaskCount*100)+'%'}"></div>
+                </div>
+              </div>
+              <div class="text">
+                Fortschritt {{mySubmissionCount}} von {{totalTaskCount}}
+              </div>
+            </div>
           </div>
           <div class="col col-wrapping col-tablet-portrait-8">
 
@@ -358,6 +367,9 @@ export default {
 
           tasks: state => state.c3s.task.tasks,
           taskMedia: state => state.c3s.task.media,
+
+          totalTaskCount: state => state.stats.totalTaskCount,
+          mySubmissionCount: state => state.stats.mySubmissionCount
       }),
       answer() {
           if( this.selectedAnimal !== null ) {
@@ -405,6 +417,9 @@ export default {
               this.animalListStates.push(animalListState);
           }
       }
+
+      this.$store.dispatch('stats/updateMySubmissionCount');
+      this.$store.dispatch('stats/updateTotalTaskCount');
 
       this.loadUiImages();
 
@@ -690,6 +705,7 @@ export default {
         this.$store.dispatch('c3s/submission/createSubmission').then(submission => {
 
             console.log('submission sent');
+            this.$store.dispatch('stats/increaseMySubmissionCount');
 
         });
 
@@ -1583,6 +1599,36 @@ export default {
 
     box-shadow: 0px -2px 4px +2px rgba($color-black, 0.05);
 
+    .progress {
+      font-size: 0;
+      text-align: center;
+      .progress-bar {
+        height: 40px;
+        width: 48px;
+        padding-top: calc( 40px / 2 - #{$spacing-1} / 2 );
+        margin-right: $spacing-2;
+        display: inline-block;
+        .progress-bar-back {
+          width: 100%;
+          height: $spacing-1;
+          border-radius: $border-radius;
+          overflow: hidden;
+          background-color: $color-secondary-tint-90;
+          .progress-bar-fill {
+            height: 100%;
+            width: 50%;
+            background-color: $color-secondary;
+            transition: width $transition-duration-long $transition-timing-function;
+          }
+        }
+      }
+      .text {
+        display: inline-block;
+        line-height: 40px;
+        font-size: $font-size-small;
+      }
+    }
+
     .content-wrapper {
       max-width: none;
       display: flex;
@@ -1718,6 +1764,20 @@ export default {
     }
 
     .action-bar {
+
+      .progress {
+        text-align: left;
+        .progress-bar {
+          height: 48px;
+          width: 64px;
+          padding-top: calc( 48px / 2 - #{$spacing-1} / 2 );
+          margin-right: $spacing-3;
+        }
+        .text {
+          line-height: 48px;
+        }
+      }
+
       .content-wrapper {
         .col:last-child {
           .button-group {
@@ -1774,6 +1834,7 @@ export default {
           }
         }
       }
+
       .answer-section {
         margin-bottom: 0;
 

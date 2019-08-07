@@ -3,6 +3,8 @@ import Vuex from 'vuex'
 import settings from './modules/settings'
 import consts from './modules/consts'
 import gdpr from './modules/gdpr'
+import stats from './modules/stats'
+
 import createPersistedState from 'vuex-persistedstate'
 
 
@@ -17,7 +19,8 @@ if( window.localStorage ) {
         modules: {
             settings,
             consts,
-            gdpr
+            gdpr,
+            stats
         },
         strict: debug,
         plugins: [createPersistedState({ storage: window.localStorage})]
