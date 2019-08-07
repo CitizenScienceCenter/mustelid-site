@@ -1159,7 +1159,7 @@ export default {
 
 
     .answer-section {
-      margin-bottom: 80px;
+      margin-bottom: 96px;
 
       .animal-categories {
 
@@ -1696,6 +1696,7 @@ export default {
       }
 
       .answer-section {
+        margin-bottom: 112px;
         .animal-categories {
           .category-item {
             .category {
