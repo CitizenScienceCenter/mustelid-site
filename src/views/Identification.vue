@@ -1128,6 +1128,7 @@ export default {
             background: linear-gradient(to top, rgba( $color-black, 0.5 ), rgba( $color-black, 0.25 ) );
             //background: rgba( white, 0.8 );
             //background: none;
+            cursor: pointer;
 
             outline: none;
             overflow: hidden;
