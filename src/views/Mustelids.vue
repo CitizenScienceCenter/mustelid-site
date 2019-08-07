@@ -63,7 +63,7 @@
             <p v-html="$t('paragraph-3-3')"></p>
 
             <div class="logo-group">
-              <a href="http://wieselnetz.ch" target="_blank"><img src="/img/logo-wieselnetz.jpg"/></a>
+              <a href="http://wieselnetz.ch" target="_blank"><img src="/img/logo-wieselnetz.jpg" class="rounded"/></a>
             </div>
 
           </div>
@@ -131,6 +131,10 @@ export default {
         height: 80px;
       }
     }
+  }
+
+  .rounded {
+    border-radius: $border-radius;
   }
 
 </style>

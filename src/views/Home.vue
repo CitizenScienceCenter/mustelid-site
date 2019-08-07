@@ -11,7 +11,7 @@
 
   "intro-heading": "Mit Kamerafallen auf der Suche nach Wieseln",
   "intro-text": "Beobachtungen von Wiesel in der Schweiz sind seltene Glücksfälle. Deshalb verwenden wir Kamerafallen, um mehr über das Vorkommen der Wiesel zu erfahren.<br>Wir möchten herausfinden, ob ein breites Angebot an Beutetieren die Wahrscheinlichkeit erhöht an diesem Standort auch Wiesel nachzuweisen oder ob es andere Faktoren gibt, welche die Verbreitung der Wiesel beeinflussen. Zur Beantwortung dieser Fragen sind wir auf Ihre Hilfe angewiesen.",
-  "intro-button": "Mehr erfahren",
+  "intro-button": "Weiterlesen",
 
   "identification-heading": "Helfen Sie mit die gefilmten Tiere zu identifizieren.",
   "identification-text": "An verschiedenen Standorten haben wir Boxen aufgestellt, die mit einer Wildtierkamera ausgestattet sind. Die Aufnahmen der Kameras geben uns einen Einblick in die Besucher der Box. Nebst Wieseln haben zahlreiche andere Arten die Boxen besucht. Helfen Sie mit diese heimlichen Besucher zu entdecken und zu identifizieren!",

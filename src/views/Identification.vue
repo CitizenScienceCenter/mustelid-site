@@ -45,21 +45,21 @@
             <loader></loader>
 
             <template v-for="(video,index) in taskMedia">
-              <video v-if="index === 0" :key="'video'+index" :ref="'video'+index" playsinline muted :class="{ activeVideo: index === activeVideo }" @timeupdate="onVideoUpdate" @ended="onVideoEnd" @loadeddata="onFirstVideoLoaded" @seeked="onVideoSeeked">
+              <video v-if="index === 0" :key="'video'+index" :ref="'video'+index" playsinline muted :class="{ activeVideo: index === activeVideo }" @timeupdate="onVideoUpdate" @ended="onVideoEnd" @loadeddata="onFirstVideoLoaded" @seeked="onVideoSeeked" @click="play">
                 <source type="video/mp4" :src="'/videos/'+video.path">
               </video>
-              <video v-else :key="'video'+index" :ref="'video'+index" playsinline muted :class="{ activeVideo: index === activeVideo }" @timeupdate="onVideoUpdate" @ended="onVideoEnd" @seeked="onVideoSeeked">
+              <video v-else :key="'video'+index" :ref="'video'+index" playsinline muted :class="{ activeVideo: index === activeVideo }" @timeupdate="onVideoUpdate" @ended="onVideoEnd" @seeked="onVideoSeeked" @click="play">
                 <source type="video/mp4" :src="'/videos/'+video.path">
               </video>
             </template>
 
             <div class="overlay"></div>
 
-            <div class="thumbnails" v-if="taskMedia.length > 1">
+            <div class="thumbnails" v-if="taskMedia.length > 1" id="thumbnails">
               <div class="drawer">
                 <div class="progress"><div class="bar" :style="{width: totalProgress+'%'}"></div></div>
                 <ul ref="thumbnailList">
-                  <li v-for="(video,index) in taskMedia" :key="'thumbnail'+index" :class="{active: index === activeVideo}" @click="startVideo(index)">
+                  <li v-for="(video,index) in taskMedia" :key="'thumbnail'+index" :class="{active: index === activeVideo}" @click="startVideo(index)" :id="'thumbnail'+index">
                     <img :src="'/videos/thumbnails/'+video.info.thumb" />
                   </li>
                 </ul>
@@ -438,23 +438,30 @@ export default {
 
   },
   watch: {
-    openCategory( to, from ) {
-        if( to !== null ) {
-            if( this.animals[ to ].animals ) {
-                this.animalListState = [];
-                for( let i=0; i < this.animals[ to ].animals.length; i++ ) {
-                    this.animalListState.push( {
-                        'zoomed': false,
-                        'activeImage': 0,
-                        'noOfImages': this.animals[ to ].animals[i].images.length
-                    } );
-                }
-            }
-        }
-        else {
-            this.animalListState = undefined;
-        }
-    }
+      openCategory( to, from ) {
+          if( to !== null ) {
+              if( this.animals[ to ].animals ) {
+                  this.animalListState = [];
+                  for( let i=0; i < this.animals[ to ].animals.length; i++ ) {
+                      this.animalListState.push( {
+                          'zoomed': false,
+                          'activeImage': 0,
+                          'noOfImages': this.animals[ to ].animals[i].images.length
+                      } );
+                  }
+              }
+          }
+          else {
+              this.animalListState = undefined;
+          }
+      },
+      activeVideo( to, from ) {
+          this.$scrollTo('#thumbnail'+this.activeVideo, 600, {
+              container: '#thumbnails',
+              offset: -32,
+              x: true
+          });
+      }
   },
   methods: {
       loadUiImages() {
@@ -875,7 +882,7 @@ export default {
     onSeekBarChange(event) {
         //console.log('seekbar change');
         //console.log(event.target.value);
-        console.log('change at '+this.$refs['video'+this.activeVideo][0].currentTime);
+        //console.log('change at '+this.$refs['video'+this.activeVideo][0].currentTime);
         this.videoSeek(event.target.value);
     },
     onSeekBarClick(event) {
@@ -884,7 +891,9 @@ export default {
     },
     onSeekBarTouch(event) {
         //console.log('seekbar touch');
-        this.videoSeek( (event.touches[0].clientX - event.target.offsetLeft) / event.target.clientWidth  * 100);
+        if( event.touches[0] ) {
+          this.videoSeek( (event.touches[0].clientX - event.target.offsetLeft) / event.target.clientWidth  * 100);
+        }
         //this.videoSeek( event.layerX / event.target.clientWidth * 100);
     },
     videoSeek(value) {
@@ -965,6 +974,8 @@ export default {
             right: 0%;
             height: 105%;
             opacity: 0;
+
+            cursor: pointer;
 
             &.activeVideo {
               /*
