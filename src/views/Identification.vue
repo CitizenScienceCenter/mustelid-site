@@ -198,6 +198,23 @@
         <div class="row row-reverse-tablet-portrait row-wrapping">
 
           <div class="col col-wrapping col-large-8 button-column">
+
+            <!--
+            <div class="form-field form-field-block form-field-no-animal">
+              <div class="options">
+                <label :class="{disabled: wrongLanguage }">
+                  <input type="checkbox" v-model="noHateSpeech">
+                  <div class="checkbox">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                      <path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"></path>
+                    </svg>
+                  </div>
+                  <span>Kein Tier sichtbar</span>
+                </label>
+              </div>
+            </div>
+            -->
+
             <div class="button-group right-aligned">
               <button class="button button-secondary" :disabled="!videoLoaded" @click="next">
                 <span class="viewport-tablet-portrait-text">Überspr.</span>
@@ -205,6 +222,7 @@
               </button>
               <button class="button button-primary" :disabled="!videoLoaded || selectedAnimal === null" @click="submit">Antworten</button>
             </div>
+
           </div>
 
           <div class="col col-wrapping col-large-4 progress-column">

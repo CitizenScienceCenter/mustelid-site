@@ -99,8 +99,8 @@
             <p v-html="$t('paragraph-4-3')"></p>
             <div class="logo-group">
               <a href="https://jurapark-aargau.ch" target="_blank"><img src="/img/logo-jurapark.png" /></a>
-              <a href="https://wildenachbarn.ch" target="_blank"><img src="/img/logo-wildenachbarn.jpg" class="rounded" /></a>
-              <a href="http://www.swild.ch/" target="_blank"><img src="/img/logo-swild.jpg" /></a>
+              <a href="https://wildenachbarn.ch" target="_blank"><img src="/img/logo-wildenachbarn.jpg" style="height: 64px" /></a>
+              <a href="http://www.swild.ch/" target="_blank"><img src="/img/logo-swild.jpg" style="height:144px"/></a>
             </div>
 
           </div>
