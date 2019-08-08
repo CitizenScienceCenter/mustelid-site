@@ -1806,7 +1806,7 @@ export default {
       flex-direction: row;
 
       .video-section {
-        min-width: 50%;
+        min-width: 41.667%;
         position: relative;
 
         .video-player {
@@ -1835,7 +1835,7 @@ export default {
         margin-bottom: 0;
 
         flex-grow: 1;
-        max-width: 50%;
+        max-width: 58.333%;
         min-width: 41.667%;
         overflow-y: scroll;
 
