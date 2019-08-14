@@ -34,7 +34,7 @@
 <template>
   <div>
 
-    <app-cover imageUrl="/img/cover.jpg">
+    <app-cover imageUrl="/img/cover.jpg" goal="15">
       <div class="row row-centered">
         <div class="col col-large-8">
           <h2 class="cover-heading scroll-effect" v-html="$t('cover-heading')"></h2>
@@ -131,6 +131,12 @@
       </div>
     </app-content-section>
 
+
+
+    <section-s-d-g goal="15" color="light-greyish">
+      This project is supporting goal no. 15 from the UN Sustainable Development Goals when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+    </section-s-d-g>
+
     <section-newsletter-signup></section-newsletter-signup>
 
     <app-footer></app-footer>
@@ -146,11 +152,13 @@ import Cover from '@/components/shared/Cover.vue';
 import ContentSection from '@/components/shared/ContentSection.vue';
 import Footer from '@/components/shared/Footer.vue';
 import SectionNewsletterSignup from "@/components/shared/SectionNewsletterSignup";
+import SectionSDG from "../components/shared/SectionSDG";
 
 
 export default {
   name: 'Home',
   components: {
+      SectionSDG,
       SectionNewsletterSignup,
     'app-cover': Cover,
     'app-content-section': ContentSection,
