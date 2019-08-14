@@ -2,7 +2,7 @@
   {
     "name": {
       "de": "Wiesel / Marder",
-      "en": "Weasel / Marten"
+      "en": "Weasels / Martens"
     },
     "images": [
       "leastweasel.jpg",
@@ -81,8 +81,8 @@
   },
   {
     "name": {
-      "de": "Maus (Spitzmaus, Nagetier)",
-      "en": "Mouse (Shrew, Rodent)"
+      "de": "Mäuse (Spitzmäuse, Nagetiere)",
+      "en": "Mice (Shrews, Rodents)"
     },
     "images": [
       "shrew.jpg",
@@ -146,8 +146,8 @@
   },
   {
     "name": {
-      "de": "Anderes Säugetier",
-      "en": "Other Mammal"
+      "de": "Andere Säugetiere",
+      "en": "Other Mammals"
     },
     "images": [
       "hedgehog.jpg",
@@ -198,8 +198,8 @@
   },
   {
     "name": {
-      "de": "Amphibie / Reptil",
-      "en": "Amphibian / Reptile"
+      "de": "Amphibien / Reptilien",
+      "en": "Amphibians / Reptiles"
     },
     "images": [
       "frog.jpg",
