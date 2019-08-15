@@ -22,8 +22,9 @@ Vue.use(Meta);
 let VueScrollTo = require('vue-scrollto');
 Vue.use(VueScrollTo, {
     easing: "easeInOut",
+    duration: 600,
     offset: 0
-})
+});
 
 
 store.watch(
