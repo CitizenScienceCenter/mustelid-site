@@ -55,7 +55,6 @@
       </div>
     </app-cover>
 
-
     <app-content-section>
       <div class="content-wrapper">
         <div class="row row-centered row-middle row-wrapping">
@@ -80,6 +79,8 @@
       </div>
     </app-content-section>
 
+
+    <section-stats color="greyish" :submissionCount="totalSubmissionCount" :userCount="totalUserCount" :taskCount="totalTaskCount" ></section-stats>
 
     <app-content-section color="light-greyish">
       <div class="content-wrapper">
@@ -153,11 +154,13 @@ import ContentSection from '@/components/shared/ContentSection.vue';
 import Footer from '@/components/shared/Footer.vue';
 import SectionNewsletterSignup from "@/components/shared/SectionNewsletterSignup";
 import SectionSDG from "../components/shared/SectionSDG";
+import SectionStats from "../components/shared/SectionStats";
 
 
 export default {
   name: 'Home',
   components: {
+      SectionStats,
       SectionSDG,
       SectionNewsletterSignup,
     'app-cover': Cover,
@@ -178,9 +181,17 @@ export default {
   },
   computed: {
       ...mapState({
-          user: state => state.c3s.user
+          user: state => state.c3s.user,
+
+          totalTaskCount: state => state.stats.totalTaskCount,
+          totalUserCount: state => state.stats.totalUserCount,
+          totalSubmissionCount: state => state.stats.totalSubmissionCount
       })
-  }
+  },
+    mounted() {
+        this.$store.dispatch('stats/updateTotalUserAndSubmissionCount');
+        this.$store.dispatch('stats/updateTotalTaskCount');
+    }
 }
 
 </script>
