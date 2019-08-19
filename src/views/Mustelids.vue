@@ -7,22 +7,39 @@
 
   "page-heading": "Wiesel in der Schweiz",
 
-  "paragraph-1-1": "Der Begriff „Wiesel“ umfasst zwei, sehr ähnliche Tierarten – das Hermelin (Mustela erminea) und das Mauswiesel (Mustela nivalis). Gemeinsam mit dem Iltis (Mustela putorius), dem nächsten Verwandten der zwei Wieselarten, bilden sie die Gattung „Mustela“.",
-  "paragraph-1-2": "Das Mauswiesel ist das kleinste Raubtier der Welt und deutlich kleiner als das Hermelin und besitzt einen kurzen Schwanz mit einer braunen Schwanzspitze. Das Hermelin hingegen besitzt eine schwarze Schwanzspitze und färbt sich im Winter weiss um.",
+  "paragraph-1-1": "Der Begriff „Wiesel“ umfasst zwei sehr ähnliche Tierarten – das Hermelin (Mustela erminea) und das Mauswiesel (Mustela nivalis). Gemeinsam mit dem Iltis (Mustela putorius), dem nächsten Verwandten der zwei Wieselarten, bilden sie die Gattung „Mustela“.",
+  "paragraph-1-2": "Das Mauswiesel ist das kleinste Raubtier der Welt. Es ist deutlich kleiner als das Hermelin und besitzt einen kurzen Schwanz mit einer braunen Schwanzspitze. Das Hermelin hingegen besitzt eine schwarze Schwanzspitze und färbt sich im Winter weiss um.",
 
   "subheading-1": "So leben Wiesel",
-  "paragraph-2-1": "Beide Arten ernähren sich grösstenteils von Wühlmäusen, andern Mäusen, Vögeln, Amphibien und Wirbellosen. Durch ihre typische Körperform – langgestreckter Körper und kurze Beine – sind sie optimal an die Mäusejagd angepasst und folgen ihrer Beute selbst in die engen Gänge. Sie leben einzelgängerisch und sind territorial.",
-  "paragraph-2-2": "Aufgrund des ständig schwankenden Beuteangebots schwanken auch die Wieselpopulationsdichten enorm.",
-  "paragraph-2-3": "Aufgrund der Vorliebe für Wühlmäuse sind Wiesel gerngesehene Bewohner von Landwirtschaftsflächen. Wiesel brauchen aber nicht nur eine gute Nahrungsgrundlage, sondern auch Verstecksmöglichkeiten wie zum Beispiel Asthaufen, wo sie sich bei Gefahr verstecken können oder wo sie ihre Jungtiere aufziehen. Ausserdem benötigen sie Schutz bei der Ausbreitung, welcher zum Beispiel durch Hecken geboten wird.",
+  "paragraph-2-1": "Beide Arten ernähren sich grösstenteils von Wühlmäusen, anderen Mäusen, Vögeln, Amphibien und Wirbellosen. Durch ihre typische Körperform – langgestreckter Körper und kurze Beine – sind sie optimal an die Mäusejagd angepasst und folgen ihrer Beute selbst in die engsten Gänge. Sie leben einzelgängerisch und verteidigen ihr Revier gegen Konkurrenten.",
+  "paragraph-2-2": "Aufgrund des ständig schwankenden Beuteangebots schwankt auch die Dichte der Wieselpopulation enorm.",
+  "paragraph-2-3": "Wegen ihrer Vorliebe für Wühlmäuse sind Wiesel gern gesehene Bewohner von Landwirtschaftsflächen. Wiesel brauchen aber nicht nur eine gute Nahrungsgrundlage, sondern auch Verstecksmöglichkeiten, wie zum Beispiel Asthaufen, wo sie sich bei Gefahr verkriechen können oder wo sie ihre Jungtiere aufziehen. Ausserdem benötigen sie Verbindungsstrukturen, denen sie folgen können und Schutz vor Beutegreifern bei der Ausbreitung. Hecken können beispielsweise solche Strukturen bieten, da sich die Wiesel daran orientieren und im Falle von Gefahr darin verstecken können.",
 
   "subheading-2": "Wie steht es um die Wiesel in der Schweiz?",
-  "paragraph-3-1": "Eine Frage die so einfach nicht zu beantworten ist. Leider weiss man nur sehr wenig über die Wieselpopulationen in der Schweiz. Es ist bekannt, dass die zunehmende Zerstückelung der Lebensräume den Wieseln zusetzt. Doch wie es um das Nahrungsangebot dieser flinken Tiere steht ist nach wie vorungeklärt.",
-  "paragraph-3-2": "Mit dem Mauswiesel und dem Iltis sind zwei der drei Arten der Gattung Mustela auf der Roten Liste der bedrohten Tierarten der Schweiz als verletzlich aufgeführt.",
-  "paragraph-3-3": "Seit vielen Jahren fördert die Stiftung <b>WIN Wieselnetz</b> in der Schweiz Wiesel und koordiniert und begleitet viele lokale Förderprojekte."
+  "paragraph-3-1": "Eine Frage, die so einfach nicht zu beantworten ist. Leider weiss man nur sehr wenig über die Wieselpopulationen in der Schweiz. Es ist bekannt, dass die zunehmende Zerstückelung der Lebensräume den Wieseln zusetzt. Doch wie es um das Nahrungsangebot dieser flinken Tiere steht, ist nach wie vor ungeklärt.",
+  "paragraph-3-2": "Mit dem Mauswiesel und dem Iltis sind zwei der drei Arten der Gattung Mustela auf der Roten Liste der bedrohten Tierarten der Schweiz als gefährdet aufgeführt. Dies heisst, dass ein hohes Risiko besteht, dass diese Arten in unmittelbarer Zukunft in der Natur aussterben könnten.",
+  "paragraph-3-3": "Seit vielen Jahren fördert die Stiftung <a href='http://wieselnetz.ch' target='_blank'><b>WIN Wieselnetz</b></a> in der Schweiz Wiesel und koordiniert und begleitet viele lokale Förderprojekte."
 
   },
 
   "en": {
+
+  "page-title": "Weasels in Switzerland",
+
+  "page-heading": "Weasels in Switzerland",
+
+  "paragraph-1-1": "The term „weasel“ includes two very similar animal species - the stoat (Mustela erminea) and the least weasel (Mustela nivalis). Together with the European polecat (Mustela putorius), the next relative of the two weasel species, they form the genus „Mustela“.",
+  "paragraph-1-2": "The least weasel is the smallest predator in the world (and potentially the cutest). It is clearly smaller than the stoat and possesses a short tail with a brown tail-top. The stoat, on the other hand, has a black tail tip and turns white in winter.",
+
+  "subheading-1": "How do Weasels Live?",
+  "paragraph-2-1": "Both species feed mainly on voles, other mice, birds, amphibians and invertebrates. Due to their typical body shape - elongated body and short legs - they are optimally adapted to mouse hunting and follow their prey even into the narrowest passages. They live solitary and defend their territory against competitors.",
+  "paragraph-2-2": "Due to the constantly fluctuating supply of prey, the density of weasel populations also fluctuates enormously.",
+  "paragraph-2-3": "Because of their preference for voles (a pest of many crops), weasels are welcome inhabitants of agricultural areas. However, weasels not only need a solid food source, but also hiding places, such as piles of branches, where they can hide from danger or where they raise their young. Additionally, they also need connecting structures that they can follow and seek protection in against predators during their dispersal. Hedges, for example, can provide such structures, since weasels can orient themselves from them and hide in them in the event of danger. Without these types of structures, even a field filled with voles will not be able to sustain a weasel population for long.",
+
+  "subheading-2": "How are Weasels Doing in Switzerland?",
+  "paragraph-3-1": "This question cannot be answered easily. Unfortunately, very little is known about the weasel populations in Switzerland. It is well known that the increasing fragmentation of habitats is affecting them, but the state of the food supply of these elusive animals is still unclear.",
+  "paragraph-3-2": "With the weasel and the polecat, two of the three species in the genus Mustela are listed as vulnerable on the Red List of Endangered Species in Switzerland. This means that there is a high risk of these species going extinct in nature in the immediate future.",
+  "paragraph-3-3": "For many years, the <a href='http://wieselnetz.ch' target='_blank'><b>WIN Wieselnetz</b></a> Foundation has supported weasels in Switzerland and coordinates and supports many local projects."
 
 
   }
