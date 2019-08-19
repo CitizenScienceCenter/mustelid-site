@@ -22,7 +22,9 @@
   "paragraph-4-1": "Im Verlauf des Jahres haben wir an verschiedenen Standorten Videos von den tierischen Besuchern dieser Fotofallenboxen gemacht und können diese alle alleine niemals durchschauen. Deshalb sind wir auf Ihre Hilfe angewiesen. Helfen Sie uns herauszufinden, wer die Boxen besucht.",
   "paragraph-4-1-button": "Zu den Videos",
   "paragraph-4-2": "Auf der Meldeplattform <a href='https://wildenachbarn.ch/' target='_blank'><b>wildenachbarn.ch</b></a> werden auch Beobachtungen von Hermelin und Mauswiesel gesammelt, die schlussendlich wieder als Datengrundlage in Förderprojekte einfliessen.",
-  "paragraph-4-3": "Das Projekt wird unterstützt von:"
+  "paragraph-4-3": "Das Projekt wird unterstützt von:",
+
+  "subheading-team": "Projekt Team"
 
   },
   "en": {
@@ -46,7 +48,9 @@
   "paragraph-4-1": "In the course of the year we have made innumerable videos of the animals visiting these camera trap boxes at different locations. Alone we will never be able to look through them all. Therefore we are dependent on your help. Help us find out who is visiting the boxes.",
   "paragraph-4-1-button": "To the Videos",
   "paragraph-4-2": "On the observation platform <a href='https://wildenachbarn.ch/' target='_blank'><b>wildenachbarn.ch</b></a> sightings of stoats and least weasels are collected. These observations will flow into conservation projects as a data basis.",
-  "paragraph-4-3": "The project is supported by:"
+  "paragraph-4-3": "The project is supported by:",
+
+  "subheading-team": "Project Team"
 
   }
 
@@ -70,35 +74,52 @@
         <div class="row row-reverse-large">
           <div class="col col-tablet-portrait-7 col-large-6 col-large-after-1 col-wrapping scroll-effect">
 
-            <h2 class="heading centered left-aligned-large">{{ $t('page-heading') }}</h2>
-            <!--
-            <h3 class="subheading">{{ $t('subheading-1') }}</h3>
-            <h2 class="heading centered left-aligned-large">{{ $t('subheading-1') }}</h2>
-             -->
-            <p v-html="$t('paragraph-1-1')"></p>
-            <p v-html="$t('paragraph-1-2')"></p>
+            <div class="content-subsection">
 
-            <h3 class="subheading">{{ $t('subheading-2') }}</h3>
-            <p v-html="$t('paragraph-2')"></p>
+              <h2 class="heading centered left-aligned-large">{{ $t('page-heading') }}</h2>
+              <!--
+              <h3 class="subheading">{{ $t('subheading-1') }}</h3>
+              <h2 class="heading centered left-aligned-large">{{ $t('subheading-1') }}</h2>
+               -->
+              <p v-html="$t('paragraph-1-1')"></p>
+              <p v-html="$t('paragraph-1-2')"></p>
 
-            <h3 class="subheading">{{ $t('subheading-3') }}</h3>
-            <p v-html="$t('paragraph-3-1')"></p>
-            <p v-html="$t('paragraph-3-2')"></p>
-            <p v-html="$t('paragraph-3-3')"></p>
+              <h3 class="subheading">{{ $t('subheading-2') }}</h3>
+              <p v-html="$t('paragraph-2')"></p>
 
-            <h3 class="subheading">{{ $t('subheading-4') }}</h3>
-            <p v-html="$t('paragraph-4-1')"></p>
-            <div class="margin-bottom">
-              <div class="button-group centered left-aligned-large">
-                <router-link tag="button" to="/identification" class="button button-primary">{{ $t('paragraph-4-1-button') }}</router-link>
+              <h3 class="subheading">{{ $t('subheading-3') }}</h3>
+              <p v-html="$t('paragraph-3-1')"></p>
+              <p v-html="$t('paragraph-3-2')"></p>
+              <p v-html="$t('paragraph-3-3')"></p>
+
+              <h3 class="subheading">{{ $t('subheading-4') }}</h3>
+              <p v-html="$t('paragraph-4-1')"></p>
+              <div class="margin-bottom">
+                <div class="button-group centered left-aligned-large">
+                  <router-link tag="button" to="/identification" class="button button-primary">{{ $t('paragraph-4-1-button') }}</router-link>
+                </div>
               </div>
+              <p v-html="$t('paragraph-4-2')"></p>
+              <p v-html="$t('paragraph-4-3')"></p>
+              <div class="margin-bottom">
+                <div class="logo-group">
+                  <a href="https://jurapark-aargau.ch" target="_blank"><img src="/img/logo-jurapark.png" style="height: 80px" /></a>
+                  <a href="https://wildenachbarn.ch" target="_blank"><img src="/img/logo-wildenachbarn.jpg" style="height: 72px" /></a>
+                  <a href="http://www.swild.ch/" target="_blank"><img src="/img/logo-swild.jpg" style="height:144px"/></a>
+                </div>
+              </div>
+
             </div>
-            <p v-html="$t('paragraph-4-2')"></p>
-            <p v-html="$t('paragraph-4-3')"></p>
-            <div class="logo-group">
-              <a href="https://jurapark-aargau.ch" target="_blank"><img src="/img/logo-jurapark.png" style="height: 80px" /></a>
-              <a href="https://wildenachbarn.ch" target="_blank"><img src="/img/logo-wildenachbarn.jpg" style="height: 72px" /></a>
-              <a href="http://www.swild.ch/" target="_blank"><img src="/img/logo-swild.jpg" style="height:144px"/></a>
+            <div class="content-subsection">
+
+              <h3 class="subheading">{{ $t('subheading-team') }}</h3>
+              <ul>
+                <li>Dr. Daniel Hegglin, SWILD & Universität Zürich</li>
+                <li>Dr. Fabio Bontadina, SWILD & WSL</li>
+                <li>Adrian Dietrich, SWILD</li>
+                <li>Anouk Taucher, SWILD</li>
+              </ul>
+
             </div>
 
           </div>
