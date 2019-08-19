@@ -128,6 +128,8 @@
       </div>
     </app-content-section>
 
+    <section-feedback email="wiesel@citizenscience.ch"></section-feedback>
+
     <section-newsletter-signup></section-newsletter-signup>
 
     <app-footer></app-footer>
@@ -142,11 +144,13 @@ import {mapState} from 'vuex'
 import ContentSection from '@/components/shared/ContentSection.vue';
 import Footer from '@/components/shared/Footer.vue';
 import SectionNewsletterSignup from "@/components/shared/SectionNewsletterSignup";
+import SectionFeedback from "../components/shared/SectionFeedback";
 
 
 export default {
   name: 'Home',
   components: {
+      SectionFeedback,
       SectionNewsletterSignup,
     'app-content-section': ContentSection,
     'app-footer': Footer

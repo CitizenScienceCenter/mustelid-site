@@ -155,11 +155,13 @@
       </div>
     </app-content-section>
 
-
-
     <section-s-d-g goal="15" color="light-greyish">
       This project is supporting goal no. 15 from the UN Sustainable Development Goals when an unknown printer took a galley of type and scrambled it to make a type specimen book.
     </section-s-d-g>
+
+
+    <section-feedback email="wiesel@citizenscience.ch"></section-feedback>
+
 
     <section-newsletter-signup></section-newsletter-signup>
 
@@ -178,11 +180,13 @@ import Footer from '@/components/shared/Footer.vue';
 import SectionNewsletterSignup from "@/components/shared/SectionNewsletterSignup";
 import SectionSDG from "../components/shared/SectionSDG";
 import SectionStats from "../components/shared/SectionStats";
+import SectionFeedback from "../components/shared/SectionFeedback";
 
 
 export default {
   name: 'Home',
   components: {
+      SectionFeedback,
       SectionStats,
       SectionSDG,
       SectionNewsletterSignup,
