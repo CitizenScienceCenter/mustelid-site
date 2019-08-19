@@ -240,13 +240,15 @@ export default {
     img {
       height: 48px;
     }
+    transition: opacity $transition-duration-short $transition-timing-function;
+    opacity: 0.9;
 
     &:active, &:focus {
-      opacity: 0.9;
+      opacity: 1;
     }
     @media (hover: hover) {
       &:hover {
-        opacity: 0.9;
+        opacity: 1;
       }
     }
   }
