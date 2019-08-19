@@ -33,7 +33,7 @@
         <div class="content-wrapper">
           <div class="row row-centered row-in-background">
             <div class="col col-tablet-portrait-10 col-large-7 col-large-after-1 col-wrapping col-large-no-bottom-margin">
-              <img src="/img/graphic-hermelin.jpg" style="border-radius: 50%" />
+              <img src="/img/scientifica.jpg" style="border-radius: 50%" />
             </div>
           </div>
         </div>
