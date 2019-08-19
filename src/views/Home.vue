@@ -72,7 +72,9 @@
 
     </app-cover>
 
-    <img src="/img/scientifica-teaser.png" class="scientifica-teaser" />
+    <router-link to="/scientifica" class="scientifica-teaser">
+      <img src="/img/scientifica-teaser.png" />
+    </router-link>
 
     <app-content-section>
       <div class="content-wrapper">
@@ -234,14 +236,28 @@ export default {
     position: absolute;
     top: calc( 48px + #{$spacing-2});
     right: 0;
-    height: 48px;
+    line-height: 0;
+    img {
+      height: 48px;
+    }
+
+    &:active, &:focus {
+      opacity: 0.9;
+    }
+    @media (hover: hover) {
+      &:hover {
+        opacity: 0.9;
+      }
+    }
   }
 
   @media only screen and (min-width: $viewport-mobile-large) {
 
     .scientifica-teaser {
       top: calc( 64px + #{$spacing-2});
-      height: 56px;
+      img {
+        height: 56px;
+      }
     }
 
   }
@@ -255,7 +271,9 @@ export default {
 
     .scientifica-teaser {
       top: calc( 80px + #{$spacing-3});
-      height: 64px;
+      img {
+        height: 64px;
+      }
     }
 
   }
@@ -265,7 +283,9 @@ export default {
 
     .scientifica-teaser {
       top: calc( 80px + #{$spacing-3});
-      height: 72px;
+      img {
+        height: 72px;
+      }
     }
 
   }

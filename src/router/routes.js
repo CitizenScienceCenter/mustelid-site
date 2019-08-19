@@ -2,6 +2,7 @@
 import Identification from '@/views/Identification';
 import IdentificationComplete from '@/views/IdentificationComplete';
 import Forum from '@/views/Forum';
+import Scientifica from '@/views/Scientifica';
 
 import Login from '@/views/shared/user/Login';
 import Register from '@/views/shared/user/Register';
@@ -77,6 +78,11 @@ export const routes = [
                 component: Forum,
                 name: "Forum",
                 meta: {requiresAuth: true, i18n: 'navigation-forum', nav: true},
+            },
+            {
+                path: "scientifica",
+                component: Scientifica,
+                meta: {nav: false}
             },
             {
                 path: "terms",

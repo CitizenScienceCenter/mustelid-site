@@ -148,7 +148,7 @@ import SectionFeedback from "../components/shared/SectionFeedback";
 
 
 export default {
-  name: 'Home',
+  name: 'About',
   components: {
       SectionFeedback,
       SectionNewsletterSignup,

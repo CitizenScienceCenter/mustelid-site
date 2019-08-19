@@ -318,7 +318,7 @@ import animals from "@/assets/animals.json";
 import Loader from "@/components/shared/Loader";
 
 export default {
-  name: 'Home',
+  name: 'Identification',
   components: {
       Loader,
       ContentSection,
