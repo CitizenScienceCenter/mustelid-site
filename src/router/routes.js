@@ -41,7 +41,8 @@ export const routes = [
                 component: Home,
                 meta: {
                     i18n: "navigation-homepage",
-                    nav: false
+                    nav: false,
+                    requiresAuth: true
                 }
             },
             {

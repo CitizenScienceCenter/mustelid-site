@@ -46,10 +46,10 @@
 
             <template v-for="(video,index) in taskMedia">
               <video v-if="index === 0" :key="'video'+index" :ref="'video'+index" playsinline muted :class="{ activeVideo: index === activeVideo }" @timeupdate="onVideoUpdate" @ended="onVideoEnd" @loadeddata="onFirstVideoLoaded" @seeked="onVideoSeeked" @click="play">
-                <source type="video/mp4" :src="'/videos/'+video.path">
+                <source type="video/mp4" :src="'https://api.citizenscience.ch/files/upload/'+video.path">
               </video>
               <video v-else :key="'video'+index" :ref="'video'+index" playsinline muted :class="{ activeVideo: index === activeVideo }" @timeupdate="onVideoUpdate" @ended="onVideoEnd" @seeked="onVideoSeeked" @click="play">
-                <source type="video/mp4" :src="'/videos/'+video.path">
+                <source type="video/mp4" :src="'https://api.citizenscience.ch/files/upload/'+video.path">
               </video>
             </template>
 
@@ -60,7 +60,7 @@
                 <div class="progress"><div class="bar" :style="{width: totalProgress+'%'}"></div></div>
                 <ul ref="thumbnailList">
                   <li v-for="(video,index) in taskMedia" :key="'thumbnail'+index" :class="{active: index === activeVideo}" @click="startVideo(index)" :id="'thumbnail'+index">
-                    <img :src="'/videos/thumbnails/'+video.info.thumb" />
+                    <img :src="'https://api.citizenscience.ch/files/upload/'+video.info.thumb" />
                   </li>
                 </ul>
               </div>
@@ -420,8 +420,10 @@ export default {
           }
       }
 
-      this.$store.dispatch('stats/updateMySubmissionCount');
       this.$store.dispatch('stats/updateTotalTaskCount');
+      this.$store.dispatch('stats/updateTotalUserAndSubmissionCount');
+      this.$store.dispatch('stats/updateMySubmissionCount');
+
 
       this.loadUiImages();
 
@@ -639,6 +641,8 @@ export default {
                     this.$router.replace('/identification/'+this.tasks[0].id);
                 }
 
+                console.log( this.tasks[0] );
+
                 const mediaQuery = {
                     'select': {
                         'fields': [
@@ -660,6 +664,9 @@ export default {
 
                 this.$store.dispatch('c3s/media/getMedia', [mediaQuery, 'c3s/task/SET_MEDIA', 0]).then(media => {
 
+
+                    console.log( 'media loaded');
+                    console.log ( this.taskMedia );
                     // media loaded
 
                     this.videoLoaded = false;
@@ -709,7 +716,9 @@ export default {
         this.$store.dispatch('c3s/submission/createSubmission').then(submission => {
 
             console.log('submission sent');
-            this.$store.dispatch('stats/increaseMySubmissionCount');
+            //this.$store.dispatch('stats/increaseMySubmissionCount');
+            this.$store.dispatch('stats/updateMySubmissionCount');
+            this.$store.dispatch('stats/updateTotalUserAndSubmissionCount');
 
         });
 

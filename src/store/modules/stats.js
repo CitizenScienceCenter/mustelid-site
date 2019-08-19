@@ -36,6 +36,9 @@ const actions = {
         };
         store.dispatch('c3s/task/getTaskCount', taskCountQuery).then(res => {
 
+
+            console.log('task count returned');
+
             commit('SET_TOTAL_TASK_COUNT', res.body );
 
         });
@@ -82,6 +85,8 @@ const actions = {
         };
         store.dispatch('c3s/submission/getSubmissions', [allSubmissionsQuery, 99999]).then(res => {
 
+            console.log('total user and submission count returned');
+
             let allUsersCount = 0;
             let allSubmissionsCount = 0;
             for (let i = 0; i < res.body.length; i++) {
@@ -96,7 +101,7 @@ const actions = {
 
     updateMySubmissionCount({state, commit, rootState}) {
 
-        console.log('update my submissions');
+        console.log('update my submissions count');
 
         const submissionCountQuery = {
             "select": {
@@ -116,6 +121,9 @@ const actions = {
             ]
         };
         store.dispatch('c3s/task/getTaskCount', submissionCountQuery).then(res => {
+
+
+            console.log('my submissions count returned');
 
             commit('SET_MY_SUBMISSION_COUNT', res.body );
 
