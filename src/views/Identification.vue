@@ -1109,7 +1109,7 @@ export default {
                     width: 110%;
                   }
 
-                  opacity: 0.5;
+                  opacity: 0.25;
                   transition: border $transition-duration-short $transition-timing-function;
                   &.active {
                     opacity: 1;
@@ -1122,7 +1122,7 @@ export default {
 
           .video-button {
             border-radius: 0;
-            background: linear-gradient(to top, rgba( $color-black, 0.5 ), rgba( $color-black, 0.25 ) );
+            background: linear-gradient(to top, rgba( $color-black, 0.5 ), rgba( $color-black, 0.1 ) );
             &:focus  {
               svg {
                 fill: white;
@@ -1154,7 +1154,7 @@ export default {
             height: 40px;
             padding-right: $spacing-1;
             //background-color: rgba( $color-black, 0.5 );
-            background: linear-gradient(to top, rgba( $color-black, 0.5 ), rgba( $color-black, 0.25 ) );
+            background: linear-gradient(to top, rgba( $color-black, 0.5 ), rgba( $color-black, 0.1 ) );
             //background: rgba( white, 0.8 );
             //background: none;
             cursor: pointer;
