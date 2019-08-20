@@ -1568,6 +1568,7 @@ export default {
           &.nothing {
             .category {
               height: 40px;
+              background: $color-primary-tint-80;
               .images {
                 height: 40px;
               }
