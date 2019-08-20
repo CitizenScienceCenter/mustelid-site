@@ -155,14 +155,14 @@
 
 
                         <li class="animal-item">
-                          <div class="animal" @click="clickAnimal(-2)" :class="{selected: selectedAnimal === -2}">
+                          <div class="animal" @click="clickAnimal(-1)" :class="{selected: selectedAnimal === -1}">
                             <div class="info">
                               <div class="title">
                                 Andere / Nicht genauer erkennbar
                               </div>
-                              <div class="text" v-if="selectedAnimal === -2">
+                              <div class="text" v-if="selectedAnimal === -1">
                                 <div class="form-field form-field-block">
-                                  <input placeholder="Kommentar hinzufügen" />
+                                  <input v-model="comment" placeholder="Kommentar hinzufügen" />
                                 </div>
                               </div>
                             </div>
@@ -173,6 +173,15 @@
                     </div>
 
 
+                  </li>
+
+                  <li class="category-item no-animals nothing" :class="{ open: openCategory === -1 }">
+                    <div class="category" @click="clickCategory(-1)">
+                      <div class="images"></div>
+                      <div class="title">
+                        Kein Tier erkennbar
+                      </div>
+                    </div>
                   </li>
                 </ul>
 
@@ -343,8 +352,9 @@ export default {
           animals: animals,
           openCategory: null,
           selectedAnimal: null,
-          animalListState: undefined,
           animalListStates: undefined,
+
+          comment: null,
 
           noOfUiImages: 0,
           noOfUiImagesLoaded: 0,
@@ -374,11 +384,18 @@ export default {
           mySubmissionCount: state => state.stats.mySubmissionCount
       }),
       answer() {
-          if( this.selectedAnimal !== null ) {
-              if( this.selectedAnimal >= 0 ) {
+          if( this.selectedAnimal === -2 ) {
+              return {
+                  'category': 'n/a',
+                  'animal': 'n/a',
+              }
+          }
+          else if( this.selectedAnimal === -1 ) {
+              if( this.comment ) {
                   return {
                       'category': this.animals[this.openCategory].name.en,
-                      'animal': this.animals[this.openCategory].animals[this.selectedAnimal].name.en,
+                      'animal': 'n/a',
+                      'comment': this.comment
                   }
               }
               else {
@@ -388,10 +405,10 @@ export default {
                   }
               }
           }
-          else {
+          else if( this.selectedAnimal >= 0 ) {
               return {
                   'category': this.animals[this.openCategory].name.en,
-                  'animal': '',
+                  'animal': this.animals[this.openCategory].animals[this.selectedAnimal].name.en,
               }
           }
       }
@@ -430,7 +447,7 @@ export default {
 
       this.$store.dispatch("c3s/activity/getActivity", [this.activityId, false]).then(activity => {
 
-          console.log('activity loaded');
+          //console.log('activity loaded');
 
           // load task with or without id
           if( this.$route.params.id ) {
@@ -457,23 +474,6 @@ export default {
 
   },
   watch: {
-      openCategory( to, from ) {
-          if( to !== null ) {
-              if( this.animals[ to ].animals ) {
-                  this.animalListState = [];
-                  for( let i=0; i < this.animals[ to ].animals.length; i++ ) {
-                      this.animalListState.push( {
-                          'zoomed': false,
-                          'activeImage': 0,
-                          'noOfImages': this.animals[ to ].animals[i].images.length
-                      } );
-                  }
-              }
-          }
-          else {
-              this.animalListState = undefined;
-          }
-      },
       activeVideo( to, from ) {
           this.$scrollTo('#thumbnail'+this.activeVideo, 600, {
               container: '#thumbnails',
@@ -501,30 +501,12 @@ export default {
               }
           }
       },
-      /*
-  resizeAnimalList() {
-      for( var i=0; i< this.animals.length; i++ ) {
-          if( this.openCategory === i && this.$refs['animalListWrapper'+i][0] ) {
-              //this.$refs['animalListWrapper'+i][0].style.height = this.$refs['animalList'+this.openCategory][0].offsetHeight +'px';
-              this.$refs['animalListWrapper'+i][0].style.height = 'auto';
-              let self = this;
-              setTimeout( function() {
-                  console.log( 'gaggi: '+i );
-                  self.$refs['animalListWrapper'+i][0].style.height = 'auto';
-              }, 300 );
-          }
-          else if( this.$refs['animalListWrapper'+i][0] ) {
-              this.$refs['animalListWrapper'+i][0].style.height = 0+'px';
-          }
-      }
-    },
-      */
     loadTask() {
 
         let taskQuery;
         if( !this.taskId ) {
             // without id
-            console.log('without id');
+            //console.log('without id');
             taskQuery = {
                 'select': {
                     'fields': [
@@ -562,7 +544,7 @@ export default {
         }
         else {
             // with id
-            console.log('with id');
+            //console.log('with id');
             taskQuery = {
                 'select': {
                     'fields': [
@@ -592,7 +574,7 @@ export default {
 
             if( this.taskId ) {
                 // loaded with id, check for submissions
-                console.log('has task id, check for submissions');
+                //console.log('has task id, check for submissions');
 
                 let query = {
                     'select': {
@@ -636,12 +618,12 @@ export default {
 
             if ( this.tasks[0] ) {
 
-                console.log( 'task loaded');
+                //console.log( 'task loaded');
                 if( navigator.userAgent !== 'ReactSnap' ) {
                     this.$router.replace('/identification/'+this.tasks[0].id);
                 }
 
-                console.log( this.tasks[0] );
+                //console.log( this.tasks[0] );
 
                 const mediaQuery = {
                     'select': {
@@ -665,16 +647,17 @@ export default {
                 this.$store.dispatch('c3s/media/getMedia', [mediaQuery, 'c3s/task/SET_MEDIA', 0]).then(media => {
 
 
-                    console.log( 'media loaded');
-                    console.log ( this.taskMedia );
+                    //console.log( 'media loaded');
+                    //console.log ( this.taskMedia );
                     // media loaded
 
                     this.videoLoaded = false;
                     this.activeVideo = 0;
                     this.openCategory = null;
                     this.selectedAnimal = null;
-                    //this.resizeAnimalList();
+                    this.comment = null;
                     this.$refs.video0[0].load();
+
                     this.playing = true;
 
                 });
@@ -704,12 +687,15 @@ export default {
             "info": {},
             "content": {
                 "category": this.answer.category,
-                "animal": this.answer.animal,
+                "animal": this.answer.animal
             },
             "task_id": this.tasks[0].id,
             "user_id": this.currentUser.id,
             "draft": true
         };
+        if( this.answer.comment ) {
+            submissionObject.content["comment"] = this.answer.comment;
+        }
 
         this.$store.commit('c3s/submission/SET_SUBMISSION', submissionObject );
 
@@ -729,34 +715,35 @@ export default {
         let closeFirst = false;
 
         if( this.openCategory !== index ) {
+            // select category
+            if( this.animals[index] ) {
+                // if animal is from list
 
-            if( !this.animals[index].animals ) {
-                this.selectedAnimal = -1;
+                if( !this.animals[index].animals ) {
+                    this.selectedAnimal = -1;
+                }
+                else {
+                    this.selectedAnimal = null;
+                }
+
+
+                // "close first" thing
+                if( this.openCategory !== null ) {
+                    if( this.animals[this.openCategory] && this.animals[this.openCategory].animals ) {
+                        closeFirst = true;
+                    }
+                }
             }
             else {
-                this.selectedAnimal = null;
-            }
-
-            if( this.openCategory !== null ) {
-                if( this.animals[this.openCategory].animals ) {
-                    closeFirst = true;
-                }
+                // if open category is 'no animal visible'
+                this.selectedAnimal = -2;
             }
 
             this.openCategory = index;
-        }
-        else {
-            // close accordion
-            this.openCategory = null;
-            this.selectedAnimal = null;
-        }
-        //this.resizeAnimalList();
-
-        console.log('click category: '+this.openCategory);
 
 
-        // auto scrolling
-        if( this.openCategory !== null ) {
+
+            // auto scrolling
             if( closeFirst ) {
                 console.log('close first');
                 let self = this;
@@ -794,6 +781,13 @@ export default {
                     });
                 }
             }
+
+
+        }
+        else {
+            // deselect
+            this.openCategory = null;
+            this.selectedAnimal = null;
         }
     },
     clickAnimal(index) {
@@ -1209,7 +1203,7 @@ export default {
             box-shadow: 0px 4px 8px -4px rgba($color-black,0.2);
             transition: all $transition-duration-long $transition-timing-function;
 
-            height: calc( ( 100vh - 160px - 64px - ( 4 * 16px ) ) / 5 );
+            height: calc( ( 100vh - 160px - 64px - 40px - ( 5 * 16px ) ) / 5 );
             min-height: 40px;
             max-height: 15vw;
 
@@ -1229,7 +1223,7 @@ export default {
             .images {
               display: flex;
               overflow: hidden;
-              height: calc( ( 100vh - 160px - 64px - ( 4 * 16px ) ) / 5 );
+              height: calc( ( 100vh - 160px - 64px - 40px - ( 5 * 16px ) ) / 5 );
               min-height: 40px;
 
               .image {
@@ -1297,9 +1291,9 @@ export default {
 
           .animal-list-wrapper {
             overflow: hidden;
-            display: none;
+            height: 0;
 
-            transition: height $transition-duration-long $transition-timing-function;
+            //transition: height $transition-duration-long $transition-timing-function;
 
             .animals {
 
@@ -1571,6 +1565,15 @@ export default {
             }
           }
 
+          &.nothing {
+            .category {
+              height: 40px;
+              .images {
+                height: 40px;
+              }
+            }
+          }
+
           &:not(.no-animals) {
             &.open {
 
@@ -1587,7 +1590,7 @@ export default {
                 }
               }
               .animal-list-wrapper {
-                display: block;
+                height: auto;
                 .animals {
                 }
               }
@@ -1729,8 +1732,10 @@ export default {
         .animal-categories {
           .category-item {
             .category {
+              height: calc( ( 100vh - 160px - 64px - 48px - ( 5 * 16px ) ) / 5 );
               .images {
                 min-height: 48px;
+                height: calc( ( 100vh - 160px - 64px - 48px - ( 5 * 16px ) ) / 5 );
               }
               .title {
                 padding: calc((48px - 1.5rem) / 2) $spacing-2;
@@ -1753,6 +1758,15 @@ export default {
                       }
                     }
                   }
+                }
+              }
+            }
+
+            &.nothing {
+              .category {
+                height: 48px;
+                .images {
+                  height: 48px;
                 }
               }
             }
@@ -1915,9 +1929,11 @@ export default {
         .animal-categories {
           .category-item {
             .category {
-              height: calc((100vh - 160px - 96px - (4 * 16px)) / 5);
+              //height: calc((100vh - 160px - 96px - (4 * 16px)) / 5);
+              height: calc( ( 100vh - 160px - 96px - 48px - ( 5 * 16px ) ) / 5 );
               .images {
-                height: calc((100vh - 160px - 96px - (4 * 16px)) / 5);
+                //height: calc((100vh - 160px - 96px - (4 * 16px)) / 5);
+                height: calc( ( 100vh - 160px - 96px - 48px - ( 5 * 16px ) ) / 5 );
               }
             }
           }

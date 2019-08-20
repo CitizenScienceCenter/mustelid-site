@@ -19,7 +19,9 @@
 
   "mustelids-heading": "Wiesel in der Schweiz",
   "mustelids-text": "Wer schon einmal ein Wiesel gesehen hat vergisst diese Beobachtung so schnell nicht mehr. Die flinken Tiere faszinieren. Doch wie steht es um die Wiesel-Populationen in der Schweiz? Haben Sie gewusst, dass es in der Schweiz zwei Wieselarten gibt?",
-  "mustelids-button": "Mehr erfahren"
+  "mustelids-button": "Mehr erfahren",
+
+  "swild-text": "SWILD ist eine unabhängige Forschungs- und Beratungsgemeinschaft von Biologinnen und Biologen. Organisiert als non-profit Verein, arbeiten wir seit 1989 in den Bereichen Stadt- und Siedlungsökologie, Wildtierforschung, Naturschutz und Kommunikation."
 
   },
   "en": {
@@ -39,7 +41,9 @@
 
   "mustelids-heading": "Weasels in Switzerland",
   "mustelids-text": "Anyone who has ever seen a weasel will never forget this observation. These elusive and clever animals fascinate people. But how are weasel populations in Switzerland doing? Did you know that there are two weasel species in Switzerland?",
-  "mustelids-button": "Learn more"
+  "mustelids-button": "Learn more",
+
+  "swild-text": "SWILD ist eine unabhängige Forschungs- und Beratungsgemeinschaft von Biologinnen und Biologen. Organisiert als non-profit Verein, arbeiten wir seit 1989 in den Bereichen Stadt- und Siedlungsökologie, Wildtierforschung, Naturschutz und Kommunikation."
 
 
   }
@@ -69,8 +73,13 @@
           </div>
         </div>
       </div>
-
     </app-cover>
+
+
+
+    <section-stats color="greyish" :submissionCount="totalSubmissionCount" :userCount="totalUserCount" :taskCount="totalTaskCount" ></section-stats>
+
+
 
     <router-link to="/scientifica" class="scientifica-teaser">
       <img src="/img/scientifica-teaser.png" />
@@ -129,10 +138,6 @@
 
 
 
-    <section-stats color="greyish" :submissionCount="totalSubmissionCount" :userCount="totalUserCount" :taskCount="totalTaskCount" ></section-stats>
-
-
-
     <app-content-section>
       <div class="content-wrapper">
         <div class="row row-centered row-middle row-wrapping">
@@ -160,7 +165,30 @@
 
     <section-feedback email="wiesel@citizenscience.ch"></section-feedback>
 
-    <section-s-d-g goal="15" color="light-greyish">
+
+    <app-content-section color="greyish" >
+      <div class="content-wrapper">
+        <div class="row row-centered row-middle row-wrapping">
+
+          <div class="col col-4 col-large-2 col-large-before-3 col-wrapping scroll-effect">
+            <div class="extra-padding-large-h">
+              <img src="/img/logo-swild.png" />
+            </div>
+          </div>
+
+          <div class="col col-10 col-large-4 col-large-after-3 col-wrapping scroll-effect scroll-effect-delayed-1">
+            <div>
+              <h2 class="subheading reduced-bottom-margin">Eine Zusammenarbeit mit SWILD</h2>
+              <p v-html="$t('swild-text')" class="reduced-bottom-margin"></p>
+              <a href="http://www.swild.ch" target="_blank">swild.ch</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </app-content-section>
+
+    <section-s-d-g color="light-greyish" goal="15">
       This project is supporting goal no. 15 from the UN Sustainable Development Goals when an unknown printer took a galley of type and scrambled it to make a type specimen book.
     </section-s-d-g>
 
@@ -266,6 +294,13 @@ export default {
 
   @media only screen and (min-width: $viewport-tablet-portrait) {
 
+    .scientifica-teaser {
+      top: calc( 64px + #{$spacing-3});
+      img {
+        height: 64px;
+      }
+    }
+
   }
 
 
@@ -274,7 +309,7 @@ export default {
     .scientifica-teaser {
       top: calc( 80px + #{$spacing-3});
       img {
-        height: 64px;
+        height: 72px;
       }
     }
 
@@ -284,9 +319,9 @@ export default {
   @media only screen and (min-width: $viewport-xlarge) {
 
     .scientifica-teaser {
-      top: calc( 80px + #{$spacing-3});
+      top: calc( 88px + #{$spacing-3});
       img {
-        height: 72px;
+        height: 88px;
       }
     }
 

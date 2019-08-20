@@ -105,7 +105,7 @@
                 <div class="logo-group">
                   <a href="https://jurapark-aargau.ch" target="_blank"><img src="/img/logo-jurapark.png" style="height: 80px" /></a>
                   <a href="https://wildenachbarn.ch" target="_blank"><img src="/img/logo-wildenachbarn.jpg" style="height: 72px" /></a>
-                  <a href="http://www.swild.ch/" target="_blank"><img src="/img/logo-swild.jpg" style="height:144px"/></a>
+                  <a href="http://www.swild.ch/" target="_blank"><img src="/img/logo-swild.png" style="height:160px"/></a>
                 </div>
               </div>
 
