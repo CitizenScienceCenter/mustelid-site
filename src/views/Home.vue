@@ -168,15 +168,15 @@
 
     <app-content-section color="greyish" >
       <div class="content-wrapper">
-        <div class="row row-centered row-middle row-wrapping">
+        <div class="row row-centered row-middle row-wrapping row-reverse-large">
 
-          <div class="col col-4 col-large-2 col-large-before-3 col-wrapping scroll-effect">
+          <div class="col col-4 col-large-2 col-large-after-3 col-wrapping scroll-effect">
             <div class="extra-padding-large-h">
               <img src="/img/logo-swild.png" />
             </div>
           </div>
 
-          <div class="col col-10 col-large-4 col-large-after-3 col-wrapping scroll-effect scroll-effect-delayed-1">
+          <div class="col col-10 col-large-4 col-large-before-3 col-wrapping scroll-effect scroll-effect-delayed-1">
             <div>
               <h2 class="subheading reduced-bottom-margin">Eine Zusammenarbeit mit SWILD</h2>
               <p v-html="$t('swild-text')" class="reduced-bottom-margin"></p>
