@@ -165,7 +165,7 @@
 
     <section-feedback color="light-greyish" email="wiesel@citizenscience.ch"></section-feedback>
 
-
+    <!--
     <app-content-section color="greyish" >
       <div class="content-wrapper">
         <div class="row row-centered row-middle row-wrapping row-reverse-large">
@@ -192,8 +192,9 @@
         </div>
       </div>
     </app-content-section>
+    -->
 
-    <section-s-d-g color="light-greyish" goal="15">
+    <section-s-d-g color="greyish" goal="15">
       This project is supporting goal no. 15 from the UN Sustainable Development Goals when an unknown printer took a galley of type and scrambled it to make a type specimen book.
     </section-s-d-g>
 
@@ -274,7 +275,7 @@ export default {
   .scientifica-teaser {
     position: absolute;
     top: calc( 48px + #{$spacing-2});
-    right: 0;
+    left: 0;
     line-height: 0;
     img {
       height: 48px;
