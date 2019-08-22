@@ -195,7 +195,7 @@
     -->
 
     <section-s-d-g color="greyish" goal="15">
-      This project is supporting goal no. 15 from the UN Sustainable Development Goals when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+      This project supports Goal 15: Protect, restore and promote sustainable use of terrestrial ecosystems, sustainably manage forests, combat desertification, and halt and reverse land degradation and halt biodiversity loss.
     </section-s-d-g>
 
 
