@@ -1,15 +1,45 @@
 <i18n>
 {
 
-  "en": {
+  "de": {
 
-  "page-title": "Identification"
+  "page-title": "Identifikation",
+
+  "question": "Welches Tier ist zu sehen?",
+
+  "answer-unsure": "Andere / Nicht genauer erkennbar",
+  "add-comment": "Kommentar hinhufügen (optional)",
+  "answer-none": "Kein Tier erkennbar",
+
+  "progress": "Fortschritt",
+  "progress-of": "von",
+
+  "button-skip": "Überspringen",
+  "button-skip-short": "Überspr.",
+
+  "button-submit": "Antworten",
+  "button-submit-confirmation": "Antwort übermittelt"
 
   },
 
-  "de": {
+  "en": {
 
-  "page-title": "Identifikation"
+  "page-title": "Identification",
+
+  "question": "Which Animal do You See?",
+
+  "answer-unsure": "Other / Not visible",
+  "add-comment": "Add Comment (optional)",
+  "answer-none": "No animal recognizable",
+
+  "progress": "Progress",
+  "progress-of": "of",
+
+  "button-skip": "Skip",
+  "button-skip-short": "Skip",
+
+  "button-submit": "Answer",
+  "button-submit-confirmation": "Answer submitted"
 
   }
 
@@ -29,7 +59,7 @@
             <div class="row">
               <div class="col">
 
-                <h2 class="heading small scroll-effect">Welches Tier ist zu sehen?</h2>
+                <h2 class="heading small scroll-effect">{{$t('question')}}</h2>
 
               </div>
             </div>
@@ -158,11 +188,11 @@
                           <div class="animal" @click="clickAnimal(-1)" :class="{selected: selectedAnimal === -1}">
                             <div class="info">
                               <div class="title">
-                                Andere / Nicht genauer erkennbar
+                                {{ $t('answer-unsure') }}
                               </div>
                               <div class="text" v-if="selectedAnimal === -1">
                                 <div class="form-field form-field-block">
-                                  <input v-model="comment" placeholder="Kommentar hinzufügen" />
+                                  <input v-model="comment" :placeholder="$t('add-comment')" />
                                 </div>
                               </div>
                             </div>
@@ -179,7 +209,7 @@
                     <div class="category" @click="clickCategory(-1)">
                       <div class="images"></div>
                       <div class="title">
-                        Kein Tier erkennbar
+                        {{ $t('answer-none')}}
                       </div>
                     </div>
                   </li>
@@ -225,11 +255,12 @@
             -->
 
             <div class="button-group right-aligned">
-              <button class="button button-secondary" :disabled="!videoLoaded" @click="next">
-                <span class="viewport-tablet-portrait-text">Überspr.</span>
-                <span class="viewport-large-text">Überspringen</span>
+              <button class="button button-secondary" :disabled="!videoLoaded || showSubmissionInfo" @click="next">
+                <span class="viewport-tablet-portrait-text">{{ $t('button-skip-short') }}</span>
+                <span class="viewport-large-text">{{ $t('button-skip') }}</span>
               </button>
-              <button class="button button-primary" :disabled="!videoLoaded || selectedAnimal === null" @click="submit">Antworten</button>
+              <!--<button class="button button-primary" :disabled="!videoLoaded || selectedAnimal === null" @click="submit">Antworten</button>-->
+              <submit-button :disabled="!videoLoaded || selectedAnimal === null" @click="submit" :submissionInfo="showSubmissionInfo" :infoMessage="$t('button-submit-confirmation')">{{$t('button-submit')}}</submit-button>
             </div>
 
           </div>
@@ -242,75 +273,75 @@
                 </div>
               </div>
               <div class="text">
-                Fortschritt {{mySubmissionCount}} von {{totalTaskCount}}
+                {{$t('progress')}} {{mySubmissionCount}} {{$t('progress-of')}} {{totalTaskCount}}
               </div>
             </div>
           </div>
 
-        </div>
-      </div>
-    </app-content-section>
-
-
-    <!--
-    <app-content-section color="light-greyish">
-      <div class="content-wrapper">
-        <div class="row row-centered row-middle row-wrapping">
-
-          <div class="col col-10 col-tablet-portrait-8 col-large-6 col-wrapping scroll-effect">
-            <div class="extra-padding-h">
-              <img src="/img/graphic-intro.png" />
-            </div>
           </div>
+        </div>
+      </app-content-section>
 
-          <div class="col col-large-5 col-large-after-1 col-wrapping scroll-effect scroll-effect-delayed-1">
-            <div>
-              <h2 class="heading centered left-aligned-large">Mit Kamerafallen auf der Suche nach Wieseln</h2>
-              <p class="">
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
-              </p>
-              <div class="button-group centered left-aligned-large">
-                <router-link tag="button" to="/about" class="button button-secondary">Mehr erfahren</router-link>
+
+      <!--
+      <app-content-section color="light-greyish">
+        <div class="content-wrapper">
+          <div class="row row-centered row-middle row-wrapping">
+
+            <div class="col col-10 col-tablet-portrait-8 col-large-6 col-wrapping scroll-effect">
+              <div class="extra-padding-h">
+                <img src="/img/graphic-intro.png" />
               </div>
             </div>
-          </div>
 
-        </div>
-      </div>
-    </app-content-section>
-
-
-    <app-content-section>
-      <div class="content-wrapper">
-        <div class="row row-centered row-middle row-wrapping row-reverse-large">
-
-          <div class="col col-10 col-tablet-portrait-8 col-large-6 col-wrapping scroll-effect">
-            <div class="extra-padding-h">
-              <img src="/img/graphic-hermelin.jpg" style="border-radius:50%"/>
-            </div>
-          </div>
-
-          <div class="col col-large-5 col-large-before-1 col-wrapping scroll-effect scroll-effect-delayed-1">
-            <div>
-              <h2 class="heading centered left-aligned-large">Wiesel-Population in der Schweiz</h2>
-              <p class="">
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
-              </p>
-              <div class="button-group centered left-aligned-large">
-                <router-link tag="button" to="/sources" class="button button-secondary">Mehr erfahren</router-link>
+            <div class="col col-large-5 col-large-after-1 col-wrapping scroll-effect scroll-effect-delayed-1">
+              <div>
+                <h2 class="heading centered left-aligned-large">Mit Kamerafallen auf der Suche nach Wieseln</h2>
+                <p class="">
+                  Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
+                </p>
+                <div class="button-group centered left-aligned-large">
+                  <router-link tag="button" to="/about" class="button button-secondary">Mehr erfahren</router-link>
+                </div>
               </div>
             </div>
+
           </div>
-
         </div>
-      </div>
-    </app-content-section>
+      </app-content-section>
 
-    <section-newsletter-signup></section-newsletter-signup>
 
-    <app-footer></app-footer>
+      <app-content-section>
+        <div class="content-wrapper">
+          <div class="row row-centered row-middle row-wrapping row-reverse-large">
 
-    -->
+            <div class="col col-10 col-tablet-portrait-8 col-large-6 col-wrapping scroll-effect">
+              <div class="extra-padding-h">
+                <img src="/img/graphic-hermelin.jpg" style="border-radius:50%"/>
+              </div>
+            </div>
+
+            <div class="col col-large-5 col-large-before-1 col-wrapping scroll-effect scroll-effect-delayed-1">
+              <div>
+                <h2 class="heading centered left-aligned-large">Wiesel-Population in der Schweiz</h2>
+                <p class="">
+                  Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
+                </p>
+                <div class="button-group centered left-aligned-large">
+                  <router-link tag="button" to="/sources" class="button button-secondary">Mehr erfahren</router-link>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </app-content-section>
+
+      <section-newsletter-signup></section-newsletter-signup>
+
+      <app-footer></app-footer>
+
+      -->
 
   </div>
 </template>
@@ -325,10 +356,12 @@ import ContentSection from "@/components/shared/ContentSection";
 
 import animals from "@/assets/animals.json";
 import Loader from "@/components/shared/Loader";
+import SubmitButton from "../components/shared/SubmitButton";
 
 export default {
   name: 'Identification',
   components: {
+      SubmitButton,
       Loader,
       ContentSection,
       SectionNewsletterSignup,
@@ -367,7 +400,9 @@ export default {
           activeVideo: 0,
 
           taskId: undefined,
-          hasSubmissionAlready: false
+          hasSubmissionAlready: false,
+
+          showSubmissionInfo: false
       }
   },
   computed: {
@@ -393,22 +428,22 @@ export default {
           else if( this.selectedAnimal === -1 ) {
               if( this.comment ) {
                   return {
-                      'category': this.animals[this.openCategory].name.en,
+                      'category': this.animals[this.openCategory].name.de,
                       'animal': 'n/a',
                       'comment': this.comment
                   }
               }
               else {
                   return {
-                      'category': this.animals[this.openCategory].name.en,
+                      'category': this.animals[this.openCategory].name.de,
                       'animal': 'n/a',
                   }
               }
           }
           else if( this.selectedAnimal >= 0 ) {
               return {
-                  'category': this.animals[this.openCategory].name.en,
-                  'animal': this.animals[this.openCategory].animals[this.selectedAnimal].name.en,
+                  'category': this.animals[this.openCategory].name.de,
+                  'animal': this.animals[this.openCategory].animals[this.selectedAnimal].name.de,
               }
           }
       }
@@ -702,13 +737,21 @@ export default {
         this.$store.dispatch('c3s/submission/createSubmission').then(submission => {
 
             console.log('submission sent');
+
+
+            this.showSubmissionInfo = true;
+            let self = this;
+            setTimeout( function() {
+                self.showSubmissionInfo = false;
+                self.loadTask();
+            }, 1500 );
+
             //this.$store.dispatch('stats/increaseMySubmissionCount');
             this.$store.dispatch('stats/updateMySubmissionCount');
             this.$store.dispatch('stats/updateTotalUserAndSubmissionCount');
 
         });
 
-        this.loadTask();
     },
     clickCategory( index ) {
 
@@ -1568,9 +1611,22 @@ export default {
           &.nothing {
             .category {
               height: 40px;
-              background: $color-primary-tint-80;
+              background: $color-black-tint-50;
               .images {
                 height: 40px;
+                &:after {
+                  background: none;
+                }
+              }
+            }
+            &.open {
+              .category {
+                .images {
+                  &:after {
+                    opacity: 1;
+                    background: linear-gradient(120deg, $color-primary-shade-20, rgba($color-primary-shade-20, 0.5) 100%);
+                  }
+                }
               }
             }
           }
