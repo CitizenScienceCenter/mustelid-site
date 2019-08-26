@@ -744,7 +744,7 @@ export default {
             setTimeout( function() {
                 self.showSubmissionInfo = false;
                 self.loadTask();
-            }, 1500 );
+            }, 900 );
 
             //this.$store.dispatch('stats/increaseMySubmissionCount');
             this.$store.dispatch('stats/updateMySubmissionCount');
