@@ -20,8 +20,8 @@
           "stoat2.jpg"
         ],
         "text": {
-          "de": "<ul><li>Schwarze Schwanzspitze</li><li>Übergang heller Bauch zu dunklem Rückenfell bildet eine gerade Linie.</li><ul>",
-          "en": "<ul><li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li></ul>"
+          "de": "<ul><li>schwarze Schwanzspitze</li><li>Übergang heller Bauch zu dunklem Rückenfell bildet eine gerade Linie</li><ul>",
+          "en": "<ul><li>black tail tip</li><li>transition between light belly to dark back fur forms a straight line.</li></ul>"
         }
       },
       {
@@ -34,8 +34,8 @@
           "leastweasel2.jpg"
         ],
         "text": {
-          "de": "<ul><li>Kurzer Schwanz, ohne dunkle Spitze</li><li>Übergang heller Bauch zu dunklem Rückenfell ist gewellt</li><ul>",
-          "en": "<ul><li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li></ul>"
+          "de": "<ul><li>kurzer Schwanz, ohne dunkle Spitze</li><li>Übergang heller Bauch zu dunklem Rückenfell ist gewellt</li><ul>",
+          "en": "<ul><li>short tail, without dark tip</li><li>transition light belly to dark back fur is wavy</li></ul>"
         }
       },
       {
@@ -44,11 +44,12 @@
           "en": "Polecat"
         },
         "images": [
-          "polecat.jpg"
+          "polecat.jpg",
+          "polecat2.jpg"
         ],
         "text": {
           "de": "<ul><li>Gesichttsmaske (helles Gesucht mit dunklen Flecken um die Augen)</li><li>helle Ohren</li><li>Körper heller als Vorderbeine und Schwanz</li></ul>",
-          "en": "<ul><li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li></ul>"
+          "en": "<ul><li>face mask (light face with dark spots around the eyes)</li><li>bright ears</li><li>body lighter than forelegs and tail</li></ul>"
         }
       },
       {
@@ -60,8 +61,8 @@
           "pinemarten.jpg"
         ],
         "text": {
-          "de": "<ul><li>Dunkle Nasespitze</li><li>helle Ohren</li><li>Buschiger Schwanz</li><li>Kehlfleck meistens nicht geteilt</li></ul>",
-          "en": "<ul><li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li></ul>"
+          "de": "<ul><li>dunkle Nasespitze</li><li>buschiger Schwanz</li><li>Kehlfleck meistens nicht geteilt</li></ul>",
+          "en": "<ul><li>dark tip of the nose</li><li>bushy tail</li><li>throat spot in most cases is not divided</li></ul>"
         }
       },
       {
@@ -73,8 +74,8 @@
           "beechmarten.jpg"
         ],
         "text": {
-          "de": "<ul><li>Helle Nasenspitze</li><li>Heller Kehlfleck meist gegabelt und bis zu den Beinen reichend</li></ul>",
-          "en": "<ul><li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li></ul>"
+          "de": "<ul><li>helle Nasenspitze</li><li>heller Kehlfleck meist gegabelt und bis zu den Beinen reichend</li></ul>",
+          "en": "<ul><li>bright nasal tip</li><li>bright throat spot mostly forked and reaching down to the legs</li></ul>"
         }
       }
     ]
@@ -86,7 +87,7 @@
     },
     "images": [
       "shrew.jpg",
-      "vole.jpg",
+      "vole2.jpg",
       "longtailmouse.jpg"
     ],
     "animals": [
@@ -99,8 +100,8 @@
           "shrew.jpg"
         ],
         "text": {
-          "de": "<ul><li>Längliche, spitze Schnauze</li><li>Dünner bis körperlanger Schwanz</li><li>Ohren sichtbar</li></ul>",
-          "en": "<ul><li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li></ul>"
+          "de": "<ul><li>längliche, spitze Schnauze</li><li>dünner bis körperlanger Schwanz</li><li>Ohren sichtbar</li></ul>",
+          "en": "<ul><li>elongated, pointed snout</li><li>thin to body length tail</li><li>ears visible</li></ul>"
         }
       },
       {
@@ -109,11 +110,12 @@
           "en": "Vole"
         },
         "images": [
+          "vole2.jpg",
           "vole.jpg"
         ],
         "text": {
-          "de": "<ul><li>Schwanz ist kürzer als der Körper</li><li>Ohren schlecht bis gar nicht sichtbar</li><li>Runde Kopfform</li></ul>",
-          "en": "<ul><li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li></ul>"
+          "de": "<ul><li>Schwanz ist kürzer als der Körper</li><li>Ohren schlecht bis gar nicht sichtbar</li><li>runde Kopfform</li></ul>",
+          "en": "<ul><li>tail is shorter than the body</li><li>ears poorly or not visible at all</li><li>round head</li></ul>"
         }
       },
       {
@@ -126,7 +128,7 @@
         ],
         "text": {
           "de": "<ul><li>Schwanz ist ungefähr gleich lang wie der Körper oder länger</li><li>Ohren sind gut sichtbar</li><li>Dreieckige Kopfform</li></ul>",
-          "en": "<ul><li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li></ul>"
+          "en": "<ul><li>tail is about the same length as the body or longer</li><li>ears are clearly visible</li><li>triangular head shape</li></ul>"
         }
       },
       {
@@ -138,8 +140,8 @@
           "dormouse.jpg"
         ],
         "text": {
-          "de": "<ul><li>Schwanz lang und stark behaart</li></ul>",
-          "en": "<ul><li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li></ul>"
+          "de": "<ul><li>Schwanz lang und buschig</li></ul>",
+          "en": "<ul><li>tail long and bushy</li></ul>"
         }
       }
     ]
@@ -213,7 +215,7 @@
           "en": "Frog / Toad"
         },
         "images": [
-          "frog.jpg"
+          "toad.jpg"
         ],
         "text": {
           "de": "",
@@ -229,8 +231,8 @@
           "newt.jpg"
         ],
         "text": {
-          "de": "<ul><li>Langgezogener Körper</li><li>Abgeplatteter Schwanz</li></ul>",
-          "en": "<ul><li>Langgezogener Körper</li><li>Abgeplatteter Schwanz</li></ul>"
+          "de": "<ul><li>Llanggezogener Körper</li><li>seitlich abgeplatteter Schwanz</li></ul>",
+          "en": "<ul><li>elongated body</li><li>flattened tail</li></ul>"
         }
       },
       {
@@ -243,7 +245,7 @@
         ],
         "text": {
           "de": "<ul><li>Runder Schwanz</li></ul>",
-          "en": "<ul><li>Runder Schwanz</li></ul>"
+          "en": "<ul><li>round tail</li></ul>"
         }
       },
       {
@@ -293,9 +295,9 @@
       "en": "Bird"
     },
     "images": [
-      "bird1.jpg",
       "bird2.jpg",
-      "bird3.jpg"
+      "bird3.jpg",
+      "bird4.jpg"
     ]
   }
 ]
