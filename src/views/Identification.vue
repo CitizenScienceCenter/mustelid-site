@@ -1618,6 +1618,9 @@ export default {
                   background: none;
                 }
               }
+              .title {
+                font-weight: 400;
+              }
             }
             &.open {
               .category {
