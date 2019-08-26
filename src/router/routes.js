@@ -26,6 +26,11 @@ const Mustelids = resolve => {
         resolve(require("@/views/Mustelids.vue"));
     });
 };
+const FAQ = resolve => {
+    require.ensure(["@/views/FAQ.vue"], () => {
+        resolve(require("@/views/FAQ.vue"));
+    });
+};
 const Terms = resolve => {
     require.ensure(["@/views/shared/static/Terms.vue"], () => {
         resolve(require("@/views/shared/static/Terms.vue"));
@@ -78,6 +83,12 @@ export const routes = [
                 component: Forum,
                 name: "Forum",
                 meta: {requiresAuth: true, i18n: 'navigation-forum', nav: true},
+            },
+            {
+                path: "faq",
+                component: FAQ,
+                name: "FAQ",
+                meta: {i18n: 'navigation-faq', nav: true},
             },
             {
                 path: "scientifica",

@@ -48,6 +48,9 @@ export const i18n = new VueI18n({
           'navigation-forum': {
               'link': 'Forum'
           },
+          'navigation-faq': {
+              'link': 'FAQ'
+          },
           'navigation-about': {
               'link': 'Über das Projekt'
           },
@@ -90,6 +93,9 @@ export const i18n = new VueI18n({
           },
           'navigation-forum': {
               'link': 'Forum'
+          },
+          'navigation-faq': {
+              'link': 'FAQ'
           },
           'navigation-about': {
               'link': 'About the Project'
