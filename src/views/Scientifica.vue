@@ -20,13 +20,13 @@
 
   "paragraph-2": "You can contribute directly at the stand or from home.",
   "subheading-1": "Taking part from home",
-  "paragraph-3": "At the end of the event, the participant with the <b>highest number of contributions</b> wins the 1st Prize. (We’re taking a look at the quality of the data.)<br>To win a prize you need to create a citizenscience.ch account.",
+  "paragraph-3": "At the end of the event, the participant with <b>the highest number of answers</b> wins the 1st Prize. <b>Found weasels count extra (10x).</b> We’re taking a look at the quality of the contributions.<br>To win a prize you need to create a citizenscience.ch account first.",
   "subheading-2": "At the Scientifica",
   "paragraph-4": "But that is not your only chance! If you manage to be the <b>first visitor to spot a weasel at our Scientifica stand</b>, you are immediately awarded an Extra Prize.<br>We start counting from zero every 3 hours, so in total up to 5 visitors can win a price on the stand (Fri: 6 - 9 pm / Sat: 1 - 4pm and 4 - 7pm/ Sun: 11am - 2pm and 2 - 5pm)",
 
   "heading-prize": "First Prize",
   "prize-1": "<b>The Book Marder, Iltis, Nerz und Wiesel</b>",
-  "prize-2": "or<br><b>a Free admission to an event of StadtWildTiere</b>"
+  "prize-2": "or<br><b>a free admission to an event of StadtWildTiere</b>"
 
   },
   "en": {
@@ -48,13 +48,13 @@
 
   "paragraph-2": "You can contribute directly at the stand or from home.",
   "subheading-1": "Taking part from home",
-  "paragraph-3": "At the end of the event, the participant with the <b>highest number of contributions</b> wins the 1st Prize. (We’re taking a look at the quality of the data.)<br>To win a prize you need to create a citizenscience.ch account.",
+  "paragraph-3": "At the end of the event, the participant with <b>the highest number of answers</b> wins the 1st Prize. <b>Found weasels count extra (10x).</b> We’re taking a look at the quality of the contributions.<br>To win a prize you need to create a citizenscience.ch account first.",
   "subheading-2": "At the Scientifica",
   "paragraph-4": "But that is not your only chance! If you manage to be the <b>first visitor to spot a weasel at our Scientifica stand</b>, you are immediately awarded an Extra Prize.<br>We start counting from zero every 3 hours, so in total up to 5 visitors can win a price on the stand (Fri: 6 - 9 pm / Sat: 1 - 4pm and 4 - 7pm/ Sun: 11am - 2pm and 2 - 5pm)",
 
   "heading-prize": "First Prize",
   "prize-1": "<b>The Book Marder, Iltis, Nerz und Wiesel</b>",
-  "prize-2": "or<br><b>a Free admission to an event of StadtWildTiere</b>"
+  "prize-2": "or<br><b>a free admission to an event of StadtWildTiere</b>"
 
   }
 
