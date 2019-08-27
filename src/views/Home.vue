@@ -261,12 +261,13 @@
   @import '@/styles/theme.scss';
   @import '@/styles/shared/variables.scss';
   .scientifica-teaser {
+
     position: absolute;
     top: calc( 48px + #{$spacing-2});
     left: 0;
     line-height: 0;
     img {
-      height: 48px;
+      height: 56px;
     }
     transition: opacity $transition-duration-short $transition-timing-function;
     opacity: 0.8;
@@ -283,7 +284,7 @@
     .scientifica-teaser {
       top: calc( 64px + #{$spacing-2});
       img {
-        height: 56px;
+        height: 64px;
       }
     }
   }
@@ -291,7 +292,7 @@
     .scientifica-teaser {
       top: calc( 64px + #{$spacing-3});
       img {
-        height: 64px;
+        height: 72px;
       }
     }
   }
@@ -299,7 +300,7 @@
     .scientifica-teaser {
       top: calc( 80px + #{$spacing-3});
       img {
-        height: 72px;
+        height: 80px;
       }
     }
   }
