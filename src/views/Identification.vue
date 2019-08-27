@@ -474,7 +474,7 @@ export default {
 
       this.$store.dispatch("c3s/activity/getActivity", [this.activityId, false]).then(activity => {
 
-          console.log('activity loaded');
+          //console.log('activity loaded');
 
           // load task with or without id
           if( this.$route.params.id ) {
@@ -511,7 +511,7 @@ export default {
   },
   methods: {
       loadUiImages() {
-          console.log('load ui images');
+          //console.log('load ui images');
           this.noOfUiImages = 0;
           this.noOfUiImagesLoaded = 0;
           let self = this;
@@ -523,7 +523,7 @@ export default {
                   image.onload = function() {
                       self.noOfUiImagesLoaded++;
                       if( self.noOfUiImagesLoaded === self.noOfUiImages ) {
-                          console.log('ui images loaded');
+                          //console.log('ui images loaded');
                           self.uiImagesLoaded = true;
                       }
                   };
@@ -532,7 +532,7 @@ export default {
       },
     loadTask() {
 
-          console.log('load task');
+        //console.log('load task');
 
         let taskQuery;
         if( !this.taskId ) {
@@ -599,7 +599,7 @@ export default {
 
         this.$store.dispatch('c3s/task/getTasks', [taskQuery, 1]).then(tasks => {
 
-            console.log('responded tasks');
+            //console.log('responded tasks');
 
             this.hasSubmissionAlready = false;
 
@@ -649,7 +649,7 @@ export default {
 
             if ( this.tasks[0] ) {
 
-                console.log( 'task loaded');
+                //console.log( 'task loaded');
                 if( navigator.userAgent !== 'ReactSnap' ) {
                     this.$router.replace('/identification/'+this.tasks[0].id);
                 }
@@ -676,8 +676,8 @@ export default {
                 this.$store.dispatch('c3s/media/getMedia', [mediaQuery, 'c3s/task/SET_MEDIA', 0]).then(media => {
 
 
-                    console.log( 'media loaded');
-                    console.log ( this.taskMedia );
+                    //console.log( 'media loaded');
+                    //console.log ( this.taskMedia );
                     // media loaded
 
                     this.videoLoaded = false;

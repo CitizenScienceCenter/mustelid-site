@@ -252,7 +252,6 @@ export default {
       })
   },
     mounted() {
-      console.log('mounted');
         this.$store.dispatch('stats/updateTotalUserAndSubmissionCount');
         this.$store.dispatch('stats/updateTotalTaskCount');
     },
