@@ -291,7 +291,9 @@ export default {
     transition-delay: 900ms;
 
     .scientifica-teaser {
+
         line-height: 0;
+
         img {
           height: 48px;
         }
@@ -306,6 +308,7 @@ export default {
             opacity: 1;
           }
         }
+
     }
 
     &.show {
@@ -357,11 +360,13 @@ export default {
   @media only screen and (min-width: $viewport-xlarge) {
 
     .scientifica-teaser-wrapper {
+
       top: calc( 88px + #{$spacing-3});
+
       .scientifica-teaser {
-        img {
-          height: 88px;
-        }
+          img {
+            height: 88px;
+          }
       }
     }
 
