@@ -685,7 +685,11 @@ export default {
                     this.openCategory = null;
                     this.selectedAnimal = null;
                     this.comment = null;
-                    this.$refs.video0[0].load();
+
+                    let self = this;
+                    setTimeout( function() {
+                        self.$refs.video0[0].load();
+                    }, 1);
 
                     this.playing = true;
 
