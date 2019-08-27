@@ -6,7 +6,7 @@
   "page-title": "Scientifica 2019: Find the Weasel!",
 
 
-  "heading-scientifica": "Our Stand at Scientifica 2019",
+  "heading-scientifica": "Visit us at Scientifica 2019",
   "list-item-1": "<b>Time: </b>Friday, 30 August 6pm – Sunday, 1 Sep 2019 5pm",
   "list-item-2": "<b>Place: </b>exhibition stand of the Citizen Science Center Zurich near the entry in the big Scientifica tent on Polyterasse",
   "list-item-3": "<b>1st Prize: </b>A Book or free access to event of StadtWildTiere, plus featured in the “Weasel wanted” platform (if wished)",
@@ -34,7 +34,7 @@
   "page-title": "Scientifica 2019: Find the Weasel!",
 
 
-  "heading-scientifica": "Our Stand at Scientifica 2019",
+  "heading-scientifica": "Visit us at Scientifica 2019",
   "list-item-1": "<b>Time: </b>Friday, 30 August 6pm – Sunday, 1 Sep 2019 5pm",
   "list-item-2": "<b>Place: </b>exhibition stand of the Citizen Science Center Zurich near the entry in the big Scientifica tent on Polyterasse",
   "list-item-3": "<b>1st Prize: </b>A Book or free access to event of StadtWildTiere, plus featured in the “Weasel wanted” platform (if wished)",
