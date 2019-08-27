@@ -263,19 +263,23 @@
   .scientifica-teaser {
     position: absolute;
     top: calc( 48px + #{$spacing-2});
-    left: 0;
+    left: -16px;
     line-height: 0;
     img {
       height: 48px;
+      opacity: 0.9;
     }
     transition: opacity $transition-duration-short $transition-timing-function;
-    opacity: 0.9;
     &:active, &:focus {
-      opacity: 1;
+      img {
+        opacity: 1;
+      }
     }
     @media (hover: hover) {
       &:hover {
-        opacity: 1;
+        img {
+          opacity: 1;
+        }
       }
     }
   }
