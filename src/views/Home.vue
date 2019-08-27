@@ -81,12 +81,9 @@
 
 
 
-    <div class="scientifica-teaser-wrapper">
-      <router-link to="/scientifica" class="scientifica-teaser">
-        <img src="/img/scientifica-teaser.png" />
-      </router-link>
-    </div>
-
+    <router-link to="/scientifica" class="scientifica-teaser">
+      <img src="/img/scientifica-teaser.png" />
+    </router-link>
 
     <app-content-section>
       <div class="content-wrapper">
@@ -263,75 +260,55 @@
 <style lang="scss">
   @import '@/styles/theme.scss';
   @import '@/styles/shared/variables.scss';
-
-  .scientifica-teaser-wrapper {
+  .scientifica-teaser {
     position: absolute;
     top: calc( 48px + #{$spacing-2});
     left: 0;
     line-height: 0;
-
-    .scientifica-teaser {
-      display: block;
-      img {
-        height: 48px;
-      }
-      transition: opacity $transition-duration-short $transition-timing-function;
-      opacity: 0.9;
-      &:active, &:focus {
+    img {
+      height: 48px;
+    }
+    transition: opacity $transition-duration-short $transition-timing-function;
+    opacity: 0.9;
+    &:active, &:focus {
+      opacity: 1;
+    }
+    @media (hover: hover) {
+      &:hover {
         opacity: 1;
       }
-      @media (hover: hover) {
-        &:hover {
-          opacity: 1;
-        }
-      }
     }
   }
-
-
   @media only screen and (min-width: $viewport-mobile-large) {
-    .scientifica-teaser-wrapper {
-      top: calc(64px + #{$spacing-2});
-      .scientifica-teaser {
-        img {
-          height: 56px;
-        }
+    .scientifica-teaser {
+      top: calc( 64px + #{$spacing-2});
+      img {
+        height: 56px;
       }
     }
   }
-
   @media only screen and (min-width: $viewport-tablet-portrait) {
-    .scientifica-teaser-wrapper {
-      top: calc(64px + #{$spacing-3});
-      .scientifica-teaser {
-        img {
-          height: 64px;
-        }
+    .scientifica-teaser {
+      top: calc( 64px + #{$spacing-3});
+      img {
+        height: 64px;
       }
     }
   }
-
   @media only screen and (min-width: $viewport-large) {
-    .scientifica-teaser-wrapper {
-      top: calc(80px + #{$spacing-3});
-      .scientifica-teaser {
-        img {
-          height: 72px;
-        }
+    .scientifica-teaser {
+      top: calc( 80px + #{$spacing-3});
+      img {
+        height: 72px;
       }
     }
   }
-
   @media only screen and (min-width: $viewport-xlarge) {
-    .scientifica-teaser-wrapper {
-      top: calc(88px + #{$spacing-3});
-      .scientifica-teaser {
-        img {
-          height: 88px;
-        }
+    .scientifica-teaser {
+      top: calc( 88px + #{$spacing-3});
+      img {
+        height: 88px;
       }
     }
   }
-
-
 </style>
