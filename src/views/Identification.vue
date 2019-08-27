@@ -1609,15 +1609,12 @@ export default {
           &.nothing {
             .category {
               height: 40px;
-              background: $color-black-tint-50;
+              background: $color-black-tint-70;
               .images {
                 height: 40px;
                 &:after {
                   background: none;
                 }
-              }
-              .title {
-                font-weight: 400;
               }
             }
             &.open {
