@@ -356,7 +356,7 @@ import ContentSection from "@/components/shared/ContentSection";
 
 import animals from "@/assets/animals.json";
 import Loader from "@/components/shared/Loader";
-import SubmitButton from "../components/shared/SubmitButton";
+import SubmitButton from "@/components/shared/SubmitButton";
 
 export default {
   name: 'Identification',
@@ -450,13 +450,6 @@ export default {
     },
   mounted() {
 
-      /*
-      var self = this;
-      window.addEventListener('resize', function() {
-          //self.resizeAnimalList();
-      } );
-      */
-
       this.animalListStates = [];
       for( let i=0; i < animals.length; i++ ) {
           if( this.animals[i].animals ) {
@@ -479,10 +472,9 @@ export default {
 
       this.loadUiImages();
 
-
       this.$store.dispatch("c3s/activity/getActivity", [this.activityId, false]).then(activity => {
 
-          //console.log('activity loaded');
+          console.log('activity loaded');
 
           // load task with or without id
           if( this.$route.params.id ) {
@@ -519,6 +511,7 @@ export default {
   },
   methods: {
       loadUiImages() {
+          console.log('load ui images');
           this.noOfUiImages = 0;
           this.noOfUiImagesLoaded = 0;
           let self = this;
@@ -530,6 +523,7 @@ export default {
                   image.onload = function() {
                       self.noOfUiImagesLoaded++;
                       if( self.noOfUiImagesLoaded === self.noOfUiImages ) {
+                          console.log('ui images loaded');
                           self.uiImagesLoaded = true;
                       }
                   };
@@ -537,6 +531,8 @@ export default {
           }
       },
     loadTask() {
+
+          console.log('load task');
 
         let taskQuery;
         if( !this.taskId ) {
@@ -603,7 +599,7 @@ export default {
 
         this.$store.dispatch('c3s/task/getTasks', [taskQuery, 1]).then(tasks => {
 
-            //console.log('responded tasks');
+            console.log('responded tasks');
 
             this.hasSubmissionAlready = false;
 
@@ -653,12 +649,10 @@ export default {
 
             if ( this.tasks[0] ) {
 
-                //console.log( 'task loaded');
+                console.log( 'task loaded');
                 if( navigator.userAgent !== 'ReactSnap' ) {
                     this.$router.replace('/identification/'+this.tasks[0].id);
                 }
-
-                //console.log( this.tasks[0] );
 
                 const mediaQuery = {
                     'select': {
@@ -682,8 +676,8 @@ export default {
                 this.$store.dispatch('c3s/media/getMedia', [mediaQuery, 'c3s/task/SET_MEDIA', 0]).then(media => {
 
 
-                    //console.log( 'media loaded');
-                    //console.log ( this.taskMedia );
+                    console.log( 'media loaded');
+                    console.log ( this.taskMedia );
                     // media loaded
 
                     this.videoLoaded = false;
