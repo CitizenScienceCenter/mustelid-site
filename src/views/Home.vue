@@ -81,7 +81,7 @@
 
 
 
-    <div class="pirmin" :class="{show: showTeaser}">
+    <div class="scientifica-teaser-wrapper" :class="{show: showTeaser}">
       <router-link to="/scientifica" class="scientifica-teaser">
         <img src="/img/scientifica-teaser.png" />
       </router-link>
@@ -281,11 +281,11 @@ export default {
   @import '@/styles/shared/variables.scss';
 
 
-  .pirmin {
+  .scientifica-teaser-wrapper {
 
     position: absolute;
     top: calc( 48px + #{$spacing-2});
-    left: -240px;
+    left: 0;
 
     transition: left $transition-duration-super-long $transition-timing-function;
     transition-delay: 900ms;
@@ -320,7 +320,7 @@ export default {
 
   @media only screen and (min-width: $viewport-mobile-large) {
 
-    .pirmin {
+    .scientifica-teaser-wrapper {
       top: calc( 64px + #{$spacing-2});
       .scientifica-teaser {
         img {
@@ -333,7 +333,7 @@ export default {
 
   @media only screen and (min-width: $viewport-tablet-portrait) {
 
-    .pirmin {
+    .scientifica-teaser-wrapper {
       top: calc( 64px + #{$spacing-3});
       .scientifica-teaser {
         img {
@@ -347,7 +347,7 @@ export default {
 
   @media only screen and (min-width: $viewport-large) {
 
-    .pirmin {
+    .scientifica-teaser-wrapper {
       top: calc( 80px + #{$spacing-3});
       .scientifica-teaser {
         img {
@@ -361,7 +361,7 @@ export default {
 
   @media only screen and (min-width: $viewport-xlarge) {
 
-    .pirmin {
+    .scientifica-teaser-wrapper {
 
       top: calc( 88px + #{$spacing-3});
 
