@@ -686,10 +686,12 @@ export default {
                     this.selectedAnimal = null;
                     this.comment = null;
 
-                    let self = this;
-                    setTimeout( function() {
-                        self.$refs.video0[0].load();
-                    }, 1);
+                    if( navigator.userAgent !== 'ReactSnap' ) {
+                        let self = this;
+                        setTimeout(function () {
+                            self.$refs.video0[0].load();
+                        }, 1);
+                    }
 
                     this.playing = true;
 
