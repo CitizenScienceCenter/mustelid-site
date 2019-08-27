@@ -5,7 +5,7 @@
   "de": {
 
   "cover-heading": "Dem Wiesel auf der Spur",
-  "cover-subheading": "Wer zeigt sich in der Fotoböx?",
+  "cover-subheading": "Wer zeigt sich in der Fotobox?",
   "cover-button-primary": "Zu den Videos",
   "cover-button-secondary": "Über's Projekt",
 
