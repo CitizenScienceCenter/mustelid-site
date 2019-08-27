@@ -263,7 +263,7 @@
   .scientifica-teaser {
     position: absolute;
     top: calc( 48px + #{$spacing-2});
-    left: -16px;
+    left: 0;
     line-height: 0;
     img {
       height: 48px;
