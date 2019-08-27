@@ -267,19 +267,15 @@
     line-height: 0;
     img {
       height: 48px;
-      opacity: 0.9;
     }
     transition: opacity $transition-duration-short $transition-timing-function;
+    opacity: 0.9;
     &:active, &:focus {
-      img {
-        opacity: 1;
-      }
+      opacity: 1;
     }
     @media (hover: hover) {
       &:hover {
-        img {
-          opacity: 1;
-        }
+        opacity: 1;
       }
     }
   }
