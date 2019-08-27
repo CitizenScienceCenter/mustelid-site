@@ -126,7 +126,7 @@
                 <div class="col col-large-6 col-wrapping">
                   <p v-html="$t('prize-2')" class="reduced-bottom-margin"></p>
                   <a href="http://swild.ch" target="_blank">
-                    <img src="/img/logo-swild.png" style="width: 50%" />
+                    <img src="/img/logo-swild.png" style="width: 33.333%" />
                   </a>
                 </div>
               </div>
