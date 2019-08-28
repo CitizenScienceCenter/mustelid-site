@@ -3,43 +3,41 @@
 
   "de": {
 
-  "page-title": "Scientifica 2019: Find the Weasel!",
+  "page-title": "Scientifica 2019: Finde das Wiesel!",
 
+  "heading-scientifica": "Besuchen Sie uns auf der Scientifica",
+  "list-item-1": "<b>Zeit: </b>Freitag, 30. August, 18 Uhr – Sonntag, 1. September, 17 Uhr",
+  "list-item-2": "<b>Ort: </b>Ausstellungsstand des Citizen Science Centers Zürich im grossen Scientifica-Zelt auf der Polyterasse (ETH, Rämistrasse 101, Zürich)",
+  "list-item-3": "<b>Challenge: </b>«Finde das Wiesel» mit Preisen zu gewinnen",
+  "list-item-4": "Probieren Sie verschiedene Citizen Science Projekte aus",
 
-  "heading-scientifica": "Visit us at Scientifica 2019",
-  "list-item-1": "<b>Time: </b>Friday, 30 August 6pm – Sunday, 1 Sep 2019 5pm",
-  "list-item-2": "<b>Place: </b>exhibition stand of the Citizen Science Center Zurich near the entry in the big Scientifica tent on Polyterasse",
-  "list-item-3": "<b>1st Prize: </b>A Book or free access to event of StadtWildTiere, plus featured in the “Weasel wanted” platform (if wished)",
-  "list-item-4": "Additional Extra Prizes at the stand",
+  "page-heading": "Die Challenge",
 
+  "paragraph-1": "Wie viele tierische Besucher der Kamerafallen können Sie während der dreitägigen Scientifica identifizieren? Schauen Sie sich die Videos an und bestimmen Sie, wer die Box betreten hat.",
+  "button-text": "Zu den Videos",
 
-  "page-heading": "The Challenge",
+  "paragraph-2": "Sie können direkt an unserem Scientifica-Stand oder zu Hause mitmachen.",
+  "subheading-1": "Zu Hause mitmachen",
+  "paragraph-3": "Am Ende der drei Scientifica-Tage gewinnt der oder die <b>Teilnehmer/in mit den meisten Beiträgen</b> den Hauptgewinn. <b>Wenn Sie ein Wiesel finden, zählt dies zehnfach.</b> Wir überprüfen die Qualität der Beiträge.<br>Um einen Preis zu gewinnen, müssen Sie zuerst Ihren <a href='/login'>citizenscience.ch Account erstellen</a>.",
+  "subheading-2": "An der Scientifica teilnehmen",
+  "paragraph-4": "Wenn Sie es schaffen, <b>als erstes ein Wiesel an unserem Scientifica-Stand zu entdecken</b>, bekommen Sie sofort einen Extrapreis.<br>Wir beginnen alle 3 Stunden von null zu zählen, sodass insgesamt bis zu 5 Besucher/innen einen Extrapreis am Stand gewinnen können (Fr: 18 - 21 Uhr / Sa: 13 - 16 Uhr und 16 - 19 Uhr / So: 11 - 14 Uhr und 14 - 5pm) ",
 
-  "paragraph-1": "How many animal visitors of the camera traps can you identify during the three days of Scientifica? Look at the video clips on the Identification page and tell us who entered the box.",
-  "button-text": "To the Videos",
+  "heading-prize": "Hauptgewinn",
+  "prize-1": "<b>Sachbuch: Marder, Iltis, Nerz und Wiesel</b>",
+  "prize-2": "oder ein<br><b>Gutschein für eine Veranstaltung von StadtWildTiere</b>",
 
-  "paragraph-2": "You can contribute directly at the stand or from home.",
-  "subheading-1": "Taking part from home",
-  "paragraph-3": "At the end of the event, the participant with <b>the highest number of answers</b> wins the 1st Prize. <b>Found weasels count extra (10x).</b> We’re taking a look at the quality of the contributions.<br>To win a prize you need to create a citizenscience.ch account first.",
-  "subheading-2": "At the Scientifica",
-  "paragraph-4": "But that is not your only chance! If you manage to be the <b>first visitor to spot a weasel at our Scientifica stand</b>, you are immediately awarded an Extra Prize.<br>We start counting from zero every 3 hours, so in total up to 5 visitors can win a price on the stand (Fri: 6 - 9 pm / Sat: 1 - 4pm and 4 - 7pm/ Sun: 11am - 2pm and 2 - 5pm)",
-
-  "heading-prize": "First Prize",
-  "prize-1": "<b>The Book Marder, Iltis, Nerz und Wiesel</b>",
-  "prize-2": "or<br><b>a free admission to an event of StadtWildTiere</b>"
+  "paragraph-5": "Wenn Sie möchten, stellen wir Sie ausserdem auf dieser Seite vor."
 
   },
   "en": {
 
   "page-title": "Scientifica 2019: Find the Weasel!",
 
-
-  "heading-scientifica": "Visit us at Scientifica 2019",
+  "heading-scientifica": "Visit us at Scientifica",
   "list-item-1": "<b>Time: </b>Friday, 30 August 6pm – Sunday, 1 Sep 2019 5pm",
-  "list-item-2": "<b>Place: </b>exhibition stand of the Citizen Science Center Zurich near the entry in the big Scientifica tent on Polyterasse",
-  "list-item-3": "<b>1st Prize: </b>A Book or free access to event of StadtWildTiere, plus featured in the “Weasel wanted” platform (if wished)",
-  "list-item-4": "Additional Extra Prizes at the stand",
-
+  "list-item-2": "<b>Place: </b>Exhibition stand of the Citizen Science Center Zurich near the entry in the big Scientifica tent on Polyterasse (ETH, Rämistrasse 101, Zürich)",
+  "list-item-3": "<b>Challenge: </b>«Find a Weasel» with prizes to win",
+  "list-item-4": "Try out several of our Citizen Science projects",
 
   "page-heading": "The Challenge",
 
@@ -48,13 +46,15 @@
 
   "paragraph-2": "You can contribute directly at the stand or from home.",
   "subheading-1": "Taking part from home",
-  "paragraph-3": "At the end of the event, the participant with <b>the highest number of answers</b> wins the 1st Prize. <b>Found weasels count extra (10x).</b> We’re taking a look at the quality of the contributions.<br>To win a prize you need to create a citizenscience.ch account first.",
-  "subheading-2": "At the Scientifica",
+  "paragraph-3": "At the end of the event, the participant with <b>the highest number of answers</b> wins the 1st Prize. <b>Found weasels count extra (10x).</b> We’re taking a look at the quality of the contributions.<br>To win a prize you need to <a href='/login'>create a citizenscience.ch account</a> first.",
+  "subheading-2": "Taking Part at the Scientifica",
   "paragraph-4": "But that is not your only chance! If you manage to be the <b>first visitor to spot a weasel at our Scientifica stand</b>, you are immediately awarded an Extra Prize.<br>We start counting from zero every 3 hours, so in total up to 5 visitors can win a price on the stand (Fri: 6 - 9 pm / Sat: 1 - 4pm and 4 - 7pm/ Sun: 11am - 2pm and 2 - 5pm)",
 
   "heading-prize": "First Prize",
-  "prize-1": "<b>The Book Marder, Iltis, Nerz und Wiesel</b>",
-  "prize-2": "or<br><b>a free admission to an event of StadtWildTiere</b>"
+  "prize-1": "<b>Book: Marder, Iltis, Nerz und Wiesel</b>",
+  "prize-2": "or a<br><b>Free admission to an event of StadtWildTiere</b>",
+
+  "paragraph-5": "If wished we will feature the winner on this website."
 
   }
 
@@ -125,9 +125,12 @@
                 </div>
                 <div class="col col-large-6 col-wrapping">
                   <p v-html="$t('prize-2')" class="reduced-bottom-margin"></p>
-                  <a href="http://swild.ch" target="_blank">
-                    <img src="/img/logo-swild.png" style="width: 33.333%" />
+                  <a href="https://stadtwildtiere.ch" target="_blank">
+                    <img src="/img/logo-stadtwildtiere.png" />
                   </a>
+                </div>
+                <div class="col">
+                  <p v-html="$t('paragraph-5')" class="reduced-bottom-margin"></p>
                 </div>
               </div>
             </div>

@@ -270,7 +270,7 @@
       height: 56px;
     }
     transition: opacity $transition-duration-short $transition-timing-function;
-    opacity: 0.8;
+    opacity: 0.9;
     &:active, &:focus {
       opacity: 1;
     }

@@ -1012,7 +1012,7 @@ export default {
           &:before {
             content: "";
             display: block;
-            padding-bottom: calc( 100% / 16 * 8.6 );
+            padding-bottom: calc( 100% / 16 * 9.0 );
           }
 
 
@@ -1038,7 +1038,8 @@ export default {
             position: absolute;
             top: 0%;
             right: 0%;
-            height: 105%;
+            //height: 105%;
+            height: 100%;
             opacity: 0;
 
             cursor: pointer;
@@ -1128,7 +1129,7 @@ export default {
                   }
 
                   height: 40px;
-                  min-width: calc( 40px / 8.6 * 16 );
+                  min-width: calc( 40px / 9.0 * 16 );
 
                   cursor: pointer;
 
@@ -1761,7 +1762,7 @@ export default {
                 ul {
                   li {
                     height: 48px;
-                    min-width: calc( 48px / 8.6 * 16 );
+                    min-width: calc( 48px / 9.0 * 16 );
                   }
                 }
               }
@@ -1893,7 +1894,7 @@ export default {
 
         .video-player {
           height: calc( 100vh - 160px - 135px );
-          width: calc( ( 100vh - 160px - 135px ) / 8.6 * 16 );
+          width: calc( ( 100vh - 160px - 135px ) / 9.0 * 16 );
           overflow: hidden;
 
           max-width: 100%;
@@ -1975,7 +1976,7 @@ export default {
       .video-section {
         .video-player {
           height: calc(100vh - 160px - 151px);
-          width: calc((100vh - 160px - 151px) / 8.6 * 16);
+          width: calc((100vh - 160px - 151px) / 9.0 * 16);
         }
       }
       .answer-section {
