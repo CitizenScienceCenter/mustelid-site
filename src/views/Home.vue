@@ -54,7 +54,7 @@
 <template>
   <div>
 
-    <app-cover imageUrl="/img/cover.jpg" goal="15">
+    <app-cover imageUrl="/img/cover.jpg" goal="15" logoUrl="/img/logo-swild-white.png">
       <div class="row row-centered">
         <div class="col col-large-8">
           <h2 class="cover-heading scroll-effect" v-html="$t('cover-heading')"></h2>
@@ -74,7 +74,6 @@
         </div>
       </div>
     </app-cover>
-
 
 
     <section-stats color="greyish" :submissionCount="totalSubmissionCount" :userCount="totalUserCount" :taskCount="totalTaskCount" ></section-stats>
@@ -279,7 +278,7 @@
     left: -240px;
 
     transition: left $transition-duration-super-long $transition-timing-function;
-    transition-delay: 900ms;
+    transition-delay: 600ms;
 
     line-height: 0;
 
