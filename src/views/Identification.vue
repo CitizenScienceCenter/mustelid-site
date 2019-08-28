@@ -70,11 +70,11 @@
 
         <div class="video-player scroll-effect scroll-effect-delayed-1">
 
-          <div class="video-wrapper" v-if="taskMedia" :class="{loading: !videoLoaded}">
+          <div class="video-wrapper" v-if="taskMedia" :class="{loading: !videoLoaded || !mediaLoaded}">
 
             <loader></loader>
 
-            <template v-for="(video,index) in taskMedia">
+            <template v-if="mediaLoaded" v-for="(video,index) in taskMedia">
               <video v-if="index === 0" :key="'video'+index" :ref="'video'+index" playsinline muted :class="{ activeVideo: index === activeVideo }" @timeupdate="onVideoUpdate" @ended="onVideoEnd" @loadeddata="onFirstVideoLoaded" @seeked="onVideoSeeked" @click="play">
                 <source type="video/mp4" :src="'https://api.citizenscience.ch/files/upload/'+video.path">
               </video>
@@ -402,7 +402,9 @@ export default {
           taskId: undefined,
           hasSubmissionAlready: false,
 
-          showSubmissionInfo: false
+          showSubmissionInfo: false,
+
+          mediaLoaded: false
       }
   },
   computed: {
@@ -532,7 +534,8 @@ export default {
       },
     loadTask() {
 
-        //console.log('load task');
+        this.mediaLoaded = false;
+        console.log('load task');
 
         let taskQuery;
         if( !this.taskId ) {
@@ -686,12 +689,13 @@ export default {
                     this.selectedAnimal = null;
                     this.comment = null;
 
+                    this.mediaLoaded = true;
+
+                    /*
                     if( navigator.userAgent !== 'ReactSnap' ) {
-                        let self = this;
-                        setTimeout(function () {
-                            self.$refs.video0[0].load();
-                        }, 1);
+                        this.$refs.video0[0].load();
                     }
+                    */
 
                     this.playing = true;
 
