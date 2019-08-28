@@ -81,9 +81,11 @@
 
 
 
-    <router-link to="/scientifica" class="scientifica-teaser">
-      <img src="/img/scientifica-teaser.png" />
-    </router-link>
+    <div class="scientifica-teaser-wrapper" :class="{show: showTeaser}">
+      <router-link to="/scientifica" class="scientifica-teaser">
+        <img src="/img/scientifica-teaser.png" />
+      </router-link>
+    </div>
 
     <app-content-section>
       <div class="content-wrapper">
@@ -235,6 +237,11 @@
                 ]
             }
         },
+        data() {
+            return {
+                showTeaser: false
+            }
+        },
         computed: {
             ...mapState({
                 user: state => state.c3s.user,
@@ -247,6 +254,8 @@
             console.log('mounted');
             this.$store.dispatch('stats/updateTotalUserAndSubmissionCount');
             this.$store.dispatch('stats/updateTotalTaskCount');
+
+            this.showTeaser = true;
         },
         methods: {
             openInNewTab: function(url) {
@@ -258,58 +267,103 @@
 </script>
 
 <style lang="scss">
+
   @import '@/styles/theme.scss';
   @import '@/styles/shared/variables.scss';
-  .scientifica-teaser {
+
+
+  .scientifica-teaser-wrapper {
 
     position: absolute;
     top: calc( 48px + #{$spacing-2});
-    left: 0;
+    left: -240px;
+
+    transition: left $transition-duration-super-long $transition-timing-function;
+    transition-delay: 900ms;
+
     line-height: 0;
-    img {
-      height: 56px;
-    }
-    transition: opacity $transition-duration-short $transition-timing-function;
-    opacity: 0.9;
-    &:active, &:focus {
-      opacity: 1;
-    }
-    @media (hover: hover) {
-      &:hover {
+
+    .scientifica-teaser {
+      display: block;
+
+      img {
+        height: 56px;
+      }
+      transition: opacity $transition-duration-short $transition-timing-function;
+      opacity: 0.9;
+
+      &:active, &:focus {
         opacity: 1;
       }
+      @media (hover: hover) {
+        &:hover {
+          opacity: 1;
+        }
+      }
+
     }
+
+    &.show {
+      left: 0;
+    }
+
   }
+
   @media only screen and (min-width: $viewport-mobile-large) {
-    .scientifica-teaser {
+
+    .scientifica-teaser-wrapper {
       top: calc( 64px + #{$spacing-2});
-      img {
-        height: 64px;
+      .scientifica-teaser {
+        img {
+          height: 64px;
+        }
       }
     }
+
   }
+
   @media only screen and (min-width: $viewport-tablet-portrait) {
-    .scientifica-teaser {
+
+    .scientifica-teaser-wrapper {
       top: calc( 64px + #{$spacing-3});
-      img {
-        height: 72px;
+      .scientifica-teaser {
+        img {
+          height: 72px;
+        }
       }
     }
+
   }
+
+
   @media only screen and (min-width: $viewport-large) {
-    .scientifica-teaser {
+
+    .scientifica-teaser-wrapper {
       top: calc( 80px + #{$spacing-3});
-      img {
-        height: 80px;
+      .scientifica-teaser {
+        img {
+          height: 80px;
+        }
       }
     }
+
   }
+
+
   @media only screen and (min-width: $viewport-xlarge) {
-    .scientifica-teaser {
+
+    .scientifica-teaser-wrapper {
+
       top: calc( 88px + #{$spacing-3});
-      img {
-        height: 88px;
+
+      .scientifica-teaser {
+        img {
+          height: 88px;
+        }
       }
     }
+
   }
+
+
 </style>
