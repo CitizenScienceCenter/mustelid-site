@@ -1386,6 +1386,7 @@ export default {
                     position: relative;
                     overflow: hidden;
 
+
                     .image-list {
 
                       font-size: 0;
@@ -1665,6 +1666,10 @@ export default {
       }
     }
 
+    .loader-wrapper {
+      height: calc( 100vh - 96px - 48px );
+    }
+
   }
 
 
@@ -1752,6 +1757,120 @@ export default {
   }
 
 
+
+  @media only screen and (min-width: $viewport-mobile-large) {
+
+
+    .mustelid-identification {
+
+      .video-section {
+        .video-player {
+          .video-wrapper {
+
+            .thumbnails {
+              .drawer {
+                ul {
+                  li {
+                  }
+                }
+              }
+            }
+
+            .seek-bar {
+
+              &::-webkit-slider-thumb {
+              }
+              &::-moz-range-thumb {
+              }
+            }
+          }
+        }
+      }
+
+      .answer-section {
+        .animal-categories {
+          .category-item {
+            .category {
+              .images {
+              }
+              .title {
+                svg {
+                }
+              }
+
+            }
+
+            .animal-list-wrapper {
+              .animals {
+                .animal-item {
+                  .animal {
+                    .images {
+                    }
+                    .info {
+                      .title {
+                      }
+                    }
+                  }
+                }
+              }
+            }
+
+            &.nothing {
+              .category {
+                .images {
+                }
+              }
+            }
+
+            &:not(.no-animals) {
+              &.open {
+                .category {
+                  .title {
+
+                  }
+                  .images {
+                    //height: 48px;
+                  }
+                }
+                .animal-list-wrapper {
+                  .animals {
+                  }
+                }
+              }
+            }
+
+          }
+        }
+      }
+
+
+      .loader-wrapper {
+        height: calc( 100vh - 96px - 64px );
+      }
+    }
+
+    .action-bar {
+
+      .content-wrapper {
+
+        .progress-column {
+          .progress {
+            .progress-bar {
+            }
+            .text {
+            }
+          }
+        }
+
+      }
+
+    }
+
+
+  }
+
+
+
   @media only screen and (min-width: $viewport-tablet-portrait) {
 
 
@@ -1814,6 +1933,8 @@ export default {
               .animals {
                 .animal-item {
                   .animal {
+                    .images {
+                    }
                     .info {
                       .title {
                         padding: calc((48px - 1.5rem) / 2) $spacing-2;
@@ -1854,6 +1975,13 @@ export default {
           }
         }
       }
+
+
+
+      .loader-wrapper {
+        height: calc( 100vh - 112px - 64px );
+      }
+
     }
 
     .action-bar {
@@ -1939,6 +2067,12 @@ export default {
         }
       }
 
+
+      .loader-wrapper {
+        height: calc( 100vh - 80px - 80px );
+      }
+
+
     }
 
 
@@ -2001,6 +2135,8 @@ export default {
           }
         }
       }
+
+
     }
 
   }
