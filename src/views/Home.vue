@@ -37,7 +37,7 @@
 
   "identification-heading": "Help us to identify the filmed animals.",
   "identification-text": "At various locations we have set up boxes equipped with a wildlife camera. The pictures give us an insight into the visitors of the box. In addition to weasels, numerous other species have visited the boxes. Help us to discover and identify these secret visitors!",
-  "identification-button": "Zu den Videos",
+  "identification-button": "To the Videos",
 
   "mustelids-heading": "Weasels in Switzerland",
   "mustelids-text": "Anyone who has ever seen a weasel will never forget this observation. These elusive and clever animals fascinate people. But how are weasel populations in Switzerland doing? Did you know that there are two weasel species in Switzerland?",
