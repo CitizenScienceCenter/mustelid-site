@@ -730,7 +730,7 @@ export default {
             },
             "task_id": this.tasks[0].id,
             "user_id": this.currentUser.id,
-            "draft": true
+            "draft": false
         };
         if( this.answer.comment ) {
             submissionObject.content["comment"] = this.answer.comment;
