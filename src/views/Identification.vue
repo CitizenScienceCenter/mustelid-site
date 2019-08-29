@@ -8,7 +8,7 @@
   "question": "Welches Tier ist zu sehen?",
 
   "answer-unsure": "Andere / Nicht genauer erkennbar",
-  "add-comment": "Kommentar hinhufügen (optional)",
+  "add-comment": "Kommentar hinzufügen (optional)",
   "answer-none": "Kein Tier erkennbar",
 
   "progress": "Fortschritt",
