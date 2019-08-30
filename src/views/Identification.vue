@@ -606,7 +606,9 @@ export default {
 
             this.hasSubmissionAlready = false;
 
-            if( this.taskId ) {
+            //if( this.taskId ) {
+            this.taskId = false;
+            if( false ) {
                 // loaded with id, check for submissions
                 //console.log('has task id, check for submissions');
 
