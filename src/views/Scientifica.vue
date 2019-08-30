@@ -20,8 +20,8 @@
   "subheading-1": "Zu Hause mitmachen",
   "paragraph-3": "Am Ende der drei Scientifica-Tage gewinnt der oder die <b>Teilnehmer/in mit den meisten Beiträgen</b> den Hauptgewinn. <b>Wenn Sie ein Wiesel finden, zählt dies zehnfach.</b> Wir überprüfen die Qualität der Beiträge.<br>Um einen Preis zu gewinnen, müssen Sie zuerst Ihren citizenscience.ch Account erstellen.",
   "button-register": "Jetzt Registrieren",
-  "subheading-2": "An der Scientifica teilnehmen",
-  "paragraph-4": "Wenn Sie es schaffen, <b>als erstes ein Wiesel an unserem Scientifica-Stand zu entdecken</b>, bekommen Sie sofort einen Extrapreis.<br>Wir beginnen alle 3 Stunden von null zu zählen, sodass insgesamt bis zu 5 Besucher/innen einen Extrapreis am Stand gewinnen können (Fr: 18 - 21 Uhr / Sa: 13 - 16 Uhr und 16 - 19 Uhr / So: 11 - 14 Uhr und 14 - 5pm) ",
+  "subheading-2": "Bei der Scientifica teilnehmen",
+  "paragraph-4": "Wenn Sie es schaffen, <b>als erstes ein Wiesel an unserem Scientifica-Stand zu entdecken</b>, bekommen Sie sofort einen Extrapreis.<br>Wir beginnen alle 3 Stunden von null zu zählen, sodass insgesamt bis zu 5 Besucher/innen einen Extrapreis am Stand gewinnen können (Fr: 18 - 21 Uhr / Sa: 13 - 16 Uhr und 16 - 19 Uhr / So: 11 - 14 Uhr und 14 - 17 Uhr) ",
 
   "heading-prize": "Hauptgewinn",
   "prize-1": "<b>Sachbuch: Marder, Iltis, Nerz und Wiesel</b>",
@@ -50,7 +50,7 @@
   "paragraph-3": "At the end of the event, the participant with <b>the highest number of answers</b> wins the 1st Prize. <b>Found weasels count extra (10x).</b> We’re taking a look at the quality of the contributions.<br>To win a prize you need to create a citizenscience.ch account first.",
   "button-register": "Register now",
   "subheading-2": "Taking Part at the Scientifica",
-  "paragraph-4": "But that is not your only chance! If you manage to be the <b>first visitor to spot a weasel at our Scientifica stand</b>, you are immediately awarded an Extra Prize.<br>We start counting from zero every 3 hours, so in total up to 5 visitors can win a price on the stand (Fri: 6 - 9 pm / Sat: 1 - 4pm and 4 - 7pm/ Sun: 11am - 2pm and 2 - 5pm)",
+  "paragraph-4": "If you manage to be the <b>first visitor to spot a weasel at our Scientifica stand</b>, you are immediately awarded an Extra Prize.<br>We start counting from zero every 3 hours, so in total up to 5 visitors can win a price on the stand (Fri: 6 - 9 pm / Sat: 1 - 4pm and 4 - 7pm/ Sun: 11am - 2pm and 2 - 5pm)",
 
   "heading-prize": "First Prize",
   "prize-1": "<b>Book: Marder, Iltis, Nerz und Wiesel</b>",
