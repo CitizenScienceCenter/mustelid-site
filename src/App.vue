@@ -7,7 +7,7 @@
   },
   "en": {
 
-  "project-title": "Mustelid<br/>Wanted"
+  "project-title": "Weasel<br/>Wanted"
 
   }
   }

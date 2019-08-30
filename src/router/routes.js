@@ -2,6 +2,7 @@
 import Identification from '@/views/Identification';
 import IdentificationComplete from '@/views/IdentificationComplete';
 import Forum from '@/views/Forum';
+import Scientifica from '@/views/Scientifica';
 
 import Login from '@/views/shared/user/Login';
 import Register from '@/views/shared/user/Register';
@@ -25,6 +26,11 @@ const Mustelids = resolve => {
         resolve(require("@/views/Mustelids.vue"));
     });
 };
+const FAQ = resolve => {
+    require.ensure(["@/views/FAQ.vue"], () => {
+        resolve(require("@/views/FAQ.vue"));
+    });
+};
 const Terms = resolve => {
     require.ensure(["@/views/shared/static/Terms.vue"], () => {
         resolve(require("@/views/shared/static/Terms.vue"));
@@ -41,7 +47,8 @@ export const routes = [
                 component: Home,
                 meta: {
                     i18n: "navigation-homepage",
-                    nav: false
+                    nav: false,
+                    requiresAuth: true
                 }
             },
             {
@@ -76,6 +83,17 @@ export const routes = [
                 component: Forum,
                 name: "Forum",
                 meta: {requiresAuth: true, i18n: 'navigation-forum', nav: true},
+            },
+            {
+                path: "faq",
+                component: FAQ,
+                name: "FAQ",
+                meta: {i18n: 'navigation-faq', nav: true},
+            },
+            {
+                path: "scientifica",
+                component: Scientifica,
+                meta: {nav: false}
             },
             {
                 path: "terms",

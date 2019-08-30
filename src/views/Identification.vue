@@ -1,15 +1,45 @@
 <i18n>
 {
 
-  "en": {
+  "de": {
 
-  "page-title": "Identification"
+  "page-title": "Identifikation",
+
+  "question": "Welches Tier ist zu sehen?",
+
+  "answer-unsure": "Andere / Nicht genauer erkennbar",
+  "add-comment": "Kommentar hinzufügen (optional)",
+  "answer-none": "Kein Tier erkennbar",
+
+  "progress": "Fortschritt",
+  "progress-of": "von",
+
+  "button-skip": "Überspringen",
+  "button-skip-short": "Überspr.",
+
+  "button-submit": "Antworten",
+  "button-submit-confirmation": "Antwort übermittelt"
 
   },
 
-  "de": {
+  "en": {
 
-  "page-title": "Identifikation"
+  "page-title": "Identification",
+
+  "question": "Which Animal do You See?",
+
+  "answer-unsure": "Other / Not visible",
+  "add-comment": "Add Comment (optional)",
+  "answer-none": "No animal recognizable",
+
+  "progress": "Progress",
+  "progress-of": "of",
+
+  "button-skip": "Skip",
+  "button-skip-short": "Skip",
+
+  "button-submit": "Answer",
+  "button-submit-confirmation": "Answer submitted"
 
   }
 
@@ -29,7 +59,7 @@
             <div class="row">
               <div class="col">
 
-                <h2 class="heading small scroll-effect">Welches Tier ist zu sehen?</h2>
+                <h2 class="heading small scroll-effect">{{$t('question')}}</h2>
 
               </div>
             </div>
@@ -40,16 +70,16 @@
 
         <div class="video-player scroll-effect scroll-effect-delayed-1">
 
-          <div class="video-wrapper" v-if="taskMedia" :class="{loading: !videoLoaded}">
+          <div class="video-wrapper" v-if="taskMedia" :class="{loading: !videoLoaded || !mediaLoaded}">
 
             <loader></loader>
 
-            <template v-for="(video,index) in taskMedia">
+            <template v-if="mediaLoaded" v-for="(video,index) in taskMedia">
               <video v-if="index === 0" :key="'video'+index" :ref="'video'+index" playsinline muted :class="{ activeVideo: index === activeVideo }" @timeupdate="onVideoUpdate" @ended="onVideoEnd" @loadeddata="onFirstVideoLoaded" @seeked="onVideoSeeked" @click="play">
-                <source type="video/mp4" :src="'/videos/'+video.path">
+                <source type="video/mp4" :src="'https://api.citizenscience.ch/files/upload/'+video.path">
               </video>
               <video v-else :key="'video'+index" :ref="'video'+index" playsinline muted :class="{ activeVideo: index === activeVideo }" @timeupdate="onVideoUpdate" @ended="onVideoEnd" @seeked="onVideoSeeked" @click="play">
-                <source type="video/mp4" :src="'/videos/'+video.path">
+                <source type="video/mp4" :src="'https://api.citizenscience.ch/files/upload/'+video.path">
               </video>
             </template>
 
@@ -60,7 +90,7 @@
                 <div class="progress"><div class="bar" :style="{width: totalProgress+'%'}"></div></div>
                 <ul ref="thumbnailList">
                   <li v-for="(video,index) in taskMedia" :key="'thumbnail'+index" :class="{active: index === activeVideo}" @click="startVideo(index)" :id="'thumbnail'+index">
-                    <img :src="'/videos/thumbnails/'+video.info.thumb" />
+                    <img :src="'https://api.citizenscience.ch/files/upload/'+video.info.thumb" />
                   </li>
                 </ul>
               </div>
@@ -155,14 +185,14 @@
 
 
                         <li class="animal-item">
-                          <div class="animal" @click="clickAnimal(-2)" :class="{selected: selectedAnimal === -2}">
+                          <div class="animal" @click="clickAnimal(-1)" :class="{selected: selectedAnimal === -1}">
                             <div class="info">
                               <div class="title">
-                                Andere / Nicht genauer erkennbar
+                                {{ $t('answer-unsure') }}
                               </div>
-                              <div class="text" v-if="selectedAnimal === -2">
+                              <div class="text" v-if="selectedAnimal === -1">
                                 <div class="form-field form-field-block">
-                                  <input placeholder="Kommentar hinzufügen" />
+                                  <input v-model="comment" :placeholder="$t('add-comment')" />
                                 </div>
                               </div>
                             </div>
@@ -173,6 +203,15 @@
                     </div>
 
 
+                  </li>
+
+                  <li class="category-item no-animals nothing" :class="{ open: openCategory === -1 }">
+                    <div class="category" @click="clickCategory(-1)">
+                      <div class="images"></div>
+                      <div class="title">
+                        {{ $t('answer-none')}}
+                      </div>
+                    </div>
                   </li>
                 </ul>
 
@@ -216,11 +255,12 @@
             -->
 
             <div class="button-group right-aligned">
-              <button class="button button-secondary" :disabled="!videoLoaded" @click="next">
-                <span class="viewport-tablet-portrait-text">Überspr.</span>
-                <span class="viewport-large-text">Überspringen</span>
+              <button class="button button-secondary" :disabled="!videoLoaded || showSubmissionInfo" @click="next">
+                <span class="viewport-tablet-portrait-text">{{ $t('button-skip-short') }}</span>
+                <span class="viewport-large-text">{{ $t('button-skip') }}</span>
               </button>
-              <button class="button button-primary" :disabled="!videoLoaded || selectedAnimal === null" @click="submit">Antworten</button>
+              <!--<button class="button button-primary" :disabled="!videoLoaded || selectedAnimal === null" @click="submit">Antworten</button>-->
+              <submit-button :disabled="!videoLoaded || selectedAnimal === null" @click="submit" :submissionInfo="showSubmissionInfo" :infoMessage="$t('button-submit-confirmation')">{{$t('button-submit')}}</submit-button>
             </div>
 
           </div>
@@ -233,75 +273,75 @@
                 </div>
               </div>
               <div class="text">
-                Fortschritt {{mySubmissionCount}} von {{totalTaskCount}}
+                {{$t('progress')}} {{mySubmissionCount}} {{$t('progress-of')}} {{totalTaskCount}}
               </div>
             </div>
           </div>
 
-        </div>
-      </div>
-    </app-content-section>
-
-
-    <!--
-    <app-content-section color="light-greyish">
-      <div class="content-wrapper">
-        <div class="row row-centered row-middle row-wrapping">
-
-          <div class="col col-10 col-tablet-portrait-8 col-large-6 col-wrapping scroll-effect">
-            <div class="extra-padding-h">
-              <img src="/img/graphic-intro.png" />
-            </div>
           </div>
+        </div>
+      </app-content-section>
 
-          <div class="col col-large-5 col-large-after-1 col-wrapping scroll-effect scroll-effect-delayed-1">
-            <div>
-              <h2 class="heading centered left-aligned-large">Mit Kamerafallen auf der Suche nach Wieseln</h2>
-              <p class="">
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
-              </p>
-              <div class="button-group centered left-aligned-large">
-                <router-link tag="button" to="/about" class="button button-secondary">Mehr erfahren</router-link>
+
+      <!--
+      <app-content-section color="light-greyish">
+        <div class="content-wrapper">
+          <div class="row row-centered row-middle row-wrapping">
+
+            <div class="col col-10 col-tablet-portrait-8 col-large-6 col-wrapping scroll-effect">
+              <div class="extra-padding-h">
+                <img src="/img/graphic-intro.png" />
               </div>
             </div>
-          </div>
 
-        </div>
-      </div>
-    </app-content-section>
-
-
-    <app-content-section>
-      <div class="content-wrapper">
-        <div class="row row-centered row-middle row-wrapping row-reverse-large">
-
-          <div class="col col-10 col-tablet-portrait-8 col-large-6 col-wrapping scroll-effect">
-            <div class="extra-padding-h">
-              <img src="/img/graphic-hermelin.jpg" style="border-radius:50%"/>
-            </div>
-          </div>
-
-          <div class="col col-large-5 col-large-before-1 col-wrapping scroll-effect scroll-effect-delayed-1">
-            <div>
-              <h2 class="heading centered left-aligned-large">Wiesel-Population in der Schweiz</h2>
-              <p class="">
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
-              </p>
-              <div class="button-group centered left-aligned-large">
-                <router-link tag="button" to="/sources" class="button button-secondary">Mehr erfahren</router-link>
+            <div class="col col-large-5 col-large-after-1 col-wrapping scroll-effect scroll-effect-delayed-1">
+              <div>
+                <h2 class="heading centered left-aligned-large">Mit Kamerafallen auf der Suche nach Wieseln</h2>
+                <p class="">
+                  Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
+                </p>
+                <div class="button-group centered left-aligned-large">
+                  <router-link tag="button" to="/about" class="button button-secondary">Mehr erfahren</router-link>
+                </div>
               </div>
             </div>
+
           </div>
-
         </div>
-      </div>
-    </app-content-section>
+      </app-content-section>
 
-    <section-newsletter-signup></section-newsletter-signup>
 
-    <app-footer></app-footer>
+      <app-content-section>
+        <div class="content-wrapper">
+          <div class="row row-centered row-middle row-wrapping row-reverse-large">
 
-    -->
+            <div class="col col-10 col-tablet-portrait-8 col-large-6 col-wrapping scroll-effect">
+              <div class="extra-padding-h">
+                <img src="/img/graphic-hermelin.jpg" style="border-radius:50%"/>
+              </div>
+            </div>
+
+            <div class="col col-large-5 col-large-before-1 col-wrapping scroll-effect scroll-effect-delayed-1">
+              <div>
+                <h2 class="heading centered left-aligned-large">Wiesel-Population in der Schweiz</h2>
+                <p class="">
+                  Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
+                </p>
+                <div class="button-group centered left-aligned-large">
+                  <router-link tag="button" to="/sources" class="button button-secondary">Mehr erfahren</router-link>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </app-content-section>
+
+      <section-newsletter-signup></section-newsletter-signup>
+
+      <app-footer></app-footer>
+
+      -->
 
   </div>
 </template>
@@ -316,10 +356,12 @@ import ContentSection from "@/components/shared/ContentSection";
 
 import animals from "@/assets/animals.json";
 import Loader from "@/components/shared/Loader";
+import SubmitButton from "@/components/shared/SubmitButton";
 
 export default {
-  name: 'Home',
+  name: 'Identification',
   components: {
+      SubmitButton,
       Loader,
       ContentSection,
       SectionNewsletterSignup,
@@ -343,8 +385,9 @@ export default {
           animals: animals,
           openCategory: null,
           selectedAnimal: null,
-          animalListState: undefined,
           animalListStates: undefined,
+
+          comment: null,
 
           noOfUiImages: 0,
           noOfUiImagesLoaded: 0,
@@ -357,7 +400,11 @@ export default {
           activeVideo: 0,
 
           taskId: undefined,
-          hasSubmissionAlready: false
+          hasSubmissionAlready: false,
+
+          showSubmissionInfo: false,
+
+          mediaLoaded: false
       }
   },
   computed: {
@@ -374,36 +421,36 @@ export default {
           mySubmissionCount: state => state.stats.mySubmissionCount
       }),
       answer() {
-          if( this.selectedAnimal !== null ) {
-              if( this.selectedAnimal >= 0 ) {
+          if( this.selectedAnimal === -2 ) {
+              return {
+                  'category': 'n/a',
+                  'animal': 'n/a',
+              }
+          }
+          else if( this.selectedAnimal === -1 ) {
+              if( this.comment ) {
                   return {
-                      'category': this.animals[this.openCategory].name.en,
-                      'animal': this.animals[this.openCategory].animals[this.selectedAnimal].name.en,
+                      'category': this.animals[this.openCategory].name.de,
+                      'animal': 'n/a',
+                      'comment': this.comment
                   }
               }
               else {
                   return {
-                      'category': this.animals[this.openCategory].name.en,
+                      'category': this.animals[this.openCategory].name.de,
                       'animal': 'n/a',
                   }
               }
           }
-          else {
+          else if( this.selectedAnimal >= 0 ) {
               return {
-                  'category': this.animals[this.openCategory].name.en,
-                  'animal': '',
+                  'category': this.animals[this.openCategory].name.de,
+                  'animal': this.animals[this.openCategory].animals[this.selectedAnimal].name.de,
               }
           }
       }
     },
   mounted() {
-
-      /*
-      var self = this;
-      window.addEventListener('resize', function() {
-          //self.resizeAnimalList();
-      } );
-      */
 
       this.animalListStates = [];
       for( let i=0; i < animals.length; i++ ) {
@@ -420,15 +467,16 @@ export default {
           }
       }
 
-      this.$store.dispatch('stats/updateMySubmissionCount');
       this.$store.dispatch('stats/updateTotalTaskCount');
+      this.$store.dispatch('stats/updateTotalUserAndSubmissionCount');
+      this.$store.dispatch('stats/updateMySubmissionCount');
+
 
       this.loadUiImages();
 
-
       this.$store.dispatch("c3s/activity/getActivity", [this.activityId, false]).then(activity => {
 
-          console.log('activity loaded');
+          //console.log('activity loaded');
 
           // load task with or without id
           if( this.$route.params.id ) {
@@ -455,23 +503,6 @@ export default {
 
   },
   watch: {
-      openCategory( to, from ) {
-          if( to !== null ) {
-              if( this.animals[ to ].animals ) {
-                  this.animalListState = [];
-                  for( let i=0; i < this.animals[ to ].animals.length; i++ ) {
-                      this.animalListState.push( {
-                          'zoomed': false,
-                          'activeImage': 0,
-                          'noOfImages': this.animals[ to ].animals[i].images.length
-                      } );
-                  }
-              }
-          }
-          else {
-              this.animalListState = undefined;
-          }
-      },
       activeVideo( to, from ) {
           this.$scrollTo('#thumbnail'+this.activeVideo, 600, {
               container: '#thumbnails',
@@ -482,6 +513,7 @@ export default {
   },
   methods: {
       loadUiImages() {
+          //console.log('load ui images');
           this.noOfUiImages = 0;
           this.noOfUiImagesLoaded = 0;
           let self = this;
@@ -493,36 +525,22 @@ export default {
                   image.onload = function() {
                       self.noOfUiImagesLoaded++;
                       if( self.noOfUiImagesLoaded === self.noOfUiImages ) {
+                          //console.log('ui images loaded');
                           self.uiImagesLoaded = true;
                       }
                   };
               }
           }
       },
-      /*
-  resizeAnimalList() {
-      for( var i=0; i< this.animals.length; i++ ) {
-          if( this.openCategory === i && this.$refs['animalListWrapper'+i][0] ) {
-              //this.$refs['animalListWrapper'+i][0].style.height = this.$refs['animalList'+this.openCategory][0].offsetHeight +'px';
-              this.$refs['animalListWrapper'+i][0].style.height = 'auto';
-              let self = this;
-              setTimeout( function() {
-                  console.log( 'gaggi: '+i );
-                  self.$refs['animalListWrapper'+i][0].style.height = 'auto';
-              }, 300 );
-          }
-          else if( this.$refs['animalListWrapper'+i][0] ) {
-              this.$refs['animalListWrapper'+i][0].style.height = 0+'px';
-          }
-      }
-    },
-      */
     loadTask() {
+
+        this.mediaLoaded = false;
+        console.log('load task');
 
         let taskQuery;
         if( !this.taskId ) {
             // without id
-            console.log('without id');
+            //console.log('without id');
             taskQuery = {
                 'select': {
                     'fields': [
@@ -560,7 +578,7 @@ export default {
         }
         else {
             // with id
-            console.log('with id');
+            //console.log('with id');
             taskQuery = {
                 'select': {
                     'fields': [
@@ -590,7 +608,7 @@ export default {
 
             if( this.taskId ) {
                 // loaded with id, check for submissions
-                console.log('has task id, check for submissions');
+                //console.log('has task id, check for submissions');
 
                 let query = {
                     'select': {
@@ -634,8 +652,10 @@ export default {
 
             if ( this.tasks[0] ) {
 
-                console.log( 'task loaded');
-                this.$router.replace('/identification/'+this.tasks[0].id);
+                //console.log( 'task loaded');
+                if( navigator.userAgent !== 'ReactSnap' ) {
+                    this.$router.replace('/identification/'+this.tasks[0].id);
+                }
 
                 const mediaQuery = {
                     'select': {
@@ -658,14 +678,25 @@ export default {
 
                 this.$store.dispatch('c3s/media/getMedia', [mediaQuery, 'c3s/task/SET_MEDIA', 0]).then(media => {
 
+
+                    //console.log( 'media loaded');
+                    //console.log ( this.taskMedia );
                     // media loaded
 
                     this.videoLoaded = false;
                     this.activeVideo = 0;
                     this.openCategory = null;
                     this.selectedAnimal = null;
-                    //this.resizeAnimalList();
-                    this.$refs.video0[0].load();
+                    this.comment = null;
+
+                    this.mediaLoaded = true;
+
+                    /*
+                    if( navigator.userAgent !== 'ReactSnap' ) {
+                        this.$refs.video0[0].load();
+                    }
+                    */
+
                     this.playing = true;
 
                 });
@@ -695,57 +726,71 @@ export default {
             "info": {},
             "content": {
                 "category": this.answer.category,
-                "animal": this.answer.animal,
+                "animal": this.answer.animal
             },
             "task_id": this.tasks[0].id,
             "user_id": this.currentUser.id,
-            "draft": true
+            "draft": false
         };
+        if( this.answer.comment ) {
+            submissionObject.content["comment"] = this.answer.comment;
+        }
 
         this.$store.commit('c3s/submission/SET_SUBMISSION', submissionObject );
 
         this.$store.dispatch('c3s/submission/createSubmission').then(submission => {
 
             console.log('submission sent');
-            this.$store.dispatch('stats/increaseMySubmissionCount');
+
+
+            this.showSubmissionInfo = true;
+            let self = this;
+            setTimeout( function() {
+                self.showSubmissionInfo = false;
+                self.loadTask();
+            }, 900 );
+
+            //this.$store.dispatch('stats/increaseMySubmissionCount');
+            this.$store.dispatch('stats/updateMySubmissionCount');
+            this.$store.dispatch('stats/updateTotalUserAndSubmissionCount');
 
         });
 
-        this.loadTask();
     },
     clickCategory( index ) {
 
         let closeFirst = false;
 
         if( this.openCategory !== index ) {
+            // select category
+            if( this.animals[index] ) {
+                // if animal is from list
 
-            if( !this.animals[index].animals ) {
-                this.selectedAnimal = -1;
+                if( !this.animals[index].animals ) {
+                    this.selectedAnimal = -1;
+                }
+                else {
+                    this.selectedAnimal = null;
+                }
+
+
+                // "close first" thing
+                if( this.openCategory !== null ) {
+                    if( this.animals[this.openCategory] && this.animals[this.openCategory].animals ) {
+                        closeFirst = true;
+                    }
+                }
             }
             else {
-                this.selectedAnimal = null;
-            }
-
-            if( this.openCategory !== null ) {
-                if( this.animals[this.openCategory].animals ) {
-                    closeFirst = true;
-                }
+                // if open category is 'no animal visible'
+                this.selectedAnimal = -2;
             }
 
             this.openCategory = index;
-        }
-        else {
-            // close accordion
-            this.openCategory = null;
-            this.selectedAnimal = null;
-        }
-        //this.resizeAnimalList();
-
-        console.log('click category: '+this.openCategory);
 
 
-        // auto scrolling
-        if( this.openCategory !== null ) {
+
+            // auto scrolling
             if( closeFirst ) {
                 console.log('close first');
                 let self = this;
@@ -783,6 +828,13 @@ export default {
                     });
                 }
             }
+
+
+        }
+        else {
+            // deselect
+            this.openCategory = null;
+            this.selectedAnimal = null;
         }
     },
     clickAnimal(index) {
@@ -964,7 +1016,7 @@ export default {
           &:before {
             content: "";
             display: block;
-            padding-bottom: calc( 100% / 16 * 8.6 );
+            padding-bottom: calc( 100% / 16 * 9.0 );
           }
 
 
@@ -990,7 +1042,8 @@ export default {
             position: absolute;
             top: 0%;
             right: 0%;
-            height: 105%;
+            //height: 105%;
+            height: 100%;
             opacity: 0;
 
             cursor: pointer;
@@ -1080,7 +1133,7 @@ export default {
                   }
 
                   height: 40px;
-                  min-width: calc( 40px / 8.6 * 16 );
+                  min-width: calc( 40px / 9.0 * 16 );
 
                   cursor: pointer;
 
@@ -1098,7 +1151,7 @@ export default {
                     width: 110%;
                   }
 
-                  opacity: 0.5;
+                  opacity: 0.25;
                   transition: border $transition-duration-short $transition-timing-function;
                   &.active {
                     opacity: 1;
@@ -1111,7 +1164,7 @@ export default {
 
           .video-button {
             border-radius: 0;
-            background: linear-gradient(to top, rgba( $color-black, 0.5 ), rgba( $color-black, 0.25 ) );
+            background: linear-gradient(to top, rgba( $color-black, 0.5 ), rgba( $color-black, 0.1 ) );
             &:focus  {
               svg {
                 fill: white;
@@ -1143,7 +1196,7 @@ export default {
             height: 40px;
             padding-right: $spacing-1;
             //background-color: rgba( $color-black, 0.5 );
-            background: linear-gradient(to top, rgba( $color-black, 0.5 ), rgba( $color-black, 0.25 ) );
+            background: linear-gradient(to top, rgba( $color-black, 0.5 ), rgba( $color-black, 0.1 ) );
             //background: rgba( white, 0.8 );
             //background: none;
             cursor: pointer;
@@ -1198,7 +1251,7 @@ export default {
             box-shadow: 0px 4px 8px -4px rgba($color-black,0.2);
             transition: all $transition-duration-long $transition-timing-function;
 
-            height: calc( ( 100vh - 160px - 64px - ( 4 * 16px ) ) / 5 );
+            height: calc( ( 100vh - 160px - 64px - 40px - ( 5 * 16px ) ) / 5 );
             min-height: 40px;
             max-height: 15vw;
 
@@ -1218,7 +1271,7 @@ export default {
             .images {
               display: flex;
               overflow: hidden;
-              height: calc( ( 100vh - 160px - 64px - ( 4 * 16px ) ) / 5 );
+              height: calc( ( 100vh - 160px - 64px - 40px - ( 5 * 16px ) ) / 5 );
               min-height: 40px;
 
               .image {
@@ -1286,9 +1339,9 @@ export default {
 
           .animal-list-wrapper {
             overflow: hidden;
-            display: none;
+            height: 0;
 
-            transition: height $transition-duration-long $transition-timing-function;
+            //transition: height $transition-duration-long $transition-timing-function;
 
             .animals {
 
@@ -1332,6 +1385,7 @@ export default {
                     flex: 0 0 40%;
                     position: relative;
                     overflow: hidden;
+
 
                     .image-list {
 
@@ -1560,6 +1614,29 @@ export default {
             }
           }
 
+          &.nothing {
+            .category {
+              height: 40px;
+              background: $color-black-tint-70;
+              .images {
+                height: 40px;
+                &:after {
+                  background: none;
+                }
+              }
+            }
+            &.open {
+              .category {
+                .images {
+                  &:after {
+                    opacity: 1;
+                    background: linear-gradient(120deg, $color-primary-shade-20, rgba($color-primary-shade-20, 0.5) 100%);
+                  }
+                }
+              }
+            }
+          }
+
           &:not(.no-animals) {
             &.open {
 
@@ -1576,7 +1653,7 @@ export default {
                 }
               }
               .animal-list-wrapper {
-                display: block;
+                height: auto;
                 .animals {
                 }
               }
@@ -1587,6 +1664,10 @@ export default {
         }
 
       }
+    }
+
+    .loader-wrapper {
+      height: calc( 100vh - 96px - 48px );
     }
 
   }
@@ -1676,6 +1757,120 @@ export default {
   }
 
 
+
+  @media only screen and (min-width: $viewport-mobile-large) {
+
+
+    .mustelid-identification {
+
+      .video-section {
+        .video-player {
+          .video-wrapper {
+
+            .thumbnails {
+              .drawer {
+                ul {
+                  li {
+                  }
+                }
+              }
+            }
+
+            .seek-bar {
+
+              &::-webkit-slider-thumb {
+              }
+              &::-moz-range-thumb {
+              }
+            }
+          }
+        }
+      }
+
+      .answer-section {
+        .animal-categories {
+          .category-item {
+            .category {
+              .images {
+              }
+              .title {
+                svg {
+                }
+              }
+
+            }
+
+            .animal-list-wrapper {
+              .animals {
+                .animal-item {
+                  .animal {
+                    .images {
+                    }
+                    .info {
+                      .title {
+                      }
+                    }
+                  }
+                }
+              }
+            }
+
+            &.nothing {
+              .category {
+                .images {
+                }
+              }
+            }
+
+            &:not(.no-animals) {
+              &.open {
+                .category {
+                  .title {
+
+                  }
+                  .images {
+                    //height: 48px;
+                  }
+                }
+                .animal-list-wrapper {
+                  .animals {
+                  }
+                }
+              }
+            }
+
+          }
+        }
+      }
+
+
+      .loader-wrapper {
+        height: calc( 100vh - 96px - 64px );
+      }
+    }
+
+    .action-bar {
+
+      .content-wrapper {
+
+        .progress-column {
+          .progress {
+            .progress-bar {
+            }
+            .text {
+            }
+          }
+        }
+
+      }
+
+    }
+
+
+  }
+
+
+
   @media only screen and (min-width: $viewport-tablet-portrait) {
 
 
@@ -1690,7 +1885,7 @@ export default {
                 ul {
                   li {
                     height: 48px;
-                    min-width: calc( 48px / 8.6 * 16 );
+                    min-width: calc( 48px / 9.0 * 16 );
                   }
                 }
               }
@@ -1718,8 +1913,10 @@ export default {
         .animal-categories {
           .category-item {
             .category {
+              height: calc( ( 100vh - 160px - 64px - 48px - ( 5 * 16px ) ) / 5 );
               .images {
                 min-height: 48px;
+                height: calc( ( 100vh - 160px - 64px - 48px - ( 5 * 16px ) ) / 5 );
               }
               .title {
                 padding: calc((48px - 1.5rem) / 2) $spacing-2;
@@ -1736,12 +1933,23 @@ export default {
               .animals {
                 .animal-item {
                   .animal {
+                    .images {
+                    }
                     .info {
                       .title {
                         padding: calc((48px - 1.5rem) / 2) $spacing-2;
                       }
                     }
                   }
+                }
+              }
+            }
+
+            &.nothing {
+              .category {
+                height: 48px;
+                .images {
+                  height: 48px;
                 }
               }
             }
@@ -1767,6 +1975,13 @@ export default {
           }
         }
       }
+
+
+
+      .loader-wrapper {
+        height: calc( 100vh - 112px - 64px );
+      }
+
     }
 
     .action-bar {
@@ -1811,7 +2026,7 @@ export default {
 
         .video-player {
           height: calc( 100vh - 160px - 135px );
-          width: calc( ( 100vh - 160px - 135px ) / 8.6 * 16 );
+          width: calc( ( 100vh - 160px - 135px ) / 9.0 * 16 );
           overflow: hidden;
 
           max-width: 100%;
@@ -1851,6 +2066,12 @@ export default {
           }
         }
       }
+
+
+      .loader-wrapper {
+        height: calc( 100vh - 80px - 80px );
+      }
+
 
     }
 
@@ -1893,7 +2114,7 @@ export default {
       .video-section {
         .video-player {
           height: calc(100vh - 160px - 151px);
-          width: calc((100vh - 160px - 151px) / 8.6 * 16);
+          width: calc((100vh - 160px - 151px) / 9.0 * 16);
         }
       }
       .answer-section {
@@ -1904,14 +2125,18 @@ export default {
         .animal-categories {
           .category-item {
             .category {
-              height: calc((100vh - 160px - 96px - (4 * 16px)) / 5);
+              //height: calc((100vh - 160px - 96px - (4 * 16px)) / 5);
+              height: calc( ( 100vh - 160px - 96px - 48px - ( 5 * 16px ) ) / 5 );
               .images {
-                height: calc((100vh - 160px - 96px - (4 * 16px)) / 5);
+                //height: calc((100vh - 160px - 96px - (4 * 16px)) / 5);
+                height: calc( ( 100vh - 160px - 96px - 48px - ( 5 * 16px ) ) / 5 );
               }
             }
           }
         }
       }
+
+
     }
 
   }
