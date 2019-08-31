@@ -7,6 +7,8 @@ import Vuex from 'vuex';
 import { i18n } from './i18n.js';
 import c3s from 'vuex-c3s';
 import Meta from 'vue-meta';
+import SimpleAnalytics from "simple-analytics-vue";
+
 
 
 let swaggerURL = 'https://api.citizenscience.ch/api/v2/swagger.json';
@@ -18,6 +20,7 @@ Vue.use(c3s.plugin, { store, swaggerURL});
 Vue.use(VueRouter);
 Vue.use(Vuex);
 Vue.use(Meta);
+Vue.use(SimpleAnalytics, { skip: process.env.NODE_ENV !== "production" });
 
 let VueScrollTo = require('vue-scrollto');
 Vue.use(VueScrollTo, {
