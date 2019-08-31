@@ -29,7 +29,7 @@ import {mapState} from 'vuex';
 import Header from './components/shared/Header.vue';
 import GDPR from "./components/shared/GDPR";
 
-const url = 'https://mustelids-staging.citizenscience.ch';
+const url = 'https://wiesel-gesucht.citizenscience.ch';
 
 export default {
   name: 'app',
