@@ -79,12 +79,13 @@
     <section-stats color="greyish" :submissionCount="totalSubmissionCount" :taskCount="totalTaskCount" ></section-stats>
 
 
-
+    <!--
     <div class="scientifica-teaser-wrapper" :class="{show: showTeaser}">
       <router-link to="/scientifica" class="scientifica-teaser">
         <img src="/img/scientifica-teaser.png" />
       </router-link>
     </div>
+    -->
 
     <app-content-section>
       <div class="content-wrapper">
