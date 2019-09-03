@@ -75,10 +75,10 @@
             <loader></loader>
 
             <template v-if="mediaLoaded" v-for="(video,index) in taskMedia">
-              <video v-if="index === 0" :key="'video'+index" :ref="'video'+index" playsinline muted :class="{ activeVideo: index === activeVideo }" @timeupdate="onVideoUpdate" @ended="onVideoEnd" @loadeddata="onFirstVideoLoaded" @seeked="onVideoSeeked" @click="play">
+              <video v-if="index === 0" :key="'video'+index" :ref="'video'+index" autoplay playsinline muted :class="{ activeVideo: index === activeVideo }" @timeupdate="onVideoUpdate" @ended="onVideoEnd" @loadeddata="onFirstVideoLoaded" @click="play">
                 <source type="video/mp4" :src="'https://api.citizenscience.ch/files/upload/'+video.path">
               </video>
-              <video v-else :key="'video'+index" :ref="'video'+index" playsinline muted :class="{ activeVideo: index === activeVideo }" @timeupdate="onVideoUpdate" @ended="onVideoEnd" @seeked="onVideoSeeked" @click="play">
+              <video v-else :key="'video'+index" :ref="'video'+index" playsinline muted :class="{ activeVideo: index === activeVideo }" @timeupdate="onVideoUpdate" @ended="onVideoEnd" @click="play">
                 <source type="video/mp4" :src="'https://api.citizenscience.ch/files/upload/'+video.path">
               </video>
             </template>
@@ -91,6 +91,7 @@
                 <ul ref="thumbnailList">
                   <li v-for="(video,index) in taskMedia" :key="'thumbnail'+index" :class="{active: index === activeVideo}" @click="startVideo(index)" :id="'thumbnail'+index">
                     <img :src="'https://api.citizenscience.ch/files/upload/'+video.info.thumb" />
+                    <div class="number"><span class="content">Video {{index+1}}/{{taskMedia.length}}</span></div>
                   </li>
                 </ul>
               </div>
@@ -540,7 +541,7 @@ export default {
         let taskQuery;
         if( !this.taskId ) {
             // without id
-            //console.log('without id');
+            console.log('without id');
             taskQuery = {
                 'select': {
                     'fields': [
@@ -578,7 +579,7 @@ export default {
         }
         else {
             // with id
-            //console.log('with id');
+            console.log('with id');
             taskQuery = {
                 'select': {
                     'fields': [
@@ -602,7 +603,7 @@ export default {
 
         this.$store.dispatch('c3s/task/getTasks', [taskQuery, 1]).then(tasks => {
 
-            //console.log('responded tasks');
+            console.log('tasks loaded');
 
             this.hasSubmissionAlready = false;
 
@@ -654,7 +655,7 @@ export default {
 
             if ( this.tasks[0] ) {
 
-                //console.log( 'task loaded');
+                console.log( 'load media');
                 if( navigator.userAgent !== 'ReactSnap' ) {
                     this.$router.replace('/identification/'+this.tasks[0].id);
                 }
@@ -681,7 +682,7 @@ export default {
                 this.$store.dispatch('c3s/media/getMedia', [mediaQuery, 'c3s/task/SET_MEDIA', 0]).then(media => {
 
 
-                    //console.log( 'media loaded');
+                    console.log( 'media loaded');
                     //console.log ( this.taskMedia );
                     // media loaded
 
@@ -914,6 +915,7 @@ export default {
         this.playing = true;
     },
     onFirstVideoLoaded() {
+          console.log('first video loaded');
         this.videoLoaded = true;
         this.$refs.video0[0].currentTime = 0;
         this.$refs.video0[0].play();
@@ -1150,14 +1152,43 @@ export default {
                     position: absolute;
                     top: 0;
                     right: 0;
-                    width: 110%;
+                    width: 100%;
                   }
 
-                  opacity: 0.25;
+                  .number {
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    opacity: 0;
+                    display: flex;
+                    align-items: start;
+                    .content {
+                      display: block;
+                      font-size: $font-size-mini;
+                      font-weight: 400;
+                      line-height: 1.1;
+                      padding: 6px;
+                      border-radius: 0 0 $border-radius 0;
+                      color: white;
+                      background: linear-gradient(to bottom, rgba( $color-black, 0.5 ), rgba( $color-black, 0 ) );
+                      width: 100%;
+                    }
+                  }
+
+                  opacity: 0.5;
                   transition: border $transition-duration-short $transition-timing-function;
+
                   &.active {
                     opacity: 1;
                     border: 2px solid rgba( white, 0.75 );
+
+                    .number {
+                      opacity: 1;
+                      .content {
+                      }
+                    }
                   }
                 }
               }
@@ -1704,6 +1735,7 @@ export default {
         .progress {
           font-size: 0;
           text-align: right;
+          line-height: 0;
           .progress-bar {
             height: 40px;
             width: 48px;
@@ -1725,7 +1757,9 @@ export default {
             }
           }
           .text {
-            display: inline-block;
+            display: block;
+            float: right;
+            line-height: 40px;
             font-size: $font-size-small;
           }
         }
@@ -1888,6 +1922,12 @@ export default {
                   li {
                     height: 48px;
                     min-width: calc( 48px / 9.0 * 16 );
+
+                    .number {
+                      .content {
+                        padding: 8px;
+                      }
+                    }
                   }
                 }
               }
@@ -1999,6 +2039,7 @@ export default {
               margin-right: $spacing-3;
             }
             .text {
+              line-height: 48px;
             }
           }
         }
@@ -2086,6 +2127,12 @@ export default {
           margin: $spacing-2 0;
           .progress {
             text-align: left;
+            .progress-bar {
+              float: left;
+            }
+            .text {
+              float: none;
+            }
           }
         }
         .button-column {

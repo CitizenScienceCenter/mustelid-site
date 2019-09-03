@@ -52,7 +52,7 @@ export const i18n = new VueI18n({
               'link': 'FAQ'
           },
           'navigation-about': {
-              'link': 'Über das Projekt'
+              'link': 'Das Projekt'
           },
           'navigation-mustelids': {
               'link': 'Wiesel in der Schweiz'
@@ -98,7 +98,7 @@ export const i18n = new VueI18n({
               'link': 'FAQ'
           },
           'navigation-about': {
-              'link': 'About the Project'
+              'link': 'The Project'
           },
           'navigation-mustelids': {
               'link': 'Weasels in Switzerland'
