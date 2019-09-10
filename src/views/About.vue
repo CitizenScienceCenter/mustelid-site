@@ -128,7 +128,7 @@
       </div>
     </app-content-section>
 
-    <section-feedback email="wiesel@citizenscience.ch"></section-feedback>
+    <section-feedback email="wiesel@citizenscience.ch" color="light-greyish"></section-feedback>
 
     <section-newsletter-signup></section-newsletter-signup>
 
