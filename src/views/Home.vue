@@ -165,7 +165,7 @@
     </app-content-section>
 
 
-    <section-feedback color="light-greyish" email="wiesel@citizenscience.ch"></section-feedback>
+    <section-feedback color="light-greyish" email="help@citizenscience.ch" :subject="$t('site-name')"></section-feedback>
 
     <!--
     <app-content-section color="greyish" >

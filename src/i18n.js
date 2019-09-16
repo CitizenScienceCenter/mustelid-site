@@ -33,6 +33,7 @@ export const i18n = new VueI18n({
   messages: {
       'de': {
 
+          "site-name": "Wiesel Gesucht",
           "site-title": "Wiesel Gesucht | Citizen Science Center Zürich",
           "site-description": "Helfen Sie mit die Wiesel zu finden.",
 
@@ -79,6 +80,7 @@ export const i18n = new VueI18n({
       },
       'en': {
 
+          "site-name": "Mustelid Wanted",
           "site-title": "Mustelid Wanted | Citizen Science Center Zurich",
           "site-description": "Help us find the Mustelids.",
 

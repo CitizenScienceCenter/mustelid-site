@@ -2064,13 +2064,13 @@ export default {
       flex-direction: row;
 
       .video-section {
-        min-width: 41.667%;
+        min-width: 50%;
         position: relative;
 
         .video-player {
           height: calc( 100vh - 160px - 135px );
           width: calc( ( 100vh - 160px - 135px ) / 9.0 * 16 );
-          overflow: hidden;
+          overflow-y: auto;
 
           max-width: 100%;
           min-width: 100%;
@@ -2093,7 +2093,7 @@ export default {
         margin-bottom: 0;
 
         flex-grow: 1;
-        max-width: 58.333%;
+        max-width: 50%;
         min-width: 41.667%;
         overflow-y: scroll;
 
@@ -2153,8 +2153,6 @@ export default {
 
     }
 
-
-
   }
 
   @media only screen and (min-width: $viewport-xlarge) {
@@ -2189,6 +2187,7 @@ export default {
     }
 
   }
+
 
 
 </style>
