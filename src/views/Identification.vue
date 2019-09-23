@@ -1163,7 +1163,7 @@ export default {
                     height: 100%;
                     opacity: 0;
                     display: flex;
-                    align-items: start;
+                    align-items: flex-start;
                     .content {
                       display: block;
                       font-size: $font-size-mini;
@@ -1178,6 +1178,7 @@ export default {
                   }
 
                   opacity: 0.5;
+                  border: 2px solid transparent;
                   transition: border $transition-duration-short $transition-timing-function;
 
                   &.active {
