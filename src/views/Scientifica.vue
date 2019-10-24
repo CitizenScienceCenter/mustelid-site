@@ -5,7 +5,9 @@
 
   "page-title": "Scientifica 2019: Finde das Wiesel!",
 
-  "heading-scientifica": "Besuchen Sie uns auf der Scientifica",
+  "heading-winner": "Gewinnerin der Scientifica Challenge",
+
+  "heading-scientifica": "Scientifica 2019",
   "list-item-1": "<b>Zeit: </b>Freitag, 30. August, 18 Uhr – Sonntag, 1. September, 17 Uhr",
   "list-item-2": "<b>Ort: </b>Ausstellungsstand des Citizen Science Centers Zürich im grossen Scientifica-Zelt auf der Polyterasse (ETH, Rämistrasse 101, Zürich)",
   "list-item-3": "<b>Challenge: </b>«Finde das Wiesel» mit Preisen zu gewinnen",
@@ -34,7 +36,9 @@
 
   "page-title": "Scientifica 2019: Find the Weasel!",
 
-  "heading-scientifica": "Visit us at Scientifica",
+  "heading-winner": "Winner of the Scientifica Challenge",
+
+  "heading-scientifica": "Scientifica 2019",
   "list-item-1": "<b>Time: </b>Friday, 30 August 6pm – Sunday, 1 Sep 2019 5pm",
   "list-item-2": "<b>Place: </b>Exhibition stand of the Citizen Science Center Zurich near the entry in the big Scientifica tent on Polyterasse (ETH, Rämistrasse 101, Zürich)",
   "list-item-3": "<b>Challenge: </b>«Find a Weasel» with prizes to win",
@@ -66,7 +70,77 @@
 <template>
   <div>
 
-    <app-content-section class="overflow-hidden">
+      <app-content-section>
+          <div class="content-wrapper">
+              <div class="content-subsection">
+                  <div class="row row-centered">
+                      <div class="col col-large-6 scroll-effect">
+                          <h2 class="heading centered">{{ $t('heading-winner') }}</h2>
+                      </div>
+                  </div>
+              </div>
+              <div class="content-subsection">
+                  <div class="row row-centered row-wrapping">
+                      <div class="col col-wrapping col-4 scroll-effect">
+                          <img src="/img/helena-greter.jpg" class="extra-padding-h" style="border-radius: 50%" />
+                      </div>
+                      <div class="col col-wrapping col-large-6 col-large-after-2 scroll-effect scroll-effect-delayed-1">
+                          <h3 class="subheading centered left-aligned-large">Helena Greter</h3>
+                          <table style="width:auto">
+                              <tr>
+                                  <td><label>Anzahl Antworten</label></td>
+                                  <td><p class="lead">340</p></td>
+                              </tr>
+                              <tr>
+                                  <td><label>Identifizierte Wiesel</label></td>
+                                  <td><p class="lead">3</p></td>
+                              </tr>
+                          </table>
+                          <table style="width:auto">
+                              <tr>
+                                  <td><label>Beruf</label></td>
+                                  <td>Epidemiologin</td>
+                              </tr>
+                              <tr>
+                                  <td><label>Alter</label></td>
+                                  <td>46</td>
+                              </tr>
+                              <tr>
+                                  <td><label>Wohnort</label></td>
+                                  <td>Zürich</td>
+                              </tr>
+                          </table>
+                          <p class="reduced-bottom-margin">
+                              <b>Warum haben Sie am Projekt teilgenommen, was waren Ihre Beweggründe?</b>
+                          </p>
+                          <p>
+                              Das Leben der Wildtiere in unserer heutigen Kulturlandschaft interessiert mich sehr. Meine erste Stelle nach dem Biologie Studium war bei KORA www.kora.ch, wo ich bei Forschungsprojekten und beim Monitoring der Luchspopulation in der Schweiz mitarbeitete. Dabei kamen auch Fotofallen zum Einsatz, und ich weiss wie zeitaufwändig deren Auswertung ist. Daher hat es mich gereizt, hier für das Wieselprojekt einen Beitrag leisten zu können.
+                          </p>
+                          <p class="reduced-bottom-margin">
+                              <b>Wie haben Sie vom Projekt erfahren?</b>
+                          </p>
+                          <p>
+                              Ich habe den Newsletter 'Wilde Nachbarn' von SWILD abonniert, wo das Projekt porträtiert wurde.
+                          </p>
+                          <p class="reduced-bottom-margin">
+                              <b>Was verbindet Sie mit Wieseln bzw. Wildtieren in der Schweiz?</b>
+                          </p>
+                          <p>
+                              Unsere kleinsten Raubtiere, das Mauswiesel und das Hermelin, sind mit ihrer flinken Lebensweise einfach faszinierend. Wir Menschen nehmen enormen Einfluss auf den Lebensraum der Tiere, und jede Begegnung ist ein kurzer Einblick in das 'wie' die Wildtiere in dieser mensch-gemachten Umwelt überleben.
+                          </p>
+                          <p class="reduced-bottom-margin">
+                              <b>Nehmen Sie in Ihrer Freizeit noch anderen Citizen Science Projekten teil, und an welchen?</b>
+                          </p>
+                          <p>
+                              Als Hobby-Ornithologin melde ich meine Beobachtungen bei <a href="https://www.ornitho.ch/" target="_blank">ornitho.ch</a>; Beobachtungen von Insekten, Säugetieren, Reptilien und Amphibien beim CSCF <a href="https://webfauna.cscf.ch">webfauna.cscf.ch</a>. Wenn es zeitlich drin liegt, arbeite ich als Freiwillige in Wildtierprojekten mit, dieses Jahr zB bei der <a href="http://karch.ch/karch/Mitarbeit" target="_blank">Aktualisierung der Roten Liste der Amphibien</a>.
+                          </p>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </app-content-section>
+
+    <app-content-section color="light-greyish" class="overflow-hidden">
       <div class="background-wrapper background-wrapper-move-left scroll-effect scroll-effect-delayed-1">
         <div class="content-wrapper">
           <div class="row row-centered row-in-background">

@@ -21,6 +21,10 @@
   "mustelids-text": "Wer schon einmal ein Wiesel gesehen hat vergisst diese Beobachtung so schnell nicht mehr. Die flinken Tiere faszinieren. Doch wie steht es um die Wiesel-Populationen in der Schweiz? Haben Sie gewusst, dass es in der Schweiz zwei Wieselarten gibt?",
   "mustelids-button": "Mehr erfahren",
 
+  "winner-quote": "«Das Leben der Wildtiere in unserer heutigen Kulturlandschaft interessiert mich sehr. Daher hat es mich gereizt, hier für das Wieselprojekt einen Beitrag leisten zu können.»",
+  "winner-label": "Helena Greter, Gewinnerin der Scientifica Challenge",
+  "winner-button": "Zum Interview",
+
   "swild-text": "SWILD ist eine unabhängige Forschungs- und Beratungsgemeinschaft von Biologinnen und Biologen. Organisiert als non-profit Verein, arbeiten wir seit 1989 in den Bereichen Stadt- und Siedlungsökologie, Wildtierforschung, Naturschutz und Kommunikation."
 
   },
@@ -42,6 +46,10 @@
   "mustelids-heading": "Weasels in Switzerland",
   "mustelids-text": "Anyone who has ever seen a weasel will never forget this observation. These elusive and clever animals fascinate people. But how are weasel populations in Switzerland doing? Did you know that there are two weasel species in Switzerland?",
   "mustelids-button": "Learn more",
+
+  "winner-quote": "«I am very interested in the wildlife in our present cultural landscape. Therefore, I was tempted to make a contribution for the weasel project.»",
+  "winner-label": "Helena Greter, Winner of the Scientifica Challenge",
+  "winner-button": "Read the Interview",
 
   "swild-text": "SWILD ist eine unabhängige Forschungs- und Beratungsgemeinschaft von Biologinnen und Biologen. Organisiert als non-profit Verein, arbeiten wir seit 1989 in den Bereichen Stadt- und Siedlungsökologie, Wildtierforschung, Naturschutz und Kommunikation."
 
@@ -75,9 +83,15 @@
       </div>
     </app-cover>
 
-
-    <section-stats color="greyish" :userCount="totalUserCount" :submissionCount="totalSubmissionCount" :taskCount="totalTaskCount" ></section-stats>
-
+    <app-content-section color="greyish" class="content-section-condensed">
+      <div class="content-wrapper">
+        <sub-section-stats
+                :userCount="totalUserCount"
+                :submissionCount="totalSubmissionCount"
+                :taskCount="totalTaskCount" >
+        </sub-section-stats>
+      </div>
+    </app-content-section>
 
     <!--
     <div class="scientifica-teaser-wrapper" :class="{show: showTeaser}">
@@ -165,6 +179,28 @@
     </app-content-section>
 
 
+    <app-content-section color="dark">
+      <div class="content-wrapper">
+        <div class="row row-centered row-wrapping">
+          <div class="col col-wrapping col-4 col-large-2 col-large-before-2 scroll-effect">
+            <img src="/img/helena-greter.jpg" style="border-radius: 50%" />
+          </div>
+          <div class="col col-wrapping col-large-6 col-large-after-2 scroll-effect scroll-effect-delayed-1">
+            <p class="quote centered left-aligned-large">
+              {{ $t('winner-quote') }}
+            </p>
+            <p class="small centered left-aligned-large reduced-bottom-margin">
+              <b>{{ $t('winner-label') }}</b>
+            </p>
+            <div class="button-group centered left-aligned-large">
+              <router-link tag="button" to="/scientifica" class="button button-secondary button-secondary-inverted button-secondary-naked" style="padding:0">{{ $t('winner-button') }}</router-link>
+            </div>
+          </div>
+        </div>
+      </div>
+    </app-content-section>
+
+
     <section-feedback color="light-greyish" email="help@citizenscience.ch" :subject="$t('site-name')"></section-feedback>
 
     <!--
@@ -212,13 +248,13 @@
     import Footer from '@/components/shared/Footer.vue';
     import SectionNewsletterSignup from "@/components/shared/SectionNewsletterSignup";
     import SectionSDG from "../components/shared/SectionSDG";
-    import SectionStats from "../components/shared/SectionStats";
     import SectionFeedback from "../components/shared/SectionFeedback";
+    import SubSectionStats from "../components/shared/SubSectionStats";
     export default {
         name: 'Home',
         components: {
+          SubSectionStats,
             SectionFeedback,
-            SectionStats,
             SectionSDG,
             SectionNewsletterSignup,
             'app-cover': Cover,
