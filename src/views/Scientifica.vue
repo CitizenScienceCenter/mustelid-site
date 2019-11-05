@@ -114,7 +114,7 @@
                               <b>Warum haben Sie am Projekt teilgenommen, was waren Ihre Beweggründe?</b>
                           </p>
                           <p>
-                              Das Leben der Wildtiere in unserer heutigen Kulturlandschaft interessiert mich sehr. Meine erste Stelle nach dem Biologie Studium war bei KORA www.kora.ch, wo ich bei Forschungsprojekten und beim Monitoring der Luchspopulation in der Schweiz mitarbeitete. Dabei kamen auch Fotofallen zum Einsatz, und ich weiss wie zeitaufwändig deren Auswertung ist. Daher hat es mich gereizt, hier für das Wieselprojekt einen Beitrag leisten zu können.
+                              Das Leben der Wildtiere in unserer heutigen Kulturlandschaft interessiert mich sehr. Meine erste Stelle nach dem Biologie Studium war bei KORA (<a href="https://www.kora.ch/" target="_blank">www.kora.ch</a>), wo ich bei Forschungsprojekten und beim Monitoring der Luchspopulation in der Schweiz mitarbeitete. Dabei kamen auch Fotofallen zum Einsatz, und ich weiss wie zeitaufwändig deren Auswertung ist. Daher hat es mich gereizt, hier für das Wieselprojekt einen Beitrag leisten zu können.
                           </p>
                           <p class="reduced-bottom-margin">
                               <b>Wie haben Sie vom Projekt erfahren?</b>
