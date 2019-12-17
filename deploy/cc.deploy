@@ -1,6 +1,0 @@
-export NAME=mustelid-test
-export IMG=mustelid-test
-export NS=c3s-test
-export PORT=80
-export TAG=${TAG}
-export HOST=mustelid-test.citizenscience.ch
