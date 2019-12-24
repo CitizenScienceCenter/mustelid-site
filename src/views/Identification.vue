@@ -88,7 +88,7 @@
               >
                 <source
                   type="video/mp4"
-                  :src="'https://api.citizenscience.ch/files/upload/'+video.path"
+                  :src="'https://objects.citizenscience.ch/09a565c4-73f8-483d-b59a-c3e5791f9a16'+video.path"
                 />
               </video>
               <video
@@ -593,8 +593,8 @@ export default {
         this.$store
           .dispatch("c3s/project/getProjectTask", {
             pid: this.activityId,
-            random: false,
-            index: this.index++
+            random: true,
+            index: -1
           })
           .then(t => this.showTask(t))
           .catch(e => console.error(e));
