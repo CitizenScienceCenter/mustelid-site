@@ -88,7 +88,7 @@
               >
                 <source
                   type="video/mp4"
-                  :src="'https://objects.citizenscience.ch/09a565c4-73f8-483d-b59a-c3e5791f9a16'+video.path"
+                  :src="storageURL+video.path.replace('mustelids', '')"
                 />
               </video>
               <video
@@ -104,7 +104,7 @@
               >
                 <source
                   type="video/mp4"
-                  :src="'https://objects.citizenscience.ch/09a565c4-73f8-483d-b59a-c3e5791f9a16/'+video.path"
+                  :src="storageURL+video.path.replace('mustelids', '')"
                 />
               </video>
             </template>
@@ -124,7 +124,7 @@
                     @click="startVideo(index)"
                     :id="'thumbnail'+index"
                   >
-                    <img :src="'https://objects.citizenscience.ch/09a565c4-73f8-483d-b59a-c3e5791f9a16/'+video.info.thumb" />
+                    <img :src="storageURL+video.info.thumb.replace('mustelids', '')" />
                     <div class="number">
                       <span class="content">Video {{index+1}}/{{taskMedia.length}}</span>
                     </div>
@@ -349,22 +349,6 @@
       <div class="content-wrapper">
         <div class="row row-reverse-tablet-portrait row-wrapping">
           <div class="col col-wrapping col-large-8 button-column">
-            <!--
-            <div class="form-field form-field-block form-field-no-animal">
-              <div class="options">
-                <label :class="{disabled: wrongLanguage }">
-                  <input type="checkbox" v-model="noHateSpeech">
-                  <div class="checkbox">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                      <path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"></path>
-                    </svg>
-                  </div>
-                  <span>Kein Tier sichtbar</span>
-                </label>
-              </div>
-            </div>
-            -->
-
             <div class="button-group right-aligned">
               <button
                 class="button button-secondary"
@@ -472,7 +456,8 @@ export default {
       language: state => state.settings.language,
 
       currentUser: state => state.c3s.user.currentUser,
-      activityId: state => state.consts.identificationActivity,
+      projectID: state => state.consts.projectID,
+      storageURL: state => state.consts.storageURL,
 
       tasks: state => state.c3s.task.tasks,
       taskMedia: state => state.c3s.task.media,
@@ -509,6 +494,7 @@ export default {
     }
   },
   mounted() {
+    console.log(this.storageURL)
     this.animalListStates = [];
     for (let i = 0; i < animals.length; i++) {
       if (this.animals[i].animals) {
@@ -531,7 +517,7 @@ export default {
     this.loadUiImages();
 
     this.$store
-      .dispatch("c3s/project/getProject", this.activityId)
+      .dispatch("c3s/project/getProject", this.projectID)
       .then(activity => {
         //console.log('activity loaded');
 
@@ -587,12 +573,11 @@ export default {
     },
     loadTask() {
       this.mediaLoaded = false;
-      console.log("load task");
 
       if (!this.taskId) {
         this.$store
           .dispatch("c3s/project/getProjectTask", {
-            pid: this.activityId,
+            pid: this.projectID,
             random: true,
             index: -1
           })
@@ -615,7 +600,7 @@ export default {
         this.$store
           .dispatch("c3s/task/getTaskMedia", this.tasks[0].id)
           .then(media => {
-            console.log(media.body.data)
+            console.log(media.body)
             this.videoLoaded = false;
             this.activeVideo = 0;
             this.openCategory = null;
@@ -623,17 +608,15 @@ export default {
             this.comment = null;
             this.mediaLoaded = true;
             this.playing = true;
-          });
+          }).catch(err => {console.error(err)})
       } else {
         this.$router.push("/complete");
       }
     },
     next() {
-      console.log("next");
       this.loadTask();
     },
     submit() {
-      console.log("submit");
       console.log(this.answer);
 
       let submissionObject = {
@@ -655,7 +638,6 @@ export default {
       this.$store
         .dispatch("c3s/submission/createSubmission")
         .then(submission => {
-          console.log("submission sent");
 
           this.showSubmissionInfo = true;
           let self = this;
@@ -701,7 +683,6 @@ export default {
 
         // auto scrolling
         if (closeFirst) {
-          console.log("close first");
           let self = this;
           setTimeout(function() {
             if (self.$refs.answerSection.getBoundingClientRect().x > 0) {
@@ -719,7 +700,6 @@ export default {
             }
           }, 300);
         } else {
-          console.log("scroll to " + index);
           if (this.$refs.answerSection.getBoundingClientRect().x > 0) {
             // big screen
             this.$scrollTo("#category-item-" + index, 600, {
@@ -741,7 +721,6 @@ export default {
       }
     },
     clickAnimal(index) {
-      console.log("click animal " + index);
       this.selectedAnimal = index;
     },
     zoomImage(index) {
