@@ -178,7 +178,7 @@
                 <p v-html="$t('paragraph-1')" class="reduced-bottom-margin"></p>
                 <div class="margin-bottom">
                   <div class="button-group centered left-aligned-large">
-                    <router-link tag="button" to="/identification" class="button button-primary">{{ $t('button-text') }}</router-link>
+                    <router-link tag="button" to="/identification" class="button button-primary" disabled>{{ $t('button-text') }}</router-link>
                   </div>
                 </div>
 
@@ -187,7 +187,7 @@
                 <p v-html="$t('paragraph-3')" class="reduced-bottom-margin"></p>
                 <div class="margin-bottom">
                   <div class="button-group centered left-aligned-large">
-                    <router-link tag="button" to="/identification" class="button button-secondary">{{ $t('button-register') }}</router-link>
+                    <router-link tag="button" to="/identification" class="button button-secondary" disabled>{{ $t('button-register') }}</router-link>
                   </div>
                 </div>
 

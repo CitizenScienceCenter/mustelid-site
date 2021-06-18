@@ -96,7 +96,7 @@
               <p v-html="$t('paragraph-4-1')"></p>
               <div class="margin-bottom">
                 <div class="button-group centered left-aligned-large">
-                  <router-link tag="button" to="/identification" class="button button-primary">{{ $t('paragraph-4-1-button') }}</router-link>
+                  <router-link tag="button" to="/identification" class="button button-primary" disabled>{{ $t('paragraph-4-1-button') }}</router-link>
                 </div>
               </div>
               <p v-html="$t('paragraph-4-2')"></p>

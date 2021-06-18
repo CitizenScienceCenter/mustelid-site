@@ -11,10 +11,9 @@
   "dependencies": {
     "core-js": "^2.6.5",
     "crypto-js": "^3.1.9-1",
-    "node-sass": "^4.11.0",
     "sass-loader": "^7.1.0",
     "simple-analytics-vue": "^1.1.0",
-    "swagger-client": "^3.8.25",
+    "swagger-client": "^3.13.5",
     "vue": "^2.6.10",
     "vue-i18n": "^8.10.0",
     "vue-meta": "^1.6.0",
@@ -32,6 +31,7 @@
     "babel-eslint": "^10.0.1",
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.0.0",
+    "node-sass": "^4.14.1",
     "react-snap": "^1.23.0",
     "vue-template-compiler": "^2.5.21"
   },
@@ -59,14 +59,7 @@
     "minifyHtml": {
       "collapseWhitespace": false,
       "removeComments": false
-    },
-    "puppeteerArgs": [
-      "--disable-setuid-sandbox",
-      "--no-sandbox"
-    ],
-    "concurrency": 1,
-    "inlineCss": false,
-    "puppeteerExecutablePath": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
+    }
   },
   "browserslist": [
     "> 1%",

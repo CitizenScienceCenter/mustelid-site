@@ -76,14 +76,14 @@
       <div class="row row-centered">
         <div class="col col-large-8">
           <div class="button-group centered scroll-effect scroll-effect-delayed-2">
-            <router-link tag="button" to="/identification" class="button button-primary">{{ $t('cover-button-primary') }}</router-link>
-            <router-link tag="button" to="/about" class="button button-secondary button-secondary-inverted">{{ $t('cover-button-secondary') }}</router-link>
+            <!-- <router-link tag="button" to="/identification" class="button button-primary">{{ $t('cover-button-primary') }}</router-link> -->
+            <router-link tag="button" to="/about" class="button button-primary">{{ $t('cover-button-secondary') }}</router-link>
           </div>
         </div>
       </div>
     </app-cover>
 
-    <app-content-section color="greyish" class="content-section-condensed">
+    <!-- <app-content-section color="greyish" class="content-section-condensed">
       <div class="content-wrapper">
         <sub-section-stats
                 :userCount="totalUserCount"
@@ -91,7 +91,7 @@
                 :taskCount="totalTaskCount" >
         </sub-section-stats>
       </div>
-    </app-content-section>
+    </app-content-section> -->
 
     <!--
     <div class="scientifica-teaser-wrapper" :class="{show: showTeaser}">
@@ -142,9 +142,9 @@
             <div>
               <h2 class="heading centered left-aligned-large">{{ $t('identification-heading') }}</h2>
               <p v-html="$t('identification-text')"></p>
-              <div class="button-group centered left-aligned-large">
+              <!-- <div class="button-group centered left-aligned-large">
                 <router-link tag="button" to="/identification" class="button button-primary">{{ $t('identification-button') }}</router-link>
-              </div>
+              </div> -->
             </div>
           </div>
 
@@ -249,11 +249,10 @@
     import SectionNewsletterSignup from "@/components/shared/SectionNewsletterSignup";
     import SectionSDG from "../components/shared/SectionSDG";
     import SectionFeedback from "../components/shared/SectionFeedback";
-    import SubSectionStats from "../components/shared/SubSectionStats";
+    // import SubSectionStats from "../components/shared/SubSectionStats";
     export default {
         name: 'Home',
         components: {
-          SubSectionStats,
             SectionFeedback,
             SectionSDG,
             SectionNewsletterSignup,
@@ -287,9 +286,8 @@
             })
         },
         mounted() {
-            console.log('mounted');
-            this.$store.dispatch('stats/updateTotalUserAndSubmissionCount');
-            this.$store.dispatch('stats/updateTotalTaskCount');
+            // this.$store.dispatch('stats/updateTotalUserAndSubmissionCount');
+            // this.$store.dispatch('stats/updateTotalTaskCount');
 
             this.showTeaser = true;
         },
