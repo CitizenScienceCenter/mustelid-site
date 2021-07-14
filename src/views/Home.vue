@@ -6,42 +6,36 @@
 
   "cover-heading": "Dem Wiesel auf der Spur",
   "cover-subheading": "Wer zeigt sich in der Fotobox?",
-  "cover-button-primary": "Zu den Videos",
   "cover-button-secondary": "Über's Projekt",
 
   "intro-heading": "Mit Kamerafallen auf der Suche nach Wieseln",
-  "intro-text": "Wiesel geraten in der Schweiz zunehmend unter Druck. Ihr Lebensraum wird kleiner und Beobachtungen der flinken Tiere werden immer seltener. Als Raubtiere liefern Wiesel jedoch wichtige Hinweise für den Zustand des ganzen Ökosystems. Deshalb benutzen wir Kamerafallen, um das Vorkommen von Wieseln und ihren Beutetieren im Schweizer Mittelland zu untersuchen. Bei der Auswertung der Videos brauchen wir Ihre Hilfe!",
+  "intro-text": "Wiesel geraten in der Schweiz zunehmend unter Druck. Ihr Lebensraum wird kleiner und Beobachtungen der flinken Tiere werden immer seltener. Als Raubtiere liefern Wiesel jedoch wichtige Hinweise für den Zustand des ganzen Ökosystems. Deshalb benutzen wir Kamerafallen, um das Vorkommen von Wieseln und ihren Beutetieren im Schweizer Mittelland zu untersuchen. Bei der Auswertung der Videos haben engagierte Citizen Scientists mitgeholfen.",
   "intro-button": "Weiterlesen",
 
-  "identification-heading": "Helfen Sie mit, die gefilmten Tiere zu identifizieren.",
-  "identification-text": "An verschiedenen Standorten haben wir Boxen aufgestellt, die mit einer Wildtierkamera ausgestattet sind. Die Aufnahmen der Kameras geben uns einen Einblick in die Besucher der Box. Nebst Wieseln haben zahlreiche andere Arten die Boxen besucht. Helfen Sie mit, diese heimlichen Besucher zu entdecken und zu identifizieren!",
-  "identification-button": "Zu den Videos",
+  "identification-heading": "Gefilmte Tiere identifizieren",
+  "identification-text": "An verschiedenen Standorten haben wir Boxen aufgestellt, die mit einer Wildtierkamera ausgestattet sind. Die Aufnahmen der Kameras geben uns einen Einblick in die Besucher der Box. Nebst Wieseln haben zahlreiche andere Arten die Boxen besucht. Aufgabe der Citizen Scientists war es, diese heimlichen Besucher zu entdecken und zu identifizieren.",
 
   "mustelids-heading": "Wiesel in der Schweiz",
-  "mustelids-text": "Wer schon einmal ein Wiesel gesehen hat vergisst diese Beobachtung so schnell nicht mehr. Die flinken Tiere faszinieren. Doch wie steht es um die Wiesel-Populationen in der Schweiz? Haben Sie gewusst, dass es in der Schweiz zwei Wieselarten gibt?",
+  "mustelids-text": "Wer schon einmal ein Wiesel gesehen hat vergisst diese Beobachtung so schnell nicht mehr. Die flinken Tiere faszinieren. Doch wie steht es um die Wiesel-Populationen in der Schweiz? Habt Ihr gewusst, dass es in der Schweiz zwei Wieselarten gibt?",
   "mustelids-button": "Mehr erfahren",
 
   "winner-quote": "«Das Leben der Wildtiere in unserer heutigen Kulturlandschaft interessiert mich sehr. Daher hat es mich gereizt, hier für das Wieselprojekt einen Beitrag leisten zu können.»",
   "winner-label": "Helena Greter, Gewinnerin der Scientifica Challenge",
-  "winner-button": "Zum Interview",
-
-  "swild-text": "SWILD ist eine unabhängige Forschungs- und Beratungsgemeinschaft von Biologinnen und Biologen. Organisiert als non-profit Verein, arbeiten wir seit 1989 in den Bereichen Stadt- und Siedlungsökologie, Wildtierforschung, Naturschutz und Kommunikation."
+  "winner-button": "Zum Interview"
 
   },
   "en": {
 
   "cover-heading": "On the Trail of the Weasel",
   "cover-subheading": "Who's in the Camera Box?",
-  "cover-button-primary": "To the Videos",
   "cover-button-secondary": "About the Project",
 
   "intro-heading": "Searching for Weasels With Camera Traps",
-  "intro-text": "Weasels are under increasing pressure in Switzerland. Their habitat is becoming smaller and observations of these elusive animals are becoming increasingly rare. As predators, however, weasels provide important information on the condition of the entire ecosystem. We therefore use camera traps to investigate the occurrence of weasels and their prey in the Swiss Midlands. Help us us evaluate these videos so that we can monitor their movements!",
+  "intro-text": "Weasels are under increasing pressure in Switzerland. Their habitat is becoming smaller and observations of these elusive animals are becoming increasingly rare. As predators, however, weasels provide important information on the condition of the entire ecosystem. We therefore use camera traps to investigate the occurrence of weasels and their prey in the Swiss Midlands. Dedicated Citizen Scientists helped evaluating these videos so that their movements can be monitored.",
   "intro-button": "Read more",
 
-  "identification-heading": "Help us to identify the filmed animals.",
-  "identification-text": "At various locations we have set up boxes equipped with a wildlife camera. The pictures give us an insight into the visitors of the box. In addition to weasels, numerous other species have visited the boxes. Help us to discover and identify these secret visitors!",
-  "identification-button": "To the Videos",
+  "identification-heading": "Identify the filmed animals.",
+  "identification-text": "At various locations we have set up boxes equipped with a wildlife camera. The pictures give us an insight into the visitors of the box. In addition to weasels, numerous other species have visited the boxes. The task of the Citizen Scientists was to discover and identify these secret visitors.",
 
   "mustelids-heading": "Weasels in Switzerland",
   "mustelids-text": "Anyone who has ever seen a weasel will never forget this observation. These elusive and clever animals fascinate people. But how are weasel populations in Switzerland doing? Did you know that there are two weasel species in Switzerland?",
@@ -49,10 +43,7 @@
 
   "winner-quote": "«I am very interested in the wildlife in our present cultural landscape. Therefore, I was tempted to make a contribution for the weasel project.»",
   "winner-label": "Helena Greter, Winner of the Scientifica Challenge",
-  "winner-button": "Read the Interview",
-
-  "swild-text": "SWILD ist eine unabhängige Forschungs- und Beratungsgemeinschaft von Biologinnen und Biologen. Organisiert als non-profit Verein, arbeiten wir seit 1989 in den Bereichen Stadt- und Siedlungsökologie, Wildtierforschung, Naturschutz und Kommunikation."
-
+  "winner-button": "Read the Interview"
 
   }
 

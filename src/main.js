@@ -31,7 +31,7 @@ Vue.use(VueScrollTo, {
 
 
 store.watch(
-    (state) => state.c3s && state.c3s.client,
+    // (state) => state.c3s && state.c3s.client,
     (value) => {
         if (value !== null) {
             new Vue({
